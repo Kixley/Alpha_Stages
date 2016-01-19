@@ -1,0 +1,2015 @@
+/* hey! this is ethan. if you see this message, message me (so i can code w/ you) 
+WHAT ARE WE WORKING ON?: Alpha 1.4. (Currently for Easter eggs and New classes)
+CHANGELOG FOR 1.4: 
+    More Easter eggs
+    a little more code cleanup (like a lot)
+        You can type ‘health potion’ instead of the plural to call them
+If you find any bugs, please report them in the bugs folder
+*/
+//monster variables
+var hitCounter = 100;
+var monsAtt = 0;
+var randNum= Math.floor(Math.random() * 2);
+var monsLev = level + randNum;
+var monsName = ['Goblin', 'Rabbit', 'Spearman', 'Lizard', 'Death Snake', 'Rabid Pineapple', 'Ferocious Lion', 'Velociraptor'];
+var actualMonsName = 'Goblin';
+var randName;
+var randHealth;
+var monsAttAndDiff;
+var aabeaDestroysTown = 0;
+var monsNameType = 0;
+var dwNames = ['Dalek', 'Cyberman', 'Weeping Angel', 'Zygon', 'Silurian', 'Silent', 'Master', 'Special Weapons Dalek']
+// achievements
+var listAchieveOrLeave;
+var allAchievements = ['Kill 5 monsters', 'Kill 10 monsters', 'Kill 20 monsters', 'Reach Level 5', 'Reach Level 10', 'Reach Level 20', 'Get 1000 cumulative gold', 'Get 2000 cumulative gold', 'Get 5000 cumulative gold'];
+var e;
+var compAchieve = [];
+var achieveCompletion = (compAchieve.length / 9) * 100;
+var killCounter = 0;
+var cumulativeGold = 0;
+var getGoldAchieve = 0;
+var getLevelAchieve = 0;
+//in the fight
+var hit;
+var combo;
+var attackPower = Math.floor(Math.random() * 5) + 5;
+var comboNums;
+var hitPoints = 100;
+var totalHealth = 100;
+var comboMultiplier = 0;
+var runChance;
+var runAway = 0;
+var realAttackPower;
+var accuracy = 0.25;
+var missChance;
+var blobsOfDoom = 50;
+var totalBlobsOfDoom = 50;
+var magicalSpells = [
+    'Fire (20 blobs of doom)',
+    'Rage (40 blobs of doom)'
+];
+var burnEffect = 0;
+var burnTimer = 0;
+var useRage = 0;
+var questKillAmt = 0;
+var questKillReq;
+var fightingGroup;
+var fightingAAbea;
+var fightingBalbeag;
+var magicSkillz = 1;
+var useThisAccuracy;
+// monster drops
+var goldDrops;
+var expPoints;
+var totalGold = 0;
+var totalExp = 0;
+var expLeft;
+// travel
+var inSwamp;
+var min;
+var max;
+var x;
+var plainsCounter = 0;
+var swampDiscovery = 0;
+var y;
+var yesNo = 'Yes, No';
+var questGoldReq;
+var questExpReq;
+var possibleItems = [
+    'wooden sword',
+    'pair of speed boots',
+    woodenSword,
+    speedBoots
+];
+var z;
+var reqItem;
+var reqItemVar;
+var listOfCommonRoomGuyName = ['Mithròmen', 'Galkemen', 'Maegfin', 'Gurthmereth'];
+var commonRoomGuyAnswer;
+var commonRoomGuyName = listOfCommonRoomGuyName[0];
+var commonRoomAnswerNumber;
+var timeGTOne = 0;
+var swampCounter;
+// level
+var temp;
+var tempMinusOne;
+var level = 1;
+var levelMinusOne = level - 1;
+var levelReq = 100 + level * 200;
+var levelUpHealth = 50;
+var totalExtraHealth = levelUpHealth * levelMinusOne;
+var levelUpBlobsOfDoom = 50;
+// other
+var goldCheat = 0;
+var expCheat = 0;
+var attackCheat = 0;
+var healthCheat = 0;
+var blobOfDoomCheat = 0;
+var youCheated = false;
+var noCheating = 0;
+var timerCounter = 0;
+var firstChar;
+var PassOrNot = '';
+var answer;
+//
+var diffSetting = 0;
+var theWholeShebang = [
+    'Kixley Alpha 1.44',
+    'Programmers:',
+    'Ethan Lai',
+    'Colin Pulis',
+    'Jacob Kuschel',
+    'Cameron Jordan',
+    'John Georgiades',
+    'Playtesters:',
+    'Nickel Asher',
+    'Thank you for playing Kixley! More content will be released in the future.'
+];
+var i = 0;
+var justDiscoveredSwamp;
+var onAQuest;
+var guildhallLevel;
+// menu
+var looking;
+var haveOptionsBeenUsed = 0;
+var openingMenu;
+var chosenClass;
+var savingLocation;
+var volumeSettings = ''
+//Item Variables
+var healthPotion = 0;
+var usedWoodenSword = 0;
+var usedSpeedBoots = 0;
+var woodenSword = 0;
+var speedBoots = 0;
+// functions
+
+function CheckIfGotAchieve(whichOne) {
+    switch (whichOne) {
+        case 'Kill':
+            if (killCounter === 5) {
+                alert('You got the Achievement: Kill 5 Monsters.')
+                compAchieve.push('Kill 5 Monsters')
+            } else if (killCounter === 10) {
+                alert('You got the Achievement: Kill 10 Monsters.')
+                compAchieve.push('Kill 10 Monsters')
+            } else if (killCounter === 20) {
+                alert('You got the Achievement: Kill 20 Monsters.')
+                compAchieve.push('Kill 20 Monsters')
+            }
+            Places()
+            break;
+        case 'Level':
+            if (level === 5) {
+                alert('You got the Achievement: Reach Level 5.')
+                compAchieve.push('Reach Level 5')
+            } else if (level === 10) {
+                alert('You got the Achievement: Reach Level 10.')
+                compAchieve.push('Reach Level 10')
+            } else if (level === 20) {
+                alert('You got the Achievement: Reach Level 20.')
+                compAchieve.push('Reach Level 20')
+            }
+            break;
+        case 'Gold':
+            if (cumulativeGold >= 1000 && getGoldAchieve === 0) {
+                alert('You got the Achievement: Get 1000 cumulative gold.')
+                compAchieve.push('Get 1000 cumulative gold')
+                alert('You have ' + 9 - compAchieve.length + ' achievements left!')
+                getGoldAchieve === 1
+            } else if (cumulativeGold >= 2000 && getGoldAchieve === 1) {
+                alert('You got the Achievement: Get 2000 cumulative gold.')
+                compAchieve.push('Get 2000 cumulative gold');
+                getGoldAchieve = 2
+                alert('You have ' + 9 - compAchieve.length + ' achievements left!')
+            } else if (cumulativeGold >= 5000 && getGoldAchieve === 2) {
+                alert('You got the Achievement: Get 5000 cumulative gold.')
+                compAchieve.push('Get 5000 cumulative gold')
+                getGoldAchieve = -(Math.log(0))
+            }
+            break;
+    }
+}
+
+function ListingAchievements() {
+    alert('All of the achievements:')
+    for (e = 0; e < allAchievements.length; e += 1) {
+        alert(allAchievements[e])
+    }
+    alert('Completed Achievements:')
+    if (compAchieve.length === 0) {
+        alert('Nothing. :(')
+    } else {
+        for (e = 0; e < compAchieve.length; e += 1) {
+            alert(compAchieve[e])
+        }
+    }
+    achievementMenu()
+}
+
+function achievementMenu() {
+    achieveCompletion = compAchieve.length / allAchievements.length
+    alert('This is the achievement menu. Here you can find the list of achievements, both completed and unfinished.')
+    listAchieveOrLeave = prompt('Achievement completion: ' + achieveCompletion + '%', 'List Achievements, Exit').toUpperCase()
+    switch (listAchieveOrLeave) {
+        case 'LIST ACHIEVEMENTS':
+            ListingAchievements()
+            break;
+        case 'PINEAPPLES':
+            alert('The mighty pineapple sits on his throne atop the highest mountain of Uruloki. In his slow, booming, voice, he says, \'Whoever has called upon me shall perish!\' Then he turns on you and shoots you with lasers coming from his eyes.')
+            alert('\'GAHHH!!!\' you scream as you wake up. \'Oh,\' you think. \'That was just a dream. Whew!\' You stand up and continue browsing your achievements.')
+            achievementMenu()
+            break;
+        case 'EXIT':
+            StartUpMenu()
+            break;
+        default:
+            NotAnOption()
+            AchievementMenu()
+            break;
+    }
+}
+
+function randomNumber(min, max) {
+    x = Math.floor(Math.random() * (max - min + 1));
+}
+    StartUpMenu()
+function StartUpMenu() {
+openingMenu = 1
+    randomNumber(1, 10000)
+    switch(x) {
+    case 1:
+        alert('WELCOME TO unnamedTextAdventure!')
+        break;
+    default:
+    alert('WELCOME TO KIXLEY!')
+    }
+
+    answer = prompt('Alpha 1.4.', 'Start, Options, Guide, Load, Achievements, Exit').toUpperCase()
+    switch (answer) {
+        case 'START':
+            alert('Before you start, please set the difficulty. Easier difficulties have monsters with less health and attack. Harder difficulties have monsters with more health and attack.')
+            Difficulty()
+            openingMenu = 0
+            break;
+        case 'OPTIONS':
+            Options()
+            break;
+        case 'GUIDE':
+            Guide()
+            break;
+        case 'LOAD':
+            load()
+            break;
+        case 'ACHIEVEMENTS':
+            achievementMenu()
+            break;
+        case 'EXIT':
+            alert('Goodbye!')
+            Credits()
+            endGame()
+            break;
+        case 'YEE':
+            alert('go to https://www.youtube.com/watch?v=q6EoRBvdVPQ to watch the video')
+            alert('Did you watch it?')
+            StartUpMenu()
+            break;
+    case 'MOZILLA GEAR STORE': 
+alert('check out the plush fox in the store! https://gear.mozilla.org/?utm_source=directory-tiles&utm_medium=tiles&utm_content=GearV2')
+        StartUpMenu()
+    break;
+        case 'GO DIE IN A HOLE':
+            alert('No. Go sit in an infinite loop.')
+            while (true) {
+                alert('-\4rAQZdew')
+                alert('That message was brought to you by Murphy, one of the programmer\'s dog.')
+                alert('Also, this is an infinite loop')
+                x += 1
+            }
+            while (true) {
+                alert('-\4rAQZdew')
+                alert('That message was brought to you by Murphy, one of the programmer\'s dog.')
+            }
+        default:
+            NotAnOption()
+            StartUpMenu()
+            break;
+    }
+}
+
+function Guide() {
+    alert('The Great Kixley Guide')
+    alert('New to Kixley? Forget something important? Well, the Kixley guide is here to help you get through the game!')
+    guidePT()
+}
+
+function guidePT() {
+    answer = prompt('What Chapter do you want? The chapters are: Chapter 1 - How to Play, Chapter 2 - Classes, Chapter 3 - Fighting, Chapter 4 - Questing, Chapter 5 - Items', '1, 2, 3, 4, 5, Leave').toLowerCase()
+    switch (answer) {
+        case '1':
+            GuideChapter1()
+            break;
+        case '2':
+            GuideChapter2()
+            break;
+        case '3':
+            GuideChapter3()
+            break;
+        case '4':
+            GuideChapter4()
+            break;
+        case '5':
+            GuideChapter5()
+            break;
+        case 'leave':
+            StartUpMenu()
+            break;
+        default:
+            NotAnOption()
+            guidePT()
+            break;
+    }
+}
+
+function GuideChapter1() {
+    alert('Chapter 1: How to Play')
+    alert('Kixley is a text adventure.')
+    alert('This means that you will be playing the game through words.')
+    alert('You can type commands when a text box appears, ')
+    alert('but don’t press cancel. That ends the game.')
+    alert('The commands you can type appear in the text box.')
+    alert('If you spell one wrong, or enter something that isn\'t a command, it will tell you \'That wasn\'t one of the options. Please try again,\' and make you retype the command.')
+    alert('That\'s about it!')
+    guidePT()
+}
+
+function GuideChapter2() {
+    alert('Chapter 2: Classes')
+    alert('Classes are an important decision.')
+    alert('They determine what path you’re going to go down during the course of the game.')
+    alert('There are currently three classes: Knight, Mage, and Barbarian.')
+    alert('That\'s about it!')
+    guidePT()
+}
+
+function GuideChapter3() {
+    alert('Chapter 3: Fighting')
+    alert('During the course of the game, you will be fighting monsters.')
+    alert('In the game, you will have four options: Fight, Item, Magic, and Run.')
+    alert('Fighting is pretty straightforward. Once you choose it, you can’t do anything.')
+    alert('You could miss, get a hit, or get a combo.')
+    alert('In the Items tab, you can use your items to increase health or other stats.')
+    alert('In the Magic tab, you can use spells to defeat enemies or boost stats.')
+    alert('The Run tab is used when you want to escape from your enemy.')
+    alert('That\'s about it!')
+    guidePT()
+}
+
+function GuideChapter4() {
+    alert('Chapter 4: Questing')
+    alert('Quests can be used to gain experience.')
+    alert('Quests can be gotten in the Inn.')
+    alert('That\'s about it!')
+    guidePT()
+}
+
+function GuideChapter5() {
+    alert('Chapter 5: Items')
+    alert('Items are an important part of fighting.')
+    alert('You can buy items in the marketplace.')
+    alert('That\'s about it!')
+    guidePT()
+}
+
+function Difficulty() {
+    answer = prompt('What do you want the difficulty to be?', 'Easy, Normal, Hard, Epic, Legend').toUpperCase()
+    switch (answer) {
+        case 'EASY':
+            diffSetting = 0.5
+            break;
+        case 'NORMAL':
+            diffSetting = 1
+            break;
+        case 'HARD':
+            diffSetting = 1.5
+            break;
+        case 'EPIC':
+            diffSetting = 2
+            break;
+        case 'LEGEND':
+            diffSetting = 2.5
+            break;
+        default:
+            NotAnOption()
+            Difficulty()
+            break;
+    }
+    monsAtt = monsLev + 15 - Math.floor(Math.random() * 10)
+    monsAttAndDiff = monsAtt * diffSetting
+    monsLev = level + randNum
+    hitCounter = 100
+    hitCounter = hitCounter * diffSetting
+    ChooseClass()
+}
+function KnightClass() {
+    answer = prompt('Knight', 'Inspect, Choose, Exit').toUpperCase()
+    switch (answer) {
+        case 'INSPECT':
+            alert('The Knight is a fierce warrior. He/She knows when to fight and when to block, and trains himself ceaselessly. Attack + 2, Health + 50, Blobs of Doom - 100(also called mana or magicka)')
+            KnightClass()
+            break;
+        case 'CHOOSE':
+            ChoosingAClass(chosenClass)
+            break;
+        case 'EXIT':
+            ChooseClass()
+            break;
+        default:
+            NotAnOption()
+            KnightClass()
+            break;
+    }
+}
+
+function MageClass() {
+    answer = prompt('Mage', 'Inspect, Choose').toUpperCase()
+    switch (answer) {
+        case 'INSPECT':
+            alert('The Mage does not overuse the fight option. Rather, he/she uses magical attacks that damage the enemy. Attack - 2, Blobs of Doom (also called mana or magicka) + 100, Spell effects ⋅ 1.5.')
+            MageClass()
+            break;
+        case 'CHOOSE':
+            ChoosingAClass(chosenClass)
+            break;
+        case 'EXIT':
+            ChooseClass()
+            break;
+        default:
+            NotAnOption()
+            MageClass()
+            break;
+    }
+}
+
+function BarbarianClass() {
+    answer = prompt('Barbarian', 'Inspect, Choose').toUpperCase()
+    switch (answer) {
+        case 'INSPECT':
+            alert('The Barbarian hits hard, but at the cost of health. With the Rage spell, he/she can knock out enemies with a single hit. Attack + 4, Health - 25')
+            BarbarianClass()
+            break;
+        case 'CHOOSE':
+            ChoosingAClass(chosenClass)
+            break;
+        case 'EXIT':
+            ChooseClass()
+            break;
+        default:
+            NotAnOption()
+            BarbarianClass()
+            break;
+    }
+}
+
+function ChoosingAClass(chosenClass) {
+    answer = prompt('Are you sure?', 'Yes, No').toUpperCase()
+    switch (answer) {
+        case 'YES':
+            alert('You are now a ' + chosenClass + '!')
+            if (chosenClass === 'knight') {
+                attackPower += 2
+                hitPoints += 50
+                blobsOfDoom -= 100
+            } else if (chosenClass === 'mage') {
+                attackPower -= 2
+                blobsOfDoom += 100
+                magicSkillz += 1.5
+            } else if (chosenClass = 'barbarian') {
+                attackPower += 4
+                hitPoints -= 25
+            } else if (chosenClass = 'super legendary') {
+                magicSkillz = (1 / x)
+                attackPower -= 5
+                totalHealth -= 75
+                hitPoints -= 75
+                blobsOfDoom -= 300
+            } else if (chosenClass = 'super hardcore') {
+                magicSkillz = -(Math.log(0))
+                attackPower = -(Math.log(0))
+                totalHealth = -(Math.log(0))
+                hitPoints = -(Math.log(0))
+                blobsOfDoom = -(Math.log(0))
+                totalBlobsOfDoom = -(Math.log(0))
+                youCheated = true
+            }
+            Story()
+            break;
+        case 'NO':
+            ChooseClass()
+            break;
+    case 'GOOD MUSIC':
+        alert('https://www.youtube.com/watch?v=awrzeuTMQfU Watch this!')
+        alert('And while you\'re at it, watch this too!: https://www.youtube.com/watch?v=dQw4w9WgXcQ ')
+        ChoosingAClass(chosenClass)
+        break;
+        default:
+            NotAnOption()
+            ChoosingAClass(chosenClass)
+            break;
+    }
+}
+
+function ChooseClass() {
+    alert('Along with difficulty, we need you to choose your class. Please select one now.')
+    chosenClass = prompt('The classes are: Knights, Mages, and Barbarians', 'Knight, Mage, Barbarian').toLowerCase()
+    switch (chosenClass) {
+        case 'knight':
+            KnightClass()
+            break;
+        case 'mage':
+            MageClass()
+            break;
+        case 'barbarian':
+            BarbarianClass()
+            break;
+        case 'super legendary':
+            SuperLegendaryClass()
+            break;
+        case 'super hardcore':
+            SuperHardcoreClass()
+        default:
+            NotAnOption()
+            ChooseClass()
+            break;
+    }
+}
+
+function SuperLegendaryClass() {
+    randomNumber(80, 100)
+    answer = prompt('Super Legendary', 'Inspect, Choose, Exit').toLowerCase()
+    switch (answer) {
+        case 'inspect':
+            alert('The Super Legendary is for the hardcore fans, the ones who think that the Legend difficulty is too easy. Attack - 5, BoD - 300, Health - 75, Spells effects / ' + x + '.')
+            SuperLegendaryClass()
+            break;
+        case 'choose':
+            ChoosingAClass(chosenClass)
+            break;
+        case 'exit':
+            ChooseClass()
+            break;
+        default:
+            NotAnOption()
+            SuperLegendaryClass()
+            break;
+    }
+}
+
+function SuperHardcoreClass() {
+    if (PassOrNot === true) {
+        answer = prompt('Super Hardcore', 'Inspect, Choose, Exit').toUpperCase()
+        switch (answer) {
+            case 'INSPECT':
+                alert('The Super Hardcore class is super cheaty. Everything * INFINITY')
+                SuperHardcoreClass()
+                break;
+            case 'CHOOSE':
+                ChoosingAClass(chosenClass)
+                break;
+            case 'EXIT':
+                ChooseClass()
+                break;
+            default:
+                NotAnOption()
+                SuperHardcoreClass()
+                break;
+        }
+    } else if (PassOrNot === 42) {
+        ChooseClass()
+    } else if (PassOrNot === '') {
+        PassOrNot = DevPassAttempt()
+        SuperHardcoreClass()
+    } else {
+        alert('Bad boy. Go sit in an infinite loop.')
+        while (true) {
+            alert('-\4rAQZdew')
+            alert('That message was brought to you by Murphy, one of the programmer\'s dog.')
+            alert('Also this is an infinite loop')
+        }
+        while (true) {
+            alert('-\4rAQZdew')
+            alert('That message was brought to you by Murphy, one of the programmer\'s dog.')
+        }
+    }
+}
+
+function Places() {
+    answer = prompt('Where do you go now? You have ' + totalGold + ' gold, and ' + hitPoints + ' health.', 'Town, Plains, Swamp, Save, Menu').toUpperCase()
+    switch (answer) {
+        case 'TOWN':
+            if (aabeaDestroysTown === 0) {
+                alert('You walk into town, where there is a marketplace and an inn.')
+                InTown()
+            } else {
+                alert('As you near the outskirts of town, you notice the stream of people leaving town. Then you notice that the entire place is now just a gigantic blast crater. Somebody blew it up!!! You decide to investigate, and walk over to the stream of people.')
+                alert('When you reach the people, they all say this person named A\'Abea had just come to town and started fires all over, and then used some weird, magical powers to blow up Smatino.')
+                alert('You are sure this A\'Abea is the same as the one who you met in the swamp, and wish you had used some \'weird, magical powers\' to blow him up')
+                alert('You race back to the swamp, and see him from a distance. You can\'t, however, blow him up. There are too many vines in the way. So, you follow him. You see a large tower in the distance, and finally, after a few hours, reach it at night. You see A\'Abea enter, and then, as the gate is clanging down above him, you slide under it and manage to get in.')
+                inTower()
+            }
+            break;
+        case 'PLAINS':
+            plainsCounter += 1
+            if (plainsCounter === 7) {
+                alert('As you are walking through the plains you see a map lying on the ground. It shows a path leading to a nearby swamp.')
+                swampDiscovery = 1
+        if ((monsNameType % 2) === 0) {
+            randName = Math.floor(Math.random() * (monsName.length + 1))
+            actualMonsName = monsName[randName]
+            randNum = Math.floor(Math.random() * 4)
+            monsLev = level + (Math.floor(Math.random() * 2))
+            alert('You head off into the plains, where you find a ' + monsLev + ' ' + actualMonsName + '!')
+            } 
+            randHealth = monsLev * randNum 
+            hitCounter = (100 + randHealth) * diffSetting
+            FightMenu()
+        }
+        else {
+        randomNumber(1, dwNames.length)
+        randName = x
+        actualMonsName = dwNames[randName]
+        randomNumber(0, 4)
+randNum = x
+randomNumber(1, 2)
+monsLev = level + x
+if (actualMonsName != 'Master') {    
+alert('You head off into the plains, where you find a level ' + monsLev + ' ' + actualMonsName + '!')
+}
+else if (foughtMaster === 1) {
+alert('You head off into the plains, where you find the Master, who is level ' + monsLev + '.')
+foughtMaster = 1
+}
+else if (actualMonsName === 'Master') {
+alert('You head off into the plains, where you find a newly regenerated Master, who is level ' + monsLev + '.')
+}
+                FightMenu()
+            randHealth = monsLev * randNum
+            hitCounter = (100 + randHealth) * diffSetting
+            FightMenu()
+}
+            break; 
+        case 'SWAMP':
+            if (swampDiscovery === 0) {
+                alert('You have heard rumors of this place, but have never been able to find out where it is.')
+                Places();
+            } else {
+
+
+
+
+                if (swampCounter === 7) {
+                    alert('As you are walking through the swamp, you meet someone. He says his name is A\'Abea, and he is heading towards Smatino, but doesn’t tell why.')
+                    aabeaDestroysTown = 1
+                }
+                swampCounter += 1
+                randomNumber(1, 2)
+                monsLev = level * (x + 1)
+                randomNumber(-10, 10)
+                hitCounter = (100 + x) * diffSetting + Math.pow(monLev, 2)
+            if ((monsNameType % 2) === 0) {
+        randomNumber(1, 8)
+                randName = x
+                actualMonsName = monsName[randName]
+                alert('You get lost in the swamp, where you find a level ' + monsLev + ' ' + actualMonsName + '!')
+                inSwamp = 1
+                FightMenu()
+            }
+        else {
+        randomNumber(1, dwNames.length)
+                randName = x
+                actualMonsName = dwNames[randName]
+            if (actualMonsName != 'Master') {    
+alert('You get lost in the swamp, where you find a level ' + monsLev + ' ' + actualMonsName + '!')
+}
+else if (foughtMaster === 1) {
+alert('You get lost in the swamp, where you find the Master, who is level ' + monsLev + '.')
+foughtMaster = 1
+}
+else if (actualMonsName === 'Master') {
+alert('You get lost in the swamp, where you find a newly regenerated Master, who is level ' + monsLev + '.')
+}
+                inSwamp = 1
+                FightMenu()
+            }
+        }
+            break;
+        case 'SAVE':
+            savePlaces()
+        default:
+            NotAnOption()
+            Places()
+            break;
+        case 'MENU':
+            StartUpMenu()
+            break;
+    }
+}
+
+function multiplier() {
+    if (hit === 2) {
+        comboNums = Math.floor(comboNums * 1.5);
+        alert('Wait a second, your combo got upgraded! It is multiplied by 1.5.');
+        comboMultiplier += 1
+    }
+}
+
+function MonsAtt() {
+    alert('The ' + actualMonsName + ' hit you for ' + monsAttAndDiff + ' damage.')
+    hitPoints -= monsAttAndDiff
+    if (hitPoints <= 0) {
+        alert('You died.')
+        GameOver()
+    } else {
+        alert('You have ' + hitPoints + ' health left.')
+        FightMenu()
+    }
+}
+
+function InTown() {
+    answer = prompt('Where to?', 'Marketplace, Inn, Save, Leave')
+if(answer != 'the TARDIS') {
+answer = answer.toUpperCase()
+}
+    switch (answer) {
+        case 'MARKETPLACE':
+            InShop()
+            break;
+        case 'INN':
+            InInn()
+            break;
+        case 'SAVE':
+            saveTown()
+            break;
+        case 'LEAVE':
+            alert('You leave town.')
+            Places()
+            break;
+        case 'YOUR MOM':
+        case 'UR MOM':
+            alert('You walk up to your mom. \'Woah, is that you, Kixley? It\'s been so long!\' she says. \'Yeah, yeah, mom. I gotta go save the world.\' \'Ok then! Come see me soon!\'')
+            InTown()
+            break;
+    case 'the TARDIS':
+    alert('A blue police box shows up out of thin air,making a weird whooshing noise as it does. As the door opens, you walk in, and find yourself in a large box that is much smaller on the outside.')
+    alert('A strange man says \'What are you doing in my TARDIS⁈⁈⁈⁈⁈⁈⁈\' after it makes the weird whooshing noise again. He drops you back off at Smatino.')
+    monsNameType += 1
+    InTown()
+    break;
+        default:
+            NotAnOption()
+            InTown()
+            break;
+    }
+}
+
+function Story() {
+    alert('You are a person named Kixley. You live in the land of Nulm. You are in the Vacant Plains, and you know the town called Smatino resides nearby. You know where it is, but there are monsters in the plains, and one has just spotted you.')
+    alert('Your attack power is ' + attackPower + '.')
+    FightMenu()
+}
+
+function FightMenu() {
+    answer = prompt('What do you do? Health: ' + hitPoints + ' ' + actualMonsName + ' health: ' + hitCounter + '.', 'Fight, Item, Magic, Run').toUpperCase()
+    switch (answer) {
+        case 'FIGHT':
+            missChance = ((1 / (1 - accuracy)) - 1)
+            hit = Math.floor(Math.random() * useThisAccuracy)
+    randomNumber(1, 10)
+            monsAtt = monsLev + 15 - x
+            monsAttAndDiff = monsAtt * diffSetting
+            HitOrMiss()
+            break;
+        case 'ITEM':
+            ItemMenu()
+            break;
+        case 'MAGIC':
+            ChooseSpell()
+            break;
+        case 'RUN':
+            runChance = Math.floor(Math.random() * 5)
+            switch (runChance) {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    alert('You got away safely.')
+                    Places()
+                    break;
+                case 4:
+                    alert('The ' + actualMonsName + ' got to you before you could get away.')
+                    hit = 0
+                    HitOrMiss()
+                    break;
+                default:
+                    NotAnOption()
+                    FightMenu()
+                    break;
+            }
+        default:
+            NotAnOption()
+            FightMenu()
+            break;
+    }
+}
+
+function HitOrMiss() {
+    if (hit === 0) {
+        alert('You miss.')
+        burn()
+        alert('The ' + actualMonsName + ' has ' + hitCounter + ' health left.')
+        MonsAtt()
+        if (hitPoints <= 0) {
+            alert('You died.')
+        } else {
+            alert('You have ' + hitPoints + ' health left.')
+            FightMenu()
+        }
+    } else {
+        combo = Math.floor(Math.random() * 5)
+        switch (combo) {
+            case 0:
+            case 1:
+            case 2:
+                alert('You weren\'t able to get a combo.')
+                hitCounter -= attackPower
+                burn()
+                break;
+            case 3:
+            case 4:
+                comboNums = Math.floor(Math.random() * 15) + 2
+                multiplier()
+                alert('You got a ' + comboNums + ' combo.')
+                hitCounter -= attackPower * comboNums
+                burn()
+                break;
+        }
+    }
+
+    if (hitCounter <= 0) {
+        WonTheFight()
+    } else {
+        alert('The ' + actualMonsName + ' has ' + hitCounter + ' health left.')
+        MonsAtt()
+    }
+}
+
+function GameOver() {
+    alert('You died with ' + totalGold + ' gold, were level ' + level + ', had ' + attackPower + ' power, and had a total of ' + totalHealth + ' health.')
+    Credits()
+}
+
+function BuyHealthPotion() {
+    answer = prompt('How many health potions do you want?', '1')
+
+    if (answer === '') {
+        NotAnOption()
+        BuyHealthPotion()
+    }
+    firstChar = answer.charAt(0)
+    if (firstChar === '0' || firstChar === '1' || firstChar === '2' || firstChar === '3' || firstChar === '4' || firstChar === '5' || firstChar === '6' || firstChar === '7' || firstChar === '8' || firstChar === '9') {
+        answer = parseInt(answer, (10 * 1))
+        answer = prompt('Are you sure? You\'re going to buy ' + answer + ' health potions.', 'Yes, No').toUpperCase()
+        switch (answer) {
+            case 'YES':
+                if (totalGold < 10 * answer) {
+                    alert('You don\'t have enough gold to buy that many health potions. At max you could buy ' + Math.floor(totalGold / 10) + ' health potion(s).')
+                    InShop()
+                } else {
+                    alert('Health potion(s) bought!')
+                    healthPotion += answer
+                    answer = 0
+                    totalGold -= 10
+                    InShop()
+                }
+                break;
+            case 'NO':
+                InShop()
+                break;
+            default:
+                NotAnOption()
+                BuyHealthPotion()
+        }
+    } else {
+        alert('You don’t have enough money.')
+        InShop()
+    }
+}
+
+function BuyWoodenSword() {
+    if (woodenSword === 0) {
+        if (totalGold >= 50) {
+            answer = prompt('Are you sure?', 'Yes, No').toUpperCase()
+            switch (answer) {
+                case 'YES':
+                    alert('Wooden sword bought!')
+                    woodenSword = 1
+                    totalGold -= 50
+                    InShop()
+                    break;
+                case 'NO':
+                    InShop()
+                    break;
+                default:
+                    NotAnOption()
+                    BuyWoodenSword()
+                    break;
+            }
+        } else {
+            alert('You don’t have enough money.')
+            InShop()
+        }
+    } else {
+        alert('SOLD OUT.')
+        InShop()
+    }
+}
+
+function BuySpeedBoots() {
+    if (speedBoots === 0) {
+        if (totalGold >= 100) {
+            answer = prompt('Are you sure?', 'Yes, No').toUpperCase()
+            switch (answer) {
+                case 'YES':
+                    alert('Speed boots bought!')
+                    totalGold -= 100
+                    speedBoots = 1
+                    break;
+                case 'NO':
+                    InShop()
+                    break;
+                default:
+                    NotAnOption()
+                    BuySpeedBoots()
+                    break;
+            }
+        } else {
+            alert('You don’t have enough money.')
+            InShop()
+        }
+    } else {
+        alert('SOLD OUT.')
+        InShop()
+    }
+    InShop()
+}
+/* Congratulations! You found an easter egg.
+         .-"-.
+       .'     '.
+      /=========\
+     :           ;
+     |===========|
+     :           :
+      \=========/
+       `.     .'
+         `~~~`
+*/
+
+function InShop() {
+    alert('The marketplace master greets you.')
+    if (woodenSword === 1 && speedBoots === 1) {
+        answer = prompt('One person in the marketplace says, “All I have is health potions for 10 gold.” You have ' + totalGold + ' gold.', 'Health Potions, Leave').toUpperCase()
+    } else if (woodenSword === 1) {
+        answer = prompt('One person in the marketplace says, “What do you want? I have a health potions for 10 gold and a pair of speed boots for 100 gold.” You have ' + totalGold + ' gold.', 'Health Potion, Speed Boots, Leave').toUpperCase()
+    } else if (speedBoots === 1) {
+        answer = prompt('One person in the marketplace says, “What do you want? I have a health potions for 10 gold and a wooden sword for 50 gold.” You have ' + totalGold + ' gold.', 'Health Potion, Wooden Sword, Leave').toUpperCase()
+    } else if (!(woodenSword === 1)) {
+        answer = prompt('One person in the marketplace says, "What do you want? I have a health potions for 10 gold, a wooden sword for 50 gold, and some speed boots for 100 gold." You have ' + totalGold + ' gold.', 'Health Potion, Wooden Sword, Speed Boots, Leave').toUpperCase()
+    }
+    switch (answer) {
+        case 'HEALTH POTION':
+        case 'HEALTH POTIONS':
+            BuyHealthPotion()
+            break;
+        case 'WOODEN SWORD':
+            BuyWoodenSword()
+            break;
+        case 'SPEED BOOTS':
+            BuySpeedBoots()
+            break;
+    case 'MEOW':
+        alert('https://www.youtube.com/watch?v=QH2-TGUlwu4 Watch this!')
+        InShop()
+        break;
+        case 'LEAVE':
+            alert('You leave the marketplace.')
+            InTown()
+            break;
+        default:
+            NotAnOption()
+            InShop()
+            break;
+    }
+}
+
+function useWoodenSword() {
+    if (woodenSword === 0) {
+        alert('You pull your imaginary sword out of your imaginary sheath. Oh, wait...')
+    } else {
+        if (usedWoodenSword === 1) {
+            alert('You already have the sword out, silly!')
+        } else {
+            alert('You pull a wooden sword out of a sheath!')
+            alert('You attack power was increased by 5% for this battle!')
+            usedWoodenSword = 1
+            realAttackPower = attackPower
+            attackPower += (0.05 * attackPower)
+        }
+    }
+    ItemMenu()
+}
+
+function useSpeedBoots() {
+    if (speedBoots === 0) {
+        alert('You lace up your imaginary speed boots. Oh. Never mind.')
+    } else {
+        if (usedSpeedBoots === 1) {
+            alert('You already have them on, silly!')
+        } else {
+            alert('You pull some speed boots out of your backpack and put them on!')
+            alert('Your accuracy was increased by 5%!')
+            accuracy += 0.05
+            usedSpeedBoots = 1
+        }
+    }
+    ItemMenu()
+}
+
+function useHealthPotion() {
+    if (healthPotion <= 0) {
+        alert('You search your backpack, but you don’t have a health potion!')
+    } else {
+        alert('You pull a health potion out of your bag and drink it! Yum! It tastes like snickerdoodle cookies!')
+        alert('Hit points restored!')
+        hitPoints += 50
+        healthPotion -= 1
+        alert('You now have ' + hitPoints + ' health!')
+        if (hitPoints > totalHealth) {
+            hitPoints = totalHealth
+        }
+    }
+    ItemMenu()
+}
+
+function ItemMenu() {
+    if (woodenSword === 1 && speedBoots === 1) {
+        alert('You have ' + healthPotion + ' health potion(s), a wooden sword, and a pair of speed boots.')
+        answer = prompt('Which would you like to use?', 'Health Potions, Wooden Sword, Speed Boots, Cancel').toUpperCase()
+    } else if (woodenSword === 1) {
+        alert('You have ' + healthPotion + ' health potion(s) and a wooden sword.')
+        answer = prompt('Which would you like to use?', 'Health Potions, Wooden Sword, Cancel').toUpperCase()
+    } else if (speedBoots === 1) {
+        alert('You have ' + healthPotion + ' health potion(s) and a pair of speed boots.')
+        answer = prompt('Which would you like to use?', 'Health Potions, Cancel').toUpperCase()
+    } else if (woodenSword === 0 && speedBoots === 0) {
+        alert('You have ' + healthPotion + ' health potion(s).')
+        answer = prompt('Which would you like to use?', 'Health Potions, Cancel').toUpperCase()
+    }
+    switch (answer) {
+        case 'HEALTH POTION':
+        case 'HEALTH POTIONS':
+            useHealthPotion()
+            break;
+        case 'CANCEL':
+            FightMenu()
+            break;
+        case 'SPEED BOOTS':
+            useSpeedBoots()
+            break;
+        case 'WOODEN SWORD':
+            useWoodenSword()
+            break;
+        default:
+            NotAnOption()
+            ItemMenu()
+            break;
+    }
+}
+
+function InInn() {
+    alert('A musty scent fills your nose as you walk into the inn. The dim lights are a stark difference from the outside, and it takes a moment for your eyes to adjust. When they do, they show you a man grinning at you. "Welcom\' to the Rowdy Barstead. You ca\' spend the night here if you like. Only 50 gold. You can also go to the common room. Do jobs fer money. Buy stuff real cheap.')
+    answer = prompt('So whadda you say?', 'Yes, No, Common Room').toUpperCase()
+    switch (answer) {
+        case 'YES':
+            if (totalGold >= 50) {
+                totalGold -= 50
+                alert('The man gestures towards a room door. "There\'s your room, room 104. Have a good night\'s rest.')
+                alert('You wake up fully refreshed, and new vigor fills your heart.')
+                alert('Hit points fully restored!')
+                hitPoints = totalHealth
+                alert('You walk out of the room.')
+                InInn()
+            } else if (totalGold <= 50) {
+                alert('The Inn keeper sighs and says \'You don\'t have enough gold. Sorry, pardner!\'');
+                alert('You go back into town');
+                InTown()
+            }
+        case 'NO':
+            alert('The man sighs as you leave the inn.')
+            InTown()
+            break;
+        case 'COMMON ROOM':
+            inCommonRoom()
+    break;
+    case 'JOHN CENA':
+        alert('And his name is... JOHNNNN CENNNNNNAAAAAAAAAAA!!!!!')
+        InInn()
+        break;
+    }
+}
+
+function NotAnOption() {
+    alert('That wasn\'t one of the options. Please try again.')
+}
+
+function Credits() {
+    for (i = 0; i < theWholeShebang.length; i += 1) {
+        alert(theWholeShebang[i])
+
+    }
+    window.close()
+}
+
+function ListSpells() {
+    for (k = 0; k < magicalSpells.length; k += 1) {
+        alert(magicalSpells[k])
+    }
+}
+
+function ChooseSpell() {
+    alert('What spell do you want? You have...')
+    ListSpells()
+    answer = prompt('What spell? You have ' + blobsOfDoom + ' blobs of doom.', 'List, Fire, Rage, Cancel').toUpperCase()
+    switch (answer) {
+        case 'LIST':
+            alert('You have...')
+            ListSpells()
+            break;
+        case 'CANCEL':
+            FightMenu()
+            break;
+        case 'FIRE':
+            if (blobsOfDoom < 20) {
+                alert('You don\'t have enough blobs of doom!')
+                ChooseSpell()
+            } else {
+                alert('You summon a ball of fire and throw it at the ' + actualMonsName + '.')
+                hitCounter -= (30 * magicSkillz)
+                blobsOfDoom -= 20
+                randomNumber(1, 10)
+                switch (x) {
+                    case 1:
+                        alert('The ' + actualMonsName + ' does not catch on fire.')
+                        break;
+                    default:
+                        alert('The ' + actualMonsName + ' CATCHES ON FIRE!!!!!!!!!')
+                        burnEffect = 1
+                        break;
+                }
+                if (hitCounter <= 0) {
+                    WonTheFight()
+                    alert('You won the fight!')
+                } else {
+                    MonsAtt()
+                }
+                ChooseSpell()
+            }
+            break;
+        case 'RAGE':
+            if (blobsOfDoom < 40) {
+                alert('You don\'t have enough blobs of doom!')
+                ChooseSpell()
+            } else {
+                if (useRage === 1) {
+                    alert('You feel too angry to cast this spell again.')
+                } else {
+                    alert('You feel inexplicably angry.')
+                    alert('Attack power up!')
+                    realAttackPower = attackPower
+                    attackPower = (attackPower * 1.3 * magicSkillz)
+                    useRage = 1
+                    blobsOfDoom -= 40
+                    burn()
+                    MonsAtt()
+                }
+                ChooseSpell()
+            }
+            break;
+    }
+}
+
+function WonTheFight() {
+    if (inSwamp === 1) {
+        alert('As the ' + actualMonsName + ' dies, you get teleported out of the swamp.')
+        inSwamp = 0
+    } else {
+        alert('The ' + actualMonsName + ' is defeated!')
+    }
+    goldDrops = Math.floor(Math.random() * 50) + 25
+    expPoints = Math.floor(Math.random() * 100) + 50
+    comboMultiplier = 0
+    killCounter += 1
+    if (usedWoodenSword === 1) {
+        attackPower = realAttackPower
+        alert('You put your sword back in its sheath.')
+        usedWoodenSword = 0
+    }
+    if (usedSpeedBoots === 1) {
+        accuracy -= 0.05
+        alert('You put your speed boots back in your backpack.')
+        usedSpeedBoots = 0
+    }
+    if (useRage === 1) {
+        alert('You calm down.')
+        attackPower = realAttackPower
+    }
+    burnEffect = 0
+    alert('You got ' + goldDrops + ' gold and ' + expPoints + ' experience!')
+    totalGold += goldDrops
+    cumulativeGold += goldDrops
+    totalExp += expPoints
+    CheckIfGotAchieve('Gold')
+    alert('You now have ' + totalGold + ' gold and ' + totalExp + ' experience points.')
+    if (onAQuest === 1 && y === 1) {
+        questKillAmt += 1
+    }
+    if (totalExp >= levelReq) {
+        level += 1
+        CheckForLevelUp()
+        temp = Math.floor(1.2 * level)
+        tempMinusOne = temp - 1
+        alert('You leveled up!')
+        levelReq += levelReq
+        StatToLevelUp()
+        CheckIfGotAchieve('Level')
+    } else {
+        expLeft = levelReq - totalExp
+        alert('You have ' + expLeft + ' experience to go!')
+    }
+    CheckIfGotAchieve('Kill')
+}
+
+function quest() {
+    randomNumber(1, 4)
+    alert('You got a ' + questType[x] + ' quest!')
+    x = y
+    switch (y) {
+        case 1:
+            randomNumber(7, 13)
+            killQuestChoice()
+            break;
+        case 2:
+            randomNumber((50 * diff), (min + 12.5 * diff))
+            Math.floor(x + 1)
+            questGoldReq = x
+            break;
+        case 3:
+            expQuest()
+            break;
+        case 4:
+            itemQuest()
+    }
+}
+function requestChoice() {
+    answer = prompt('Your quest is over. Would you like another?', yesNo).toLowerCase()
+    switch (answer) {
+        case 'yes':
+            alert('Ok. Here you go!')
+            break;
+        case 'no':
+            alert('You walk back into town.');
+            questResetter()
+            InTown()
+            break;
+        default:
+            NotAnOption()
+            requestChoice()
+            break;
+    }
+}
+function itemQuest() {
+    randomNumber(1, 2)
+    z = x
+}
+function expQuest() {
+    randomNumber((200 * diff), ((200* diff) + 20 * diff))
+    expQuestChoice()
+}
+function save() {
+    var saveHealth = 'saveHealth = ' + hitPoints
+    document.cookie = saveHealth
+    var saveAttackPower = 'saveAttackPower = ' + attackPower
+    document.cookie = saveAttackPower
+    var saveClass = 'saveClass = ' + chosenClass
+    document.cookie = saveClass
+    var saveLevel = 'saveLevel = ' + level
+    document.cookie = saveLevel
+    var saveTotalHealth = 'saveTotalHealth = ' + totalHealth
+    document.cookie = saveTotalHealth
+    var saveBlobsOfDoom = 'saveBlobsOfDoom = ' + blobsOfDoom
+    document.cookie = saveBlobsOfDoom
+    var saveHealthPotions = 'saveHealthPotions = ' + healthPotion
+    document.cookie = saveHealthPotions
+    var saveWoodenSword = 'saveWoodenSword = ' + woodenSword
+    document.cookie = saveWoodenSword
+    var saveSwampDiscover = 'saveSwampDiscovery = ' + swampDiscovery
+    document.cookie = saveSwampDiscover
+    var saveLevel = 'saveLevel = ' + level
+    document.cookie = saveLevel
+    var saveDiff = 'saveDiff = ' + diffSetting
+    document.cookie = saveDiff
+    var saveTotalGold = 'saveTotalGold = ' + totalGold
+    document.cookie = saveTotalGold
+    var saveSpeedBoots = 'saveSpeedBoots = ' + speedBoots
+    document.cookie = saveSpeedBoots
+    var savePlainsCounter = 'savePlainsCounter = ' + plainsCounter
+    document.cookie = savePlainsCounter
+    var saveLevelReq = 'saveLevelReq = ' + levelReq
+    document.cookie = saveLevelReq
+    var saveTotalExp = 'saveTotalExp = ' + totalExp
+    document.cookie = saveTotalExp
+    var saveLocation = 'saveLocation = ' + savingLocation
+}
+function savePlaces() {
+    answer = prompt('Are you sure you want to save? Please make sure to use the same website when loading. This will overwrite any previous saves on this website.', 'Yes, No').toLowerCase()
+    switch (answer) {
+        case 'yes':
+            savingLocation = 1
+            alert('Saving...')
+            save()
+            alert('Done!')
+            Places()
+            break;
+        case 'no':
+            alert('OKKKKK. Kinda a bad idea, but OKKKKK.')
+            Places()
+            break;
+        default:
+            NotAnOption()
+            savePlaces()
+            break;
+    }
+}
+function saveTown() {
+    answer = prompt('Are you sure you want to save? Please make sure to use the same website when loading. This will overwrite any previous saves on this website.', 'Yes, No').toLowerCase()
+    switch (answer) {
+        case 'yes':
+            savingLocation = 2
+            alert('Saving...')
+            save()
+            alert('Done!')
+            InTown()
+            break;
+        case 'no':
+            alert('OKKKKK. Kinda a bad idea, but OKKKKK.')
+            InTown()
+            break;
+        default:
+            NotAnOption()
+            saveTown()
+    }
+}
+
+function load() {
+    alert('Loading...')
+    var loadedDiff = document.cookie.replace(/(?:(?:^|.*;\s*)saveDiff\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+    Diff = parseInt(loadedDiff, 10);
+    var loadedHealth = document.cookie.replace(/(?:(?:^|.*;\s*)saveHealth\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+    hitPoints = parseInt(loadedHealth, 10);
+    var loadedTotalHealth = document.cookie.replace(/(?:(?:^|.*;\s*)saveTotalHealth\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+    TotalHealth = parseInt(loadedTotalHealth, 10);
+    var loadedLevel = document.cookie.replace(/(?:(?:^|.*;\s*)saveLevel\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+    hitPoints = parseInt(loadedLevel, 10)
+    var loadedPlainsCounter = document.cookie.replace(/(?:(?:^|.*;\s*)savePlainsCounter\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+    plainsCounter = parseInt(loadedPlainsCounter, 10)
+    var loadedSwampDiscovery = document.cookie.replace(/(?:(?:^|.*;\s*)saveSwampDiscovery\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+    swampDiscovery = parseInt(loadedSwampDiscovery, 10)
+    var loadedWoodenSword = document.cookie.replace(/(?:(?:^|.*;\s*)saveWoodenSword\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+    woodenSword = parseInt(loadedWoodenSword, 10)
+    var loadedSpeedBoots = document.cookie.replace(/(?:(?:^|.*;\s*)saveSpeedBoots\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+    speedBoots = parseInt(loadedSpeedBoots, 10)
+    var loadedHealthPotions = document.cookie.replace(/(?:(?:^|.*;\s*)saveHealthPotions\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+    healthPotion = parseInt(loadedHealthPotions, 10)
+    var loadedLevelReq = document.cookie.replace(/(?:(?:^|.*;\s*)saveLevelReq\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+    levelReq = parseInt(loadedLevelReq, 10)
+    var loadedAttackPower = document.cookie.replace(/(?:(?:^|.*;\s*)saveHealth\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+    attackPower = parseInt(loadedAttackPower, 10)
+    var loadedClass = document.cookie.replace(/(?:(?:^|.*;\s*)saveHealth\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+    chosenClass = parseInt(loadedClass, 10)
+    var loadedGold = document.cookie.replace(/(?:(?:^|.*;\s*)saveTotalGold\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+    totalGold = parseInt(loadedGold, 10)
+    var loadedExp = document.cookie.replace(/(?:(?:^|.*;\s*)saveTotalExp\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+    totalExp = parseInt(loadedExp, 10)
+    var loadedBlobsOfDoom = document.cookie.replace(/(?:(?:^|.*;\s*)saveBlobsOfDoom\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+    blobsOfDoom = parseInt(loadedBlobsOfDoom, 10)
+    var loadLocation = document.cookie.replace(/(?:(?:^|.*;\s*)saveLocation\s*\=\s*([^;]*).*$)|^.*$/, '$1');
+    location = parseInt(loadLocation, 10)
+    alert('Done!')
+    switch (location) {
+        case 1:
+            Places()
+            break;
+        case 2:
+            InTown()
+            break;
+        default:
+            NotAnOption()
+            break;
+    }
+}
+
+function GettingBlobsOfDoom() {
+    if (totalGold >= 5) {
+        totalGold -= 5
+        blobsOfDoom += 6
+        alert('Ther\’ ya go, pardner. Nice doin\’ business with ya.')
+    } else {
+        alert('I\'m not gonna give ya the blobs of doom if ya don\'t give me the monay. Sorry, pardner.')
+    }
+    if (totalGold >= 5 && timeGTOne === 1) {
+        blobsOfDoom += 1
+        timeGTOne = 0
+    }
+    if (blobsOfDoom > totalBlobsOfDoom) {
+        blobsOfDoom = totalBlobsOfDoom
+    }
+    alert('You now have ' + blobsOfDoom + ' blobs of doom.')
+    wantingMoreBlobs()
+}
+
+function wantingMoreBlobs() {
+    answer = prompt('Hey! Ya want some more blobs? Yu\'ll get 7 this time, still fer 5 gold!', 'Yes, No').toUpperCase()
+    switch (answer) {
+        case 'YES':
+            timeGTOne = 1
+            GettingBlobsOfDoom()
+            break;
+        case 'NO':
+            alert('All righty then. See ya later!')
+            InInn()
+            break;
+        default:
+            NotAnOption()
+            wantingMoreBlobs()
+            break;
+    }
+}
+
+function blobsOfDoomShop() {
+    answer = prompt('You walk up to Mithròmen. He says, \'Hey kid. I\'m runnin\' low on money, so I\'m selling my blobs o\' doom. So far there\'s been no buyers. You up for it? Only 5 gold for 6 blobs o\' doom.\'', 'Yes, No').toUpperCase()
+    switch (answer) {
+        case 'YES':
+            GettingBlobsOfDoom()
+            break;
+        case 'NO':
+            alert('Mithròmen sighs as you leave.')
+            InInn()
+            break;
+        default:
+            NotAnOption()
+            blobsOfDoomShop()
+            break;
+    }
+}
+
+function questChoiceSwitch() {
+    switch (answer) {
+        case 'no':
+            alert('Galkemen looks like he wants to kill you, but you get away from him and leave the inn, but then decide to go back in and just avoid Galkemen.')
+            InInn()
+            break;
+        case 'yes':
+            onAQuest = 1
+            alert('Galkemen hands you a piece of paper and has you sign it.')
+            switch (y) {
+                case 1:
+                    questKillReq = x
+                    break;
+                case 2:
+                    questGoldReq = x
+                    break;
+                case 3:
+                    questExpReq = x
+                    break;
+                case 4:
+                    reqItem = possibleItems[z]
+                    reqItemVar = possibleItems[z + 2]
+            }
+        default:
+            switch (y) {
+                case 1:
+                    NotAnOption()
+                    killQuestChoice()
+                    break;
+                case 2:
+                    NotAnOption()
+                    goldQuestChoice()
+                    break;
+                case 3:
+                    NotAnOption()
+                    expQuestChoice()
+                    break;
+                case 4:
+                    NotAnOption()
+                    itemQuestChoice()
+                    break;
+            }
+            break;
+    }
+}
+
+function killQuestChoice() {
+    answer = (prompt('Galkemen says \'Go kill ' + x + ' monsters', 'Yes, No').toLowerCase())
+    questChoiceSwitch()
+}
+
+function questGoldChoice() {
+    answer = (prompt('Galkemen says \'Gimme  ' + x + ' gold. I\'ll give ya exp for this one, instead o\' gold.\'', yesNo).toLowerCase())
+    questChoiceSwitch()
+}
+
+function questItemChoice() {
+    prompt('Galkemen says \'Go gimme a ' + possibleItems[z], yesNo).toLowerCase()
+    questChoiceSwitch()
+}
+
+function questExpChoice() {
+    answer = (prompt('Galkemen says \'Go get ' + x + ' exp, so you can gi\' my quests done faster.').toLowerCase())
+}
+
+function buySpeedBootsCheaply() {
+    answer = (prompt('Gurthmereth says \'Low on money. Got speed boots. Will sell them real cheap. Only 70 gold.').toLowerCase())
+    switch (answer) {
+        case 'yes':
+            if (totalGold >= 70) {
+                alert('Gurthmereth hands you the boots as you hand him the money')
+                totalGold -= 70
+            } else {
+                alert('Gurthmereth sighs and says \'You don\'t have enough money. I want the money.\' Then you leave the common room.')
+                InInn()
+            }
+            break;
+        case 'no':
+            alert('Gurthmereth looks at your receding back as you leave the common room.')
+            InInn()
+            break;
+        default:
+            NotAnOption()
+            buySpeedBootsCheaply()
+            break;
+    }
+}
+
+function buyWoodenSwordsCheap() {
+    answer = (prompt('Maegfin says \'Low on money. Got wooden swords. Will sell them real cheap. Only 35 gold.').toLowerCase())
+    switch (answer) {
+        case 'yes':
+            if (totalGold >= 35) {
+                alert('Maegfin hands you the sword, along with a sheath, as you hand him the money')
+                totalGold -= 35
+                inCommonRoom()
+            } else {
+                alert('Maegfin sighs and says \'You don\'t have enough money. I want the money.\' Then you leave the common room.')
+                InInn()
+            }
+            break;
+        case 'no':
+            alert('Maegfin looks at your receding back as you leave the common room.')
+            InInn()
+            break;
+        default:
+            NotAnOption()
+            buyWoodenSwordsCheap()
+            break;
+    }
+}
+
+function Options() {
+    alert('This is the options menu!')
+    answer = prompt('What would you like to do? Volume: ' + volumeSettings, 'Volume, Quality, Text Pace, Leave').toUpperCase()
+    switch (answer) {
+        case 'VOLUME':
+            volumeSettings = prompt('What do you want to set the volume at?', '1 to 10')
+            switch (answer) {
+                case '1':
+                case '2':
+                case '3':
+                case '4':
+                case '5':
+                case '6':
+                case '7':
+                case '8':
+                case '9':
+                case '10':
+                    alert('Volume set! Now just imagine the noises at the appropriate volume.')
+                    Options()
+                    break;
+                default:
+                    NotAnOption()
+                    Options()
+            }
+            break;
+        case 'QUALITY':
+            alert('What are you talking about? We don\'t have any pictures, man.')
+            Options()
+            break;
+        case 'TEXT PACE':
+            alert('Hahahahahahahaha. All the text is instant, man.')
+            Options()
+            break;
+        case 'LEAVE':
+            StartUpMenu()
+            break;
+        case 'DEV CHEATS':
+            alert('Welcome to the secret area, where you can enable developer cheats.')
+            alert('Don\'t use these if you\'re not a dev.')
+            answer = prompt('What is the password?', 'Leave').toLowerCase()
+            switch (answer) {
+                case '62089':
+                    alert('Access granted!')
+                    DevCheats()
+                    break;
+                case 'leave':
+                    StartUpMenu()
+                    break;
+                default:
+                    alert('Bad boy. Go sit in an infinite loop.')
+                    while (true) {
+                        alert('-\4rAQZdew')
+                        alert('That message was brought to you by Murphy, one of the programmer\'s dog.')
+                        alert('Also this is an infinite loop')
+                    }
+                    while (true) {
+                        alert('-\4rAQZdew')
+                        alert('That message was brought to you by Murphy, one of the programmer\'s dog.')
+                    }
+
+
+
+
+            }
+            break;
+        default:
+            NotAnOption()
+            Options()
+            break;
+    }
+}
+
+function DevCheats() {
+    answer = prompt('What cheat do you want to activate?', 'Infinite gold, Infinite Exp, Infinite Attack, Infinite Health, Infinite Blobs of Doom, Activate All, Leave').toLowerCase()
+    switch (answer) {
+        case 'infinite gold':
+            if (goldCheat === 0) {
+                totalGold = -(Math.log(0))
+                alert('Cheat successfully activated!')
+                goldCheat = 1
+                youCheated = true
+                DevCheats()
+            } else {
+                alert('Deactivating cheat...')
+                totalGold = 0
+                goldCheat = 0
+                alert('You now have 0 gold.')
+                DevCheats()
+            }
+            break;
+        case 'infinite exp':
+            if (expCheat === 0) {
+                totalExp = -(Math.log(0))
+                alert('Cheat successfully activated!')
+                expCheat = 1
+                youCheated = true
+                DevCheats()
+            } else {
+                alert('Deactivating cheat...')
+                totalExp = 0
+                level = 1
+                alert('You are now level 1 and have 0 exp.')
+                DevCheats()
+            }
+            break;
+        case 'infinite attack':
+            if (attackCheat === 0) {
+                attackPower = -(Math.log(0))
+                realAttackPower = attackPower
+                alert('Cheat successfully activated!')
+                attackCheat = 1
+                youCheated = true
+                DevCheats()
+            } else {
+                alert('Deactivating cheat...')
+                attackPower = Math.floor(Math.random() * 5) + 5
+                realAttackPower = attackPower
+                alert('You now have ' + attackPower + ' attack.')
+                DevCheats()
+            }
+            break;
+        case 'infinite health':
+            if (healthCheat === 0) {
+                hitPoints = -(Math.log(0))
+                totalHealth = hitPoints
+                alert('Cheat successfully activated!')
+                healthCheat = 1
+                youCheated = true
+                DevCheats()
+            } else {
+                alert('Deactivating cheat...')
+                hitPoints = 100
+                totalHealth = hitPoints
+                alert('You now have 100 health.')
+                DevCheats()
+            }
+            break;
+        case 'infinite blobs of doom':
+            if (blobOfDoomCheat === 0) {
+                blobsOfDoom = -(Math.log(0))
+                totalBlobsOfDoom = blobsOfDoom
+                alert('Cheat successfully activated!')
+                blobOfDoomCheat = 1
+                youCheated = true
+                DevCheats()
+            } else {
+                alert('Deactivating cheat...')
+                blobsOfDoom = 0
+                totalBlobsOfDoom = blobsOfDoom
+                alert('You now have 0 blobs of doom.')
+            }
+            break;
+        case 'activate all':
+            totalGold = -(Math.log(0))
+            totalExp = -(Math.log(0))
+            attackPower = -(Math.log(0))
+            realAttackPower = attackPower
+            hitPoints = -(Math.log(0))
+            totalHealth = hitPoints
+            blobsOfDoom = -(Math.log(0))
+            totalBlobsOfDoom = blobsOfDoom
+            goldCheat = 1
+            expCheat = 1
+            attackCheat = 1
+            healthCheat = 1
+            blobOfDoomCheat = 1
+            youCheated = true
+            alert('All cheats activated!')
+            DevCheats()
+            break;
+        case 'leave':
+            StartUpMenu()
+            break;
+        default:
+            NotAnOption()
+            DevCheats()
+            break;
+    }
+}
+
+function inTower() {
+    alert('You see this group of prisoners in a dungeon talking about this guy named Balbeag who sent A\'Abea to destroy Smatino, because this person named Kixley had defeated a lot of his henchmen, the monsters of the Vacant Plains. They say that they hope A\'Abea tripped over a root in the swamp and drowned in the water.')
+    hideOrFight()
+}
+
+function hideOrFight() {
+    answer = (prompt('Suddenly, you see soldiers talking about how great their master Balbeag is. Do you take them down, or hide from them?', 'Take them down, hide').toLowerCase())
+    actualMonsName = 'The Group of Balbeag\'s Soldiers'
+    actualMonsNameNoThe = 'Group of Balbeag\'s Soldiers'
+    actualMonsNameLowerThe = 'the Group of Balbeag\'s soldiers'
+    location = 3
+    fightingGroup = 1
+    monsLev = 10
+    randomNumber(-10, 10)
+    hitCounter = (100 + x) * diffSetting + Math.pow(level, 2)
+    switch (answer) {
+        case 'hide from them':
+            alert('As they pass your hiding place, they see you and say \'Hey, look at that little rat hiding in a garbage can!\'')
+            FightMenu()
+            break;
+        case 'take them down':
+            alert('You jump out in front of them and they draw their swords.')
+            FightMenu()
+            break;
+        default:
+            NotAnOption()
+            hideOrFight()
+            break;
+    }
+}
+
+function inTowerPostDoomedGroup() {
+    answer = (prompt('Wanna save?', yesNo).toLowerCase())
+    switch (answer) {
+        case 'yes':
+            alert('OK')
+            save()
+            break;
+        case 'no':
+            alert('Too bad. It\'s saving anyway.')
+            save()
+            break;
+        default:
+            NotAnOption()
+            inTowerPostDoomedGroup()
+            break;
+    }
+    location = 4
+    alert('You climb on up the tower, and meet a trembling A\'Abea, who has just reported to Balbeag. You then have to fight him.')
+    monsLev = 25
+    actualMonsName = 'A\'Abea'
+    actualMonsNameNoThe = actualMonsName
+    actualMonsNameLowerThe = actualMonsName
+    FightMenu()
+    fightingAAbea = 1
+    randomNumber(-10, 10)
+    hitCounter = (100 + x) * diffSetting + Math.pow(level, 2)
+}
+
+function fightingBalbeag() {
+    answer = (prompt('Wanna save?', yesNo).toLowerCase())
+    switch (answer) {
+        case 'yes':
+            alert('OK')
+            save()
+            break;
+        case 'no':
+            alert('Too bad. It\'s saving anyway.')
+            save()
+            break;
+        default:
+            NotAnOption()
+            fightingBalbeag()
+            break;
+    }
+    alert('You use some blobs of doom that you find in A\'Abea\'s bag to blast down the door and fight Balbeag!')
+    if (youCheated) {
+        while (true) {
+            if (noCheating = 0) {
+                alert('We\'re sorry, but this final fight is for people who didn\'t cheat. So remember, kids: NO CHEATING.')
+                alert('Also, because you cheated, you get to see no cheating forever.')
+                noCheating = 1
+            } else {
+                alert('NO CHEATING. Message number: ' + timerCounter)
+                timerCounter += 1
+            }
+        }
+        monsLev = 150
+        actualMonsName = 'Balbeag'
+        actualMonsNameNoThe = actualMonsName
+        actualMonsNameLowerThe = actualMonsName
+        fightingBalbeag = 1
+        randomNumber(-10, 10)
+        hitCounter = (100 + x) * diffSetting + Math.pow(level, 2)
+    }
+}
+
+function beatTheGame() {
+    Credits()
+    beatTheGameAfterCredits()
+}
+
+function beatTheGameAfterCredits() {
+    answer = (prompt('You beat the game! Would you like to continue?', yesNo).toLowerCase())
+    switch (answer) {
+        case 'yes':
+            alert('You return to Smatino, ready to fight Balbeag’s remaining monsters who still are evil, though their master is dead');
+            InTown()
+            break;
+        case 'no':
+            tempEndOfGame()
+            break;
+        default:
+            NotAnOption()
+            beatTheGameAfterCredits()
+            break;
+    }
+}
+
+function StatToLevelUp() {
+    answer = prompt('Please choose a stat to level up.', 'Attack + ' + tempMinusOne + ', Health + ' + levelUpHealth + ', Blobs of Doom + ' + levelUpBlobsOfDoom + '.').toUpperCase()
+    switch (answer) {
+        case 'ATTACK':
+            alert('You got ' + tempMinusOne + ' attack!')
+            attackPower += tempMinusOne
+            break;
+        case 'HEALTH':
+            alert('You got ' + levelUpHealth + ' health!')
+            hitPoints += levelUpHealth
+            totalHealth += levelUpHealth
+            break;
+        case 'BLOBS OF DOOM':
+            alert('You got ' + levelUpBlobsOfDoom + ' blobs of doom!')
+            blobsOfDoom += levelUpBlobsOfDoom
+            totalBlobsOfDoom += levelUpBlobsOfDoom
+            break;
+        default:
+            NotAnOption()
+            StatToLevelUp()
+            break;
+    }
+}
+
+function DevPassAttempt() {
+    answer = prompt('What is the password?', 'Leave').toUpperCase()
+    switch (answer) {
+        case 'LEAVE':
+            alert('Now leaving')
+            return 42
+            break;
+        case '62089':
+            return true
+            break;
+        default:
+            return false
+            break;
+    }
+}
+
+function burn() {
+    if (burnEffect === 1) {
+        burnTimer += 1
+        if (burnTimer === 5) {
+            burnEffect = 0
+            burnTimer = 0
+        }
+        alert('The ' + actualMonsName + ' takes 5 damage from burning.')
+        hitCounter -= 5
+    }
+}
+
+function checkForLevelUp() {
+    if (totalExp >= levelReq) {
+        level += 1
+        temp = Math.floor(1.2 * level)
+        tempMinusOne = temp - 1
+        alert('You leveled up!')
+        levelReq += levelReq
+        StatToLevelUp()
+        CheckIfGotAchieve('Level')
+    }
+}
+
+function endGame() {
+    x = 5
+    switch (x) {
+        case 2:
+            alert('JavaScript is broken.')
+            break;
+    }
+}
+//bottom
+function inCommonRoom() {
+                answer = (prompt('The Innkeeper gestures towards a loud, brightly lit room. It is filled with people. You walk over to a corner of the room, where there are four guys. One is named Mithròmen, another is named Galkemen, another is named Maegfin, and the fourth is named Gurthmereth. All four say \'Hi!\'. Do you run away from him in fear, or talk to one of them? If you talk who do you talk to?', 'Run away in fear, Talk to Mithròmen, talk to Galkemen, talk to Maegfin, talk to Gurthmereth').toLowerCase())
+                if (answer === 'talk to mithromen') {
+                    commonRoomAnswerNumber = 1
+                    answer = 'talk'
+                }
+                if (answer === 'talk to mithròmen') {
+                    commonRoomAnswerNumber = 1
+                    answer = 'talk'
+                }
+                if (answer === ' talk to galkemen') {
+                    commonRoomAnswerNumber = 2
+                    answer = 'talk'
+                }
+                if (answer === 'talk to maegfin') {
+                    commonRoomAnswerNumber = 3
+                    answer == 'talk'
+                }
+                if(answer === 'talk to gurthmereth') {
+                    commonRoomAnswerNumber = 4
+                    answer = 'talk'
+                }
+                switch (answer) {
+                    case 'run away in fear':
+                        alert('You run away in fear.')
+                        InInn()
+                        break;
+                    case 'talk':
+                        switch (commonRoomAnswerNumber) {
+                            case 1:
+                                blobsOfDoomShop()
+                                break;
+                            case 2:
+                                quest()
+                                break;
+                            case 3:
+                                buyWoodenSwordsCheap()
+                                break;
+                            case 4:
+                                buySpeedBootsCheaply()
+                                break;
+                            default:
+                                NotAnOption()
+                                inCommonRoom()
+                                break;
+                        }
+                }
+            }
