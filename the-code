@@ -112,10 +112,11 @@ var timerCounter = 0;
 var firstChar;
 var PassOrNot = '';
 var answer;
+var howMany = 0
 //
 var diffSetting = 0;
 var theWholeShebang = [
-    'Kixley Alpha 1.4',
+    'Kixley Alpha 1.44',
     'Programmers:',
     'Ethan Lai',
     'Colin Pulis',
@@ -871,7 +872,6 @@ function GameOver() {
 
 function BuyHealthPotion() {
     answer = prompt('How many health potions do you want?', '1')
-
     if (answer === '') {
         NotAnOption()
         BuyHealthPotion()
@@ -879,17 +879,18 @@ function BuyHealthPotion() {
     firstChar = answer.charAt(0)
     if (firstChar === '0' || firstChar === '1' || firstChar === '2' || firstChar === '3' || firstChar === '4' || firstChar === '5' || firstChar === '6' || firstChar === '7' || firstChar === '8' || firstChar === '9') {
         answer = parseInt(answer, (10 * 1))
+        howMany = answer
         answer = prompt('Are you sure? You\'re going to buy ' + answer + ' health potions.', 'Yes, No').toUpperCase()
         switch (answer) {
             case 'YES':
-                if (totalGold < 10 * answer) {
+                if (totalGold < (10 * howMany)) {
                     alert('You don\'t have enough gold to buy that many health potions. At max you could buy ' + Math.floor(totalGold / 10) + ' health potion(s).')
                     InShop()
                 } else {
                     alert('Health potion(s) bought!')
                     healthPotion += answer
                     answer = 0
-                    totalGold -= 10
+                    totalGold -= (10 * answer)
                     InShop()
                 }
                 break;
