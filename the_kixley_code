@@ -1,10 +1,10 @@
-Enter file contents here//Fork the file, then do  a pull request
+//Fork the file, then do  a pull request
 /*
 WHAT ARE WE WORKING ON?: Alpha 1.4. (Currently for Easter eggs and New classes)
 CHANGELOG FOR 1.4: 
     More Easter eggs
     a little more code cleanup (like a lot)
-        You can type ‘health potion’ instead of the plural to call them
+        You can type 'health potion' instead of the plural to call them
 If you find any bugs, please report them in the bugs folder
 */
 //monster variables
