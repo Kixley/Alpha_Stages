@@ -115,7 +115,7 @@ var answer;
 //
 var diffSetting = 0;
 var theWholeShebang = [
-    'Kixley Alpha 1.44',
+    'Kixley Alpha 1.4',
     'Programmers:',
     'Ethan Lai',
     'Colin Pulis',
