@@ -1,5 +1,5 @@
 # The code
-It's the code for kixley.
+It's the code for Kixley.
 Kixley is a text adventure first thought up by Ethan Lai on December 15, 2015.
 You, Kixley, fight mosters and eventually Balbeag, the evil final boss in charge of all the monsters.
 Currently it is still in the Alpha stages.
