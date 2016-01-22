@@ -19,7 +19,7 @@ var randHealth;
 var monsAttAndDiff;
 var aabeaDestroysTown = 0;
 var monsNameType = 0;
-var dwNames = ['Dalek', 'Cyberman', 'Weeping Angel', 'Zygon', 'Silurian', 'Silent', 'Master', 'Special Weapons Dalek']
+var dwNames = ['Dalek', 'Cyberman', 'Weeping Angel', 'Zygon', 'Silurian', 'Silent', 'Master', 'Special Weapons Dalek'];
 // achievements
 var listAchieveOrLeave;
 var allAchievements = ['Kill 5 monsters', 'Kill 10 monsters', 'Kill 20 monsters', 'Reach Level 5', 'Reach Level 10', 'Reach Level 20', 'Get 1000 cumulative gold', 'Get 2000 cumulative gold', 'Get 5000 cumulative gold'];
@@ -112,11 +112,10 @@ var timerCounter = 0;
 var firstChar;
 var PassOrNot = '';
 var answer;
-var howMany = 0
-//
+var howMany = 0;
 var diffSetting = 0;
 var theWholeShebang = [
-    'Kixley Alpha 1.44',
+    'Kixley Alpha 1.4',
     'Programmers:',
     'Ethan Lai',
     'Colin Pulis',
@@ -137,97 +136,101 @@ var haveOptionsBeenUsed = 0;
 var openingMenu;
 var chosenClass;
 var savingLocation;
-var volumeSettings = ''
+var volumeSettings = '';
 //Item Variables
 var healthPotion = 0;
 var usedWoodenSword = 0;
 var usedSpeedBoots = 0;
 var woodenSword = 0;
 var speedBoots = 0;
+//accounts
+var userCheck;
+var userName;
+var useDefaults = false;
 // functions
 
 function CheckIfGotAchieve(whichOne) {
     switch (whichOne) {
         case 'Kill':
             if (killCounter === 5) {
-                alert('You got the Achievement: Kill 5 Monsters.')
-                compAchieve.push('Kill 5 Monsters')
+                alert('You got the Achievement: Kill 5 Monsters.');
+                compAchieve.push('Kill 5 Monsters');
             } else if (killCounter === 10) {
-                alert('You got the Achievement: Kill 10 Monsters.')
-                compAchieve.push('Kill 10 Monsters')
+                alert('You got the Achievement: Kill 10 Monsters.');
+                compAchieve.push('Kill 10 Monsters');
             } else if (killCounter === 20) {
-                alert('You got the Achievement: Kill 20 Monsters.')
-                compAchieve.push('Kill 20 Monsters')
+                alert('You got the Achievement: Kill 20 Monsters.');
+                compAchieve.push('Kill 20 Monsters');
             }
-            Places()
+            Places();
             break;
         case 'Level':
             if (level === 5) {
-                alert('You got the Achievement: Reach Level 5.')
-                compAchieve.push('Reach Level 5')
+                alert('You got the Achievement: Reach Level 5.');
+                compAchieve.push('Reach Level 5');
             } else if (level === 10) {
-                alert('You got the Achievement: Reach Level 10.')
-                compAchieve.push('Reach Level 10')
+                alert('You got the Achievement: Reach Level 10.');
+                compAchieve.push('Reach Level 10');
             } else if (level === 20) {
-                alert('You got the Achievement: Reach Level 20.')
-                compAchieve.push('Reach Level 20')
+                alert('You got the Achievement: Reach Level 20.');
+                compAchieve.push('Reach Level 20');
             }
             break;
         case 'Gold':
             if (cumulativeGold >= 1000 && getGoldAchieve === 0) {
-                alert('You got the Achievement: Get 1000 cumulative gold.')
-                compAchieve.push('Get 1000 cumulative gold')
-                alert('You have ' + 9 - compAchieve.length + ' achievements left!')
-                getGoldAchieve === 1
+                alert('You got the Achievement: Get 1000 cumulative gold.');
+                compAchieve.push('Get 1000 cumulative gold');
+                alert('You have ' + 9 - compAchieve.length + ' achievements left!');
+                getGoldAchieve === 1;
             } else if (cumulativeGold >= 2000 && getGoldAchieve === 1) {
-                alert('You got the Achievement: Get 2000 cumulative gold.')
+                alert('You got the Achievement: Get 2000 cumulative gold.');
                 compAchieve.push('Get 2000 cumulative gold');
-                getGoldAchieve = 2
-                alert('You have ' + 9 - compAchieve.length + ' achievements left!')
+                getGoldAchieve = 2;
+                alert('You have ' + 9 - compAchieve.length + ' achievements left!');
             } else if (cumulativeGold >= 5000 && getGoldAchieve === 2) {
-                alert('You got the Achievement: Get 5000 cumulative gold.')
-                compAchieve.push('Get 5000 cumulative gold')
-                getGoldAchieve = -(Math.log(0))
+                alert('You got the Achievement: Get 5000 cumulative gold.');
+                compAchieve.push('Get 5000 cumulative gold');
+                getGoldAchieve = -(Math.log(0));
             }
             break;
     }
 }
 
 function ListingAchievements() {
-    alert('All of the achievements:')
+    alert('All of the achievements:');
     for (e = 0; e < allAchievements.length; e += 1) {
-        alert(allAchievements[e])
+        alert(allAchievements[e]);
     }
-    alert('Completed Achievements:')
+    alert('Completed Achievements:');
     if (compAchieve.length === 0) {
-        alert('Nothing. :(')
+        alert('Nothing. :(');
     } else {
         for (e = 0; e < compAchieve.length; e += 1) {
-            alert(compAchieve[e])
+            alert(compAchieve[e]);
         }
     }
-    achievementMenu()
+    achievementMenu();
 }
 
 function achievementMenu() {
-    achieveCompletion = compAchieve.length / allAchievements.length
-    alert('This is the achievement menu. Here you can find the list of achievements, both completed and unfinished.')
-    listAchieveOrLeave = prompt('Achievement completion: ' + achieveCompletion + '%', 'List Achievements, Exit').toUpperCase()
+    achieveCompletion = (compAchieve.length / allAchievements.length);
+    alert('This is the achievement menu. Here you can find the list of achievements, both completed and unfinished.');
+    listAchieveOrLeave = prompt('Achievement completion: ' + achieveCompletion + '%', 'List Achievements, Exit').toUpperCase();
     switch (listAchieveOrLeave) {
         case 'LIST ACHIEVEMENTS':
-            ListingAchievements()
+            ListingAchievements();
             break;
         case 'PINEAPPLES':
             alert('The mighty pineapple sits on his throne atop the highest mountain of Uruloki. In his slow, booming, voice, he says, \'Whoever has called upon me shall perish!\' Then he turns on you and shoots you with lasers coming from his eyes.')
-            alert('\'GAHHH!!!\' you scream as you wake up. \'Oh,\' you think. \'That was just a dream. Whew!\' You stand up and continue browsing your achievements.')
-            achievementMenu()
+            alert('\'GAHHH!!!\' you scream as you wake up. \'Oh,\' you think. \'That was just a dream. Whew!\' You stand up and continue browsing your achievements.');
+            achievementMenu();
             break;
         case 'EXIT':
-            StartUpMenu()
+            StartUpMenu();
             break;
         default:
-            NotAnOption()
-            AchievementMenu()
+            NotAnOption();
+            AchievementMenu();
             break;
     }
 }
@@ -235,17 +238,16 @@ function achievementMenu() {
 function randomNumber(min, max) {
     x = Math.floor(Math.random() * (max - min + 1));
 }
-    StartUpMenu()
-function StartUpMenu() {
-openingMenu = 1
-    randomNumber(1, 10000)
+openingMenu = 1;
+    randomNumber(1, 10000);
     switch(x) {
     case 1:
-        alert('WELCOME TO unnamedTextAdventure!')
+        alert('WELCOME TO unnamedTextAdventure!');
         break;
     default:
-    alert('WELCOME TO KIXLEY!')
-    }
+    alert('WELCOME TO KIXLEY!');
+    StartUpMenu()
+function StartUpMenu() 
 
     answer = prompt('Alpha 1.4.', 'Start, Options, Guide, Load, Achievements, Exit').toUpperCase()
     switch (answer) {
@@ -271,13 +273,19 @@ openingMenu = 1
             Credits()
             endGame()
             break;
+        case 'create new account':
+            MakeNewAccount()
+            break;
+        case 'login':
+            login()
+            break;
         case 'YEE':
             alert('go to https://www.youtube.com/watch?v=q6EoRBvdVPQ to watch the video')
             alert('Did you watch it?')
             StartUpMenu()
             break;
     case 'MOZILLA GEAR STORE': 
-alert('check out the plush fox in the store! https://gear.mozilla.org/?utm_source=directory-tiles&utm_medium=tiles&utm_content=GearV2')
+alert('Check out the plush fox in the store! https://gear.mozilla.org/?utm_source=directory-tiles&utm_medium=tiles&utm_content=GearV2')
         StartUpMenu()
     break;
         case 'GO DIE IN A HOLE':
@@ -2015,3 +2023,73 @@ function inCommonRoom() {
                         }
                 }
             }
+function MakeNewAccount() {
+        answer = prompt('What do you want your username to be? Your username will be case-sensitive, so choose an appropriate one. It can also be more than one word.')
+ userCheck = localStorage.getItem(answer)
+ if(userCheck === null) {
+username = answer
+MakePassword()
+}
+else {
+    alert('That username is already taken. Please try a new username.')
+    MakeNewAccount()
+}
+}
+function MakePassword() {
+answer = prompt('What do you want your password to be? This is also case-sensitive.')
+    localStorage.setItem(username + ' as a name', answer)
+alert('Saved!')
+StartUpMenu()
+}
+function login() {
+    username = prompt('What is your username??? Your username is case-sensitive.')
+    userCheck = localStorage.getItem(username + ' as a name')
+if (userCheck === null) {
+    alert('That account doesn\'t exist.')
+    login()
+}
+else {
+passTry()
+}
+}
+function passTry() {
+    answer = prompt('What is your password?')
+    if (userCheck != answer) {
+    alert('You messed up your password!!!')
+    passTry()
+        }
+else {
+inAccount()
+    }
+    }
+function inAccount() {
+signedIn = true
+answer = prompt('What would you like to do?', 'Set default difficulty, Set default class, Back to menu, Use defaults').toLowerCase()
+switch(answer) {
+case 'set default difficulty':
+    Difficulty()
+    localStorage.setItem(username + ' default difficulty', diffSetting.toString())
+inAccount()
+    break;
+case 'set default class':
+        chooseClass()
+localStorage.setItem(username + ' default class', chosenClass)
+inAccount()
+break;
+case 'back to menu':
+StartUpMenu()
+break;
+case 'use defaults':
+    if ((localStorage.getItem(username +  ' default difficulty')) != null) {
+diffSetting = localStorage.getItem(username +  ' default difficulty')
+diffSetting = paseInt(diffSetting, 10)
+}
+if ((localStorage.getItem(username + ' default class')) != null) {
+chosenClass = localStorage.getItem(username + ' default class')
+}
+    useDefaults = true
+default:
+NotAnOption()
+inAccount() 
+}
+}
