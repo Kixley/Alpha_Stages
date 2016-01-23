@@ -238,17 +238,21 @@ function achievementMenu() {
 function randomNumber(min, max) {
     x = Math.floor(Math.random() * (max - min + 1));
 }
-openingMenu = 1;
-    randomNumber(1, 10000);
+    openingMenu = true;
+    StartUpMenu()
+
+function StartUpMenu() {
+    if (openingMenu === true) {
+        randomNumber(1, 10000);
     switch(x) {
     case 1:
         alert('WELCOME TO unnamedTextAdventure!');
         break;
     default:
     alert('WELCOME TO KIXLEY!');
-    StartUpMenu()
-function StartUpMenu() {
-    if ((localStorage.getItem(staySignedInAs) != null) {
+    openingMenu = false
+    }
+    if ((localStorage.getItem('staySignedInAs')) != null) {
     username = localStorage.getItem(staySignedInAs)
     if ((localStorage.getItem(username +  ' default difficulty')) != null) {
 diffSetting = localStorage.getItem(username +  ' default difficulty')
@@ -261,9 +265,20 @@ chosenClass = localStorage.getItem(username + ' default class')
     answer = prompt('Alpha 1.4.', 'Start, Options, Guide, Load, Achievements, Exit').toUpperCase()
     switch (answer) {
         case 'START':
+            if (signedIn === false) {
             alert('Before you start, please set the difficulty. Easier difficulties have monsters with less health and attack. Harder difficulties have monsters with more health and attack.')
             Difficulty()
             openingMenu = 0
+            }
+            else {
+             if ((localStorage.getItem(username +  ' default difficulty')) != null) {
+diffSetting = localStorage.getItem(username +  ' default difficulty')
+diffSetting = paseInt(diffSetting, 10)
+}
+    if ((localStorage.getItem(username + ' default class')) != null) {
+chosenClass = localStorage.getItem(username + ' default class')
+}
+            }
             break;
         case 'OPTIONS':
             Options()
@@ -2102,5 +2117,6 @@ case 'stay signed in':
 default:
 NotAnOption()
 inAccount() 
+}
 }
 }
