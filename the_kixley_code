@@ -130,7 +130,6 @@ var i = 0;
 var justDiscoveredSwamp;
 var onAQuest;
 var guildhallLevel;
-var signedIn
 // menu
 var looking;
 var haveOptionsBeenUsed = 0;
@@ -146,10 +145,10 @@ var woodenSword = 0;
 var speedBoots = 0;
 //accounts
 var userCheck;
-var userName;
+var username;
 var useDefaults = false;
+var signedIn;
 // functions
-
 function CheckIfGotAchieve(whichOne) {
     switch (whichOne) {
         case 'Kill':
