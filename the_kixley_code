@@ -18,7 +18,7 @@ var randName;
 var randHealth;
 var monsAttAndDiff;
 var aabeaDestroysTown = 0;
-var monsNameType = 0;
+var dwNamesBool = false;
 var dwNames = ['Dalek', 'Cyberman', 'Weeping Angel', 'Zygon', 'Silurian', 'Silent', 'Master', 'Special Weapons Dalek'];
 // achievements
 var listAchieveOrLeave;
@@ -690,9 +690,9 @@ alert('You head off into the plains, where you find a newly regenerated Master, 
                 randomNumber(1, 2)
                 monsLev = level * (x + 1)
                 randomNumber(-10, 10)
-                hitCounter = (100 + x) * diffSetting + Math.pow(monLev, 2)
-            if ((monsNameType % 2) === 0) {
-        randomNumber(1, 8)
+                hitCounter = (100 + x) * diffSetting + Math.pow(monsLev, 2)
+            if (dwNamesB === false) {
+                randomNumber(1, 8)
                 randName = x
                 actualMonsName = monsName[randName]
                 alert('You get lost in the swamp, where you find a level ' + monsLev + ' ' + actualMonsName + '!')
@@ -700,12 +700,12 @@ alert('You head off into the plains, where you find a newly regenerated Master, 
                 FightMenu()
             }
         else {
-        randomNumber(1, dwNames.length)
+        randomNumber(1, 8)
                 randName = x
                 actualMonsName = dwNames[randName]
-            if (actualMonsName != 'Master') {    
-alert('You get lost in the swamp, where you find a level ' + monsLev + ' ' + actualMonsName + '!')
-}
+                if (actualMonsName != 'Master') {    
+                alert('You get lost in the swamp, where you find a level ' + monsLev + ' ' + actualMonsName + '!')
+                }   
 else if (foughtMaster === 1) {
 alert('You get lost in the swamp, where you find the Master, who is level ' + monsLev + '.')
 foughtMaster = 1
@@ -777,7 +777,12 @@ answer = answer.toUpperCase()
     case 'the TARDIS':
     alert('A blue police box shows up out of thin air,making a weird whooshing noise as it does. As the door opens, you walk in, and find yourself in a large box that is much smaller on the outside.')
     alert('A strange man says \'What are you doing in my TARDIS⁈⁈⁈⁈⁈⁈⁈\' after it makes the weird whooshing noise again. He drops you back off at Smatino.')
-    monsNameType += 1
+    if (dwNamesB === false) {
+    dwNamesB = true
+    }
+    else {
+    dwNamesB = false
+    }
     InTown()
     break;
         default:
