@@ -130,6 +130,7 @@ var i = 0;
 var justDiscoveredSwamp;
 var onAQuest;
 var guildhallLevel;
+var signedIn
 // menu
 var looking;
 var haveOptionsBeenUsed = 0;
