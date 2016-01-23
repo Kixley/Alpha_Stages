@@ -247,8 +247,17 @@ openingMenu = 1;
     default:
     alert('WELCOME TO KIXLEY!');
     StartUpMenu()
-function StartUpMenu() 
-
+function StartUpMenu() {
+    if ((localStorage.getItem(staySignedInAs) != null) {
+    username = localStorage.getItem(staySignedInAs)
+    if ((localStorage.getItem(username +  ' default difficulty')) != null) {
+diffSetting = localStorage.getItem(username +  ' default difficulty')
+diffSetting = paseInt(diffSetting, 10)
+}
+    if ((localStorage.getItem(username + ' default class')) != null) {
+chosenClass = localStorage.getItem(username + ' default class')
+}
+}
     answer = prompt('Alpha 1.4.', 'Start, Options, Guide, Load, Achievements, Exit').toUpperCase()
     switch (answer) {
         case 'START':
@@ -273,10 +282,10 @@ function StartUpMenu()
             Credits()
             endGame()
             break;
-        case 'create new account':
+        case 'CREATE NEW ACCOUNT':
             MakeNewAccount()
             break;
-        case 'login':
+        case 'LOGIN':
             login()
             break;
         case 'YEE':
@@ -352,7 +361,6 @@ function GuideChapter1() {
     alert('That\'s about it!')
     guidePT()
 }
-
 function GuideChapter2() {
     alert('Chapter 2: Classes')
     alert('Classes are an important decision.')
@@ -361,7 +369,6 @@ function GuideChapter2() {
     alert('That\'s about it!')
     guidePT()
 }
-
 function GuideChapter3() {
     alert('Chapter 3: Fighting')
     alert('During the course of the game, you will be fighting monsters.')
@@ -374,7 +381,6 @@ function GuideChapter3() {
     alert('That\'s about it!')
     guidePT()
 }
-
 function GuideChapter4() {
     alert('Chapter 4: Questing')
     alert('Quests can be used to gain experience.')
@@ -382,7 +388,6 @@ function GuideChapter4() {
     alert('That\'s about it!')
     guidePT()
 }
-
 function GuideChapter5() {
     alert('Chapter 5: Items')
     alert('Items are an important part of fighting.')
@@ -2064,6 +2069,13 @@ inAccount()
     }
 function inAccount() {
 signedIn = true
+if ((localStorage.getItem(username +  ' default difficulty')) != null) {
+diffSetting = localStorage.getItem(username +  ' default difficulty')
+diffSetting = paseInt(diffSetting, 10)
+}
+if ((localStorage.getItem(username + ' default class')) != null) {
+chosenClass = localStorage.getItem(username + ' default class')
+}
 answer = prompt('What would you like to do?', 'Set default difficulty, Set default class, Back to menu, Use defaults').toLowerCase()
 switch(answer) {
 case 'set default difficulty':
@@ -2072,22 +2084,16 @@ case 'set default difficulty':
 inAccount()
     break;
 case 'set default class':
-        chooseClass()
-localStorage.setItem(username + ' default class', chosenClass)
+    chooseClass()
+    localStorage.setItem(username + ' default class', chosenClass)
+    break;
 inAccount()
 break;
 case 'back to menu':
 StartUpMenu()
 break;
-case 'use defaults':
-    if ((localStorage.getItem(username +  ' default difficulty')) != null) {
-diffSetting = localStorage.getItem(username +  ' default difficulty')
-diffSetting = paseInt(diffSetting, 10)
-}
-if ((localStorage.getItem(username + ' default class')) != null) {
-chosenClass = localStorage.getItem(username + ' default class')
-}
-    useDefaults = true
+case 'stay signed in':
+    localStorage.setItem('staySignedInAs', username)
 default:
 NotAnOption()
 inAccount() 
