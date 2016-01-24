@@ -38,6 +38,7 @@ var isSpinning
 var slotResult1
 var slotResult2
 var slotResult3
+var casinoLevel = 1
 //in the fight
 var hit;
 var combo;
@@ -132,6 +133,8 @@ var theWholeShebang = [
     'John Georgiades',
     'Playtesters:',
     'Nickel Asher',
+    'Ian Hopper',
+    'Sam Stagner',
     'Thank you for playing Kixley! More content will be released in the future.'
 ];
 var i = 0;
@@ -2295,4 +2298,21 @@ function FindWinnings() {
             break;
     }
     InCasino()
+}
+function GivingMoney() {
+    alert('The man says, \'Hey kid. If you could lend us some money, I\'ll be able to upgrade this casino. Ya know, add a game of Blackjack or something.\' \'Ok,\' you say, pulling out your gold, \' how much is it?\' The man says, \'500 gold.\'')
+    answer = prompt('500 gold!','Yes, No').toUpperCase()
+    switch(answer) {
+        case 'YES':
+            if(totalGold < 500) {
+                alert('You don\'t have enough money.')
+                InCasino()
+            }
+            else {
+                totalGold -= 500
+                alert('As you hand the man the money, he grins. \'Thanks, kiddo. Let me go look up some casino-y things.\'')
+                InCasino()
+                casinoLevel += 1
+            }
+    }
 }
