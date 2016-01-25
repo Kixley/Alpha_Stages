@@ -2310,9 +2310,9 @@ function GivingMoney() {
             }
             else {
                 totalGold -= 500
-                alert('As you hand the man the money, he grins. \'Thanks, kiddo. Let me go look up some casino-y things.\'')
-                InCasino()
+                alert('As you hand the man your hard-earned money, he grins. \'Thanks, kiddo. Let me go look up some casino-y things.\'')
                 casinoLevel += 1
+                InCasino()
             }
     }
 }
