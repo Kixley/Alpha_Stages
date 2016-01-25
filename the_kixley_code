@@ -2135,22 +2135,36 @@ inAccount()
 }
 }
 function InCasino() {
-    alert('You walk into a somewhat dingy room, where a man stands behind a counter. He smiles at you, showing you his teeth sharpened to the shape of a knife. \'Hey, kiddo. You ready to get rich?\' he asks. \'Uhhhhhh.... sure?\' you respond, shying away. \'Well, \' he says, \' we\'ve got all sorts of games up in here. Slots, uhhhhhh.... actually, we only have slots. Never mind. The slots cost 25 gold to play.\'')
-    answer = prompt('Whadda you say?','Slots, Give money, Leave').toUpperCase()
-    switch(answer) {
-        case 'SLOTS':
-            Slots()
-            break;
-        case 'GIVE MONEY':
-            GivingMoney()
-            break;
-        case 'LEAVE':
-            InTown()
-            break;
-        default:
-            NotAnOption()
-            InCasino()
+    if(casinoLevel === 1) {
+        alert('You walk into a somewhat dingy room, where a man stands behind a counter. He smiles at you, showing you his teeth sharpened to the shape of a knife. \'Hey, kiddo. You ready to get rich?\' he asks. \'Uhhhhhh.... sure?\' you respond, shying away. \'Well, \' he says, \' we\'ve got all sorts of games up in here. Slots, uhhhhhh.... actually, we only have slots. Never mind. The slots cost 25 gold to play.\'')
+    answer = prompt('Whadda you say?','Slots, Give Money, Leave').toUpperCase()
     }
+    else if(casinoLevel === 2) {
+        alert('You walk into a somewhat dingy room, where a man stands behind a counter. He smiles at you, showing you his teeth sharpened to the shape of a knife. \'Hey, kiddo. You ready to get rich?\' he asks. \'Uhhhhhh.... sure?\' you respond, shying away. \'Well, \' he says, \' we\'ve got all sorts of games up in here. Slots, that High And Low game, and... that\' about it. The slots cost 25 gold to play, and the High And Low costs 50.\'')
+        answer = prompt('Whadda you say?','Slots, High And Low, Give Money, Leave').toUpperCase()
+    }
+        switch(answer) {
+            case 'SLOTS':
+                Slots()
+                break;
+            case 'HIGH AND LOW':
+                if(casinoLevel === 1) {
+                    alert('The man says, \'What are you talking about? We don\'t have a High And Low Table.')
+                    InCasino()
+                }
+                else {
+                    HighAndLow()
+                }
+            case 'GIVE MONEY':
+                GivingMoney()
+                break;
+            case 'LEAVE':
+                InTown()
+                break;
+            default:
+                NotAnOption()
+                InCasino()
+        }
 }
 function Slots() {
     if(totalGold < 25) {
