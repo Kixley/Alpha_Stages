@@ -6,11 +6,11 @@ Currently it is still in the Alpha stages.
 We hope to move to Beta by Feb. 1, 2016, or whenever the current version is over.
 
 
-STATS:
-Version: 1.4
-Programmers: 
-  Ethan Lai
-  Colin Pulis
-  Jacob Kuschel
-  John Georgiades
-  Cameron Jordan
+STATS:  
+Version: 1.4  
+Programmers:  
+  Ethan Lai  
+  Colin Pulis  
+  Jacob Kuschel  
+  Cameron Jordan  
+  John Georgiades  
