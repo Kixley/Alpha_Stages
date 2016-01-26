@@ -39,6 +39,7 @@ var slotResult1
 var slotResult2
 var slotResult3
 var casinoLevel = 1
+var drunk = 0
 //in the fight
 var hit;
 var combo;
@@ -2137,11 +2138,11 @@ inAccount()
 function InCasino() {
     if(casinoLevel === 1) {
         alert('You walk into a somewhat dingy room, where a man stands behind a counter. He smiles at you, showing you his teeth sharpened to the shape of a knife. \'Hey, kiddo. You ready to get rich?\' he asks. \'Uhhhhhh.... sure?\' you respond, shying away. \'Well, \' he says, \' we\'ve got all sorts of games up in here. Slots, uhhhhhh.... actually, we only have slots. Never mind. The slots cost 25 gold to play.\'')
-    answer = prompt('Whadda you say?','Slots, Give Money, Leave').toUpperCase()
+    answer = prompt('Whadda you say?','Slots, Give Money, Get Drunk, Leave').toUpperCase()
     }
     else if(casinoLevel === 2) {
         alert('You walk into a somewhat dingy room, where a man stands behind a counter. He smiles at you, showing you his teeth sharpened to the shape of a knife. \'Hey, kiddo. You ready to get rich?\' he asks. \'Uhhhhhh.... sure?\' you respond, shying away. \'Well, \' he says, \' we\'ve got all sorts of games up in here. Slots, that High And Low game, and... that\' about it. The slots cost 25 gold to play, and the High And Low costs 50.\'')
-        answer = prompt('Whadda you say?','Slots, High And Low, Give Money, Leave').toUpperCase()
+        answer = prompt('Whadda you say?','Slots, High And Low, Give Money, Get Drunk, Leave').toUpperCase()
     }
         switch(answer) {
             case 'SLOTS':
@@ -2158,7 +2159,14 @@ function InCasino() {
             case 'GIVE MONEY':
                 GivingMoney()
                 break;
+            case 'GET DRUNK':
+                Drinks()
+                break;
             case 'LEAVE':
+                if(drunk > 0) {
+                    alert('As you walk out into the town, you collapse due to being drunk.')
+                    alert('After a while, you wake up and walk into town.')
+                }
                 InTown()
                 break;
             default:
@@ -2329,4 +2337,8 @@ function GivingMoney() {
                 InCasino()
             }
     }
+}
+function Drinks() {
+    alert('You grab a drink.')
+    drunk += 1
 }
