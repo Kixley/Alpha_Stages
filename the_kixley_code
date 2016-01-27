@@ -2157,8 +2157,24 @@ function InCasino() {
         }
     }
     else if(casinoLevel === 2) {
-        alert('You walk into a somewhat dingy room, where a man stands behind a counter. He smiles at you, showing you his teeth sharpened to the shape of a knife. \'Hey, kiddo. You ready to get rich?\' he asks. \'Uhhhhhh.... sure?\' you respond, shying away. \'Well, \' he says, \' we\'ve got all sorts of games up in here. Slots, that High And Low game, and... that\' about it. The slots cost 25 gold to play, and the High And Low costs 50.\'')
+        if(drunk > 0) {
+            if(drunk === 1) {
+                alert('You walk into a som what dingy room, where a man stands behind a counter. He smiles at you, showing you his teeth sharpened to the shape of a  nife. \'Hey, kiddo. You ready to get rich?\' he  sks. \'Uhhhhhh.... sure?\' you respond, shying away. \'Well, \' he says, \' we\'ve got all sorts of games up in here. Slots, that H gh And Low game, and... that\'s about it. The slots cost 25 gold to  lay, and the High And Low you bet how much y u want.\'')
+        answer = prompt('Wha da you  ay?','Slots, High And Low, Give Money,  et Drunk, Leave').toUpperCase()
+            }
+            else if(drunk === 2) {
+                alert('You w lk in   a somewhat d ngy room, where a ma  stands behind a coun er. He smiles at you, sh wing you his teeth shar ened to the shape of a knife. \'Hey, kiddo. You ready  o get rich?\' he asks. \'Uhhhhhh.... sure?\' you resp nd, shying away. \' ell, \' he says, \' we\'ve got all sorts of g mes up in here. Slots, that High  nd Low ga e, and... that\'s abou  it. The slots  ost 25 g ld to play, and the High And Low you b   how much y u w  t.\'')
+        answer = prompt('Wh   a yo  s y?','Slots, Hi   And L w, Give Mo ey, Ge  Drunk, Lea e').toUpperCase()
+            }
+            else if(drunk >= 3) {
+            alert('                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ')
+        answer = prompt('                                                                   ').toUpperCase()
+            }
+        }
+        else {
+        alert('You walk into a somewhat dingy room, where a man stands behind a counter. He smiles at you, showing you his teeth sharpened to the shape of a knife. \'Hey, kiddo. You ready to get rich?\' he asks. \'Uhhhhhh.... sure?\' you respond, shying away. \'Well, \' he says, \' we\'ve got all sorts of games up in here. Slots, that High And Low game, and... that\'s about it. The slots cost 25 gold to play, and the High And Low costs 50.\'')
         answer = prompt('Whadda you say?','Slots, High And Low, Give Money, Get Drunk, Leave').toUpperCase()
+        }
     }
         switch(answer) {
             case 'SLOTS':
