@@ -2197,7 +2197,11 @@ function InCasino() {
             case 'LEAVE':
                 if(drunk > 0) {
                     alert('As you walk out into the town, you collapse due to being drunk.')
-                    alert('After a while, you wake up and walk into town.')
+                    while(drunk > 0) {
+                        alert('...')
+                        drunk -= 1
+                    }
+                    alert('You wake up and walk into town.')
                 }
                 InTown()
                 break;
@@ -2208,8 +2212,24 @@ function InCasino() {
 }
 function Slots() {
     if(totalGold < 25) {
+        if(drunk > 0) {
+            if(drunk === 1) {
+                alert('Not eno gh money.')
+                InCasino()
+            }
+            else if(drunk === 2) {
+                alert('N t  no gh mon y.')
+                InCasino()
+            }
+            else if(drunk >= 3) {
+                alert('                 ')
+                InCasino()
+            }
+        }
+        else {
         alert('Not enough money.')
         InCasino()
+        }
     }
     else {
     alert('You walk over to a slot machine and insert 25 gold.')
