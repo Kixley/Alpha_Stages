@@ -824,6 +824,10 @@ function FightMenu() {
             monsAttAndDiff = monsAtt * diffSetting
             HitOrMiss()
             break;
+        case 'POKEMON':
+            alert('No. This is not a Pokemon game. What are you talking about.')
+            FightMenu()
+            break;
         case 'ITEM':
             ItemMenu()
             break;
