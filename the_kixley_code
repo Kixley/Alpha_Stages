@@ -5,7 +5,7 @@ CHANGELOG FOR 1.4:
     More Easter eggs
     a little more code cleanup (like a lot)
         You can type 'health potion' instead of the plural to call them
-If you find any bugs, please report them in the bugs folder
+    If you find any bugs, or have a good suggestion, make a new issue. Label bugs 'bug' and suggestions 'improvement.'
 */
 //monster variables
 var hitCounter = 100;
