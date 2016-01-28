@@ -112,6 +112,7 @@ var levelUpHealth = 50;
 var totalExtraHealth = levelUpHealth * levelMinusOne;
 var levelUpBlobsOfDoom = 50;
 // other
+var beatTheGame = false
 var goldCheat = 0;
 var expCheat = 0;
 var attackCheat = 0;
@@ -283,7 +284,7 @@ diffSetting = paseInt(diffSetting, 10)
 chosenClass = localStorage.getItem(username + ' default class')
 }
 }
-    answer = prompt('Alpha 1.4.', 'Start, Options, Guide, Load, Achievements, Exit').toUpperCase()
+    answer = prompt('Alpha 1.4.', 'Start, Options, Guide, Load, Credits, Achievements, Exit').toUpperCase()
     switch (answer) {
         case 'START':
             if (signedIn === false) {
@@ -309,6 +310,10 @@ chosenClass = localStorage.getItem(username + ' default class')
             break;
         case 'LOAD':
             load()
+            break;
+        case 'CREDITS':
+            Credits()
+            StartUpMenu()
             break;
         case 'ACHIEVEMENTS':
             achievementMenu()
@@ -336,13 +341,13 @@ alert('Check out the plush fox in the store! https://gear.mozilla.org/?utm_sourc
         case 'GO DIE IN A HOLE':
             alert('No. Go sit in an infinite loop.')
             while (true) {
-                alert('-\4rAQZdew')
+                alert('-\\4rAQZdew')
                 alert('That message was brought to you by Murphy, one of the programmer\'s dog.')
                 alert('Also, this is an infinite loop')
                 x += 1
             }
             while (true) {
-                alert('-\4rAQZdew')
+                alert('-\\4rAQZdew')
                 alert('That message was brought to you by Murphy, one of the programmer\'s dog.')
             }
         default:
@@ -1908,7 +1913,7 @@ function fightingBalbeag() {
             break;
     }
     alert('You use some blobs of doom that you find in A\'Abea\'s bag to blast down the door and fight Balbeag!')
-    if (youCheated) {
+    if (youCheated === true && beatTheGame === false) {
         while (true) {
             if (noCheating = 0) {
                 alert('We\'re sorry, but this final fight is for people who didn\'t cheat. So remember, kids: NO CHEATING.')
@@ -1919,6 +1924,8 @@ function fightingBalbeag() {
                 timerCounter += 1
             }
         }
+        }
+        else {
         monsLev = 150
         actualMonsName = 'Balbeag'
         actualMonsNameNoThe = actualMonsName
@@ -1936,9 +1943,13 @@ function beatTheGame() {
 
 function beatTheGameAfterCredits() {
     answer = (prompt('You beat the game! Would you like to continue?', yesNo).toLowerCase())
+    beatTheGame = true
     switch (answer) {
         case 'yes':
             alert('You return to Smatino, ready to fight Balbeag’s remaining monsters who still are evil, though their master is dead');
+            alert('Because you beat the game, you will have access to developer cheats. The password is 62089.')
+            alert('Congrats! You got the secret achievement: \'Beat the Game\'! (2/2)')
+            secretAchieve.push('Beat the Game')
             InTown()
             break;
         case 'no':
@@ -2403,7 +2414,7 @@ function Drinks() {
     alert('You grab a drink.')
     drunk += 1
     if(drunk === 99) {
-        alert('Congratulations! You got the secret achievement: \'99 Bottles of Beer on the Wall\'! (1/1)')
+        alert('Congratulations! You got the secret achievement: \'99 Bottles of Beer on the Wall\'! (1/2)')
         secretAchieve.push('99 Bottles of Beer on the Wall')
         InCasino()
     }
