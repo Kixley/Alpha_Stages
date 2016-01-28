@@ -25,6 +25,7 @@ var listAchieveOrLeave;
 var allAchievements = ['Kill 5 monsters', 'Kill 10 monsters', 'Kill 20 monsters', 'Reach Level 5', 'Reach Level 10', 'Reach Level 20', 'Get 1000 cumulative gold', 'Get 2000 cumulative gold', 'Get 5000 cumulative gold'];
 var e;
 var compAchieve = [];
+var secretAchieve = [];
 var achieveCompletion = (compAchieve.length / 9) * 100;
 var killCounter = 0;
 var cumulativeGold = 0;
@@ -221,7 +222,15 @@ function ListingAchievements() {
             alert(compAchieve[e]);
         }
     }
+    if(secretAchieve.length === 0) {
     achievementMenu();
+    }
+    else {
+        for (e = 0; e < secretAchieve.length; e += 1) {
+            alert(secretAchieve[e])
+        }
+        achievementMenu()
+    }
 }
 
 function achievementMenu() {
@@ -2393,4 +2402,12 @@ function GivingMoney() {
 function Drinks() {
     alert('You grab a drink.')
     drunk += 1
+    if(drunk === 99) {
+        alert('Congratulations! You got the secret achievement: \'99 Bottles of Beer on the Wall\'! (1/1)')
+        secretAchieve.push('99 Bottles of Beer on the Wall')
+        InCasino()
+    }
+    else {
+        InCasino()
+    }
 }
