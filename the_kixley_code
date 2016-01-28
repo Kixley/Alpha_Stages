@@ -2252,12 +2252,49 @@ function Slots() {
         }
     }
     else {
+        if(drunk > 0) {
+            if(drunk === 1) {
+                alert('You wa k over to a slot machine and insert 25 go d.')
+            }
+            else if(drunk === 2) {
+                alert('You wa k over t  a s ot ma  ine a d ins rt 25 g ld.')
+            }
+            else if(drunk >= 3) {
+                alert('                                                   ')
+            }
+        }
+        else {
     alert('You walk over to a slot machine and insert 25 gold.')
+    }
     totalGold -= 25
     isSpinning = true
+    if(drunk > 0) {
+        if(drunk === 1) {
+            alert('When you wa t to stop the reels, type STOP. If you d n\'t, just hold  nter until you do.')
+        }
+        else if(drunk === 2) {
+            alert('Wh n you wa   to stop the reels, type STO . If yo  don\'t, just hold    er until y u do.')
+        }
+        else if(drunk >= 3) {
+            alert('                                                                                        ')
+        }
+    }
+    else {
     alert('When you want to stop the reels, type STOP. If you don\'t, just hold enter until you do.')
+    }
     while(isSpinning === true) {
+        if(drunk === 1) {
+            answer = prompt('Sp nning...').toUpperCase()
+        }
+        else if(drunk === 2) {
+            answer = prompt('Spi  ing...').toUpperCase()
+        }
+        else if(drunk >= 3) {
+            answer = prompt('           ').toUpperCase()
+        }
+        else {
         answer = prompt('Spinning...').toUpperCase()
+        }
         switch(answer) {
         case 'STOP':
             isSpinning = false
