@@ -18,7 +18,7 @@ var randName;
 var randHealth;
 var monsAttAndDiff;
 var aabeaDestroysTown = 0;
-var dwNamesBool = false;
+var dwNamesB = false;
 var dwNames = ['Dalek', 'Cyberman', 'Weeping Angel', 'Zygon', 'Silurian', 'Silent', 'Master', 'Special Weapons Dalek'];
 // achievements
 var listAchieveOrLeave;
@@ -265,20 +265,9 @@ chosenClass = localStorage.getItem(username + ' default class')
     answer = prompt('Alpha 1.4.', 'Start, Options, Guide, Load, Achievements, Exit').toUpperCase()
     switch (answer) {
         case 'START':
-            if (signedIn === false) {
             alert('Before you start, please set the difficulty. Easier difficulties have monsters with less health and attack. Harder difficulties have monsters with more health and attack.')
             Difficulty()
             openingMenu = 0
-            }
-            else {
-             if ((localStorage.getItem(username +  ' default difficulty')) != null) {
-diffSetting = localStorage.getItem(username +  ' default difficulty')
-diffSetting = paseInt(diffSetting, 10)
-}
-    if ((localStorage.getItem(username + ' default class')) != null) {
-chosenClass = localStorage.getItem(username + ' default class')
-}
-            }
             break;
         case 'OPTIONS':
             Options()
@@ -653,13 +642,13 @@ function Places() {
             if (plainsCounter === 7) {
                 alert('As you are walking through the plains you see a map lying on the ground. It shows a path leading to a nearby swamp.')
                 swampDiscovery = 1
-        if ((monsNameType % 2) === 0) {
+                }
+        if (dwNamesB === false) {
             randName = Math.floor(Math.random() * (monsName.length + 1))
             actualMonsName = monsName[randName]
             randNum = Math.floor(Math.random() * 4)
             monsLev = level + (Math.floor(Math.random() * 2))
             alert('You head off into the plains, where you find a ' + monsLev + ' ' + actualMonsName + '!')
-            } 
             randHealth = monsLev * randNum 
             hitCounter = (100 + randHealth) * diffSetting
             FightMenu()
@@ -682,7 +671,6 @@ foughtMaster = 1
 else if (actualMonsName === 'Master') {
 alert('You head off into the plains, where you find a newly regenerated Master, who is level ' + monsLev + '.')
 }
-                FightMenu()
             randHealth = monsLev * randNum
             hitCounter = (100 + randHealth) * diffSetting
             FightMenu()
@@ -721,11 +709,11 @@ alert('You head off into the plains, where you find a newly regenerated Master, 
                 if (actualMonsName != 'Master') {    
                 alert('You get lost in the swamp, where you find a level ' + monsLev + ' ' + actualMonsName + '!')
                 }   
-else if (foughtMaster === 1) {
+else if (foughtMaster === 0) {
 alert('You get lost in the swamp, where you find the Master, who is level ' + monsLev + '.')
 foughtMaster = 1
 }
-else if (actualMonsName === 'Master') {
+else if (foughtMaster === 1) {
 alert('You get lost in the swamp, where you find a newly regenerated Master, who is level ' + monsLev + '.')
 }
                 inSwamp = 1
