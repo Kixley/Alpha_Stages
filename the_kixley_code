@@ -2305,6 +2305,247 @@ function Slots() {
             random3 = Math.floor(Math.random() * 7)
         }
     }
+    if(drunk === 1) {
+    switch(random1) {
+        case 0:
+            slotResult1 = 'che ry'
+            break;
+        case 1:
+            slotResult1 = 'g ape'
+            break;
+        case 2:
+            slotResult1 = 'coi '
+            break;
+        case 3:
+            slotResult1 = 'a ple'
+            break;
+        case 4:
+            slotResult1 = 'ora ge'
+            break;
+        case 5:
+            slotResult1 = 'lem n'
+            break;
+        case 6:
+            slotResult1 = 'water elon'
+            break;
+        case 7:
+            slotResult1 = '7'
+            break;
+    }
+    switch(random2) {
+        case 0:
+            slotResult2 = 'ch rry'
+            break;
+        case 1:
+            slotResult2 = 'gra e'
+            break;
+        case 2:
+            slotResult2 = 'c in'
+            break;
+        case 3:
+            slotResult2 = 'app e'
+            break;
+        case 4:
+            slotResult2 = 'ora ge'
+            break;
+        case 5:
+            slotResult2 = 'l mon'
+            break;
+        case 6:
+            slotResult2 = 'waterm lon'
+            break;
+        case 7:
+            slotResult2 = '7'
+            break;
+    }
+    switch(random3) {
+        case 0:
+            slotResult3 = 'c erry'
+            break;
+        case 1:
+            slotResult3 = 'gra e'
+            break;
+        case 2:
+            slotResult3 = 'c in'
+            break;
+        case 3:
+            slotResult3 = 'a ple'
+            break;
+        case 4:
+            slotResult3 = 'oran e'
+            break;
+        case 5:
+            slotResult3 = 'le on'
+            break;
+        case 6:
+            slotResult3 = 'wa ermelon'
+            break;
+        case 7:
+            slotResult3 = '7'
+            break;
+    }
+    }
+    else if(drunk === 2) {
+        switch(random1) {
+        case 0:
+            slotResult1 = 'c  rry'
+            break;
+        case 1:
+            slotResult1 = 'gra  '
+            break;
+        case 2:
+            slotResult1 = '  in'
+            break;
+        case 3:
+            slotResult1 = 'a  le'
+            break;
+        case 4:
+            slotResult1 = 'o  nge'
+            break;
+        case 5:
+            slotResult1 = 'le  n'
+            break;
+        case 6:
+            slotResult1 = 'wa  rmelon'
+            break;
+        case 7:
+            slotResult1 = '7'
+            break;
+    }
+    switch(random2) {
+        case 0:
+            slotResult2 = 'c  rry'
+            break;
+        case 1:
+            slotResult2 = 'g a e'
+            break;
+        case 2:
+            slotResult2 = ' o n'
+            break;
+        case 3:
+            slotResult2 = 'a  le'
+            break;
+        case 4:
+            slotResult2 = 'oran  '
+            break;
+        case 5:
+            slotResult2 = 'l  on'
+            break;
+        case 6:
+            slotResult2 = 'w  ermelon'
+            break;
+        case 7:
+            slotResult2 = '7'
+            break;
+    }
+    switch(random3) {
+        case 0:
+            slotResult3 = 'che  y'
+            break;
+        case 1:
+            slotResult3 = 'gra  '
+            break;
+        case 2:
+            slotResult3 = 'co  '
+            break;
+        case 3:
+            slotResult3 = 'app  '
+            break;
+        case 4:
+            slotResult3 = 'or  ge'
+            break;
+        case 5:
+            slotResult3 = 'le  n'
+            break;
+        case 6:
+            slotResult3 = 'w  ermelon'
+            break;
+        case 7:
+            slotResult3 = '7'
+            break;
+    }
+    }
+    else if(drunk >= 3) {
+        switch(random1) {
+        case 0:
+            slotResult1 = '      '
+            break;
+        case 1:
+            slotResult1 = '     '
+            break;
+        case 2:
+            slotResult1 = '    '
+            break;
+        case 3:
+            slotResult1 = '     '
+            break;
+        case 4:
+            slotResult1 = '      '
+            break;
+        case 5:
+            slotResult1 = '     '
+            break;
+        case 6:
+            slotResult1 = '          '
+            break;
+        case 7:
+            slotResult1 = ' '
+            break;
+    }
+    switch(random2) {
+        case 0:
+            slotResult2 = '      '
+            break;
+        case 1:
+            slotResult2 = '     '
+            break;
+        case 2:
+            slotResult2 = '    '
+            break;
+        case 3:
+            slotResult2 = '     '
+            break;
+        case 4:
+            slotResult2 = '      '
+            break;
+        case 5:
+            slotResult2 = '     '
+            break;
+        case 6:
+            slotResult2 = '          '
+            break;
+        case 7:
+            slotResult2 = ' '
+            break;
+    }
+    switch(random3) {
+        case 0:
+            slotResult3 = '      '
+            break;
+        case 1:
+            slotResult3 = '     '
+            break;
+        case 2:
+            slotResult3 = '    '
+            break;
+        case 3:
+            slotResult3 = '     '
+            break;
+        case 4:
+            slotResult3 = '      '
+            break;
+        case 5:
+            slotResult3 = '     '
+            break;
+        case 6:
+            slotResult3 = '          '
+            break;
+        case 7:
+            slotResult3 = ' '
+            break;
+    }
+    }
+    else {
     switch(random1) {
         case 0:
             slotResult1 = 'cherry'
@@ -2383,7 +2624,19 @@ function Slots() {
             slotResult3 = '7'
             break;
     }
+    }
+    if(drunk === 1) {
+        alert('The reels sl w to a crawl, before stop ing at a picture of a ' + slotResult1 + ',   ' + slotResult2 + ', an  a ' + slotResult3 + '.')
+    }
+    else if(drunk === 2) {
+        alert('The re  s slow to a c  wl, before stop  ng at a   cture of a ' + slotResult1 + ', a ' + slotResult2 + ', a d a ' + slotResult3 + '.')
+    }
+    else if(drunk >= 3) {
+        alert('                                                             ' + slotResult1 + '    ' + slotResult2 + '        ' + slotResult3 + ' ')
+    }
+    else {
     alert('The reels slow to a crawl, before stopping at a picture of a ' + slotResult1 + ', a ' + slotResult2 + ', and a ' + slotResult3 + '.')
+    }
     if(random1 === random2 && random2 === random3) {
         FindWinnings()
     }
