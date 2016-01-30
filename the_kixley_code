@@ -2641,12 +2641,132 @@ function Slots() {
         FindWinnings()
     }
     else {
+        if(drunk === 1) {
+            alert('You didn\'  win anything. :(')
+        }
+        else if(drunk === 2) {
+            alert('Yo  d dn\'t win an thing. : ')
+        }
+        else if(drunk >= 3) {
+            alert('                            ')
+        }
+        else {
         alert('You didn\'t win anything. :(')
+        }
         InCasino()
     }
     }
 }
 function FindWinnings() {
+    if(drunk === 1) {
+    switch(random1) {
+        case 0:
+            alert('You w n 15 gold. Not very good...')
+            totalGold += 15
+            break;
+        case 1:
+            alert('You won 25 gold. You b oke even.')
+            totalGold += 25
+            break;
+        case 2:
+            alert('You won 100 gold. That\'s pre ty good!')
+            totalGold += 100
+            break;
+        case 3:
+            alert('You won 50 gold. Doubl  the money!')
+            totalGold += 50
+            break;
+        case 4:
+            alert('You w n 75 gold. Tripled!')
+            totalGold += 75
+            break;
+        case 5:
+            alert('You won 125 gold. Ni e!')
+            totalGold += 125
+            break;
+        case 6:
+            alert('You wo  200 gold. AWESOME!')
+            totalGold += 200
+            break;
+        case 7:
+            alert('DING DING DING!!!! JAC POT!!!! 1000 GOLD!!!!')
+            totalGold += 1000
+            break;
+    }
+    }
+    else if(drunk === 2) {
+        switch(random1) {
+        case 0:
+            alert('You w   15 gold. Not very good...')
+            totalGold += 15
+            break;
+        case 1:
+            alert('You won 25 gold. You b  ke even.')
+            totalGold += 25
+            break;
+        case 2:
+            alert('You w n 100 go d. That\'s pretty   od!')
+            totalGold += 100
+            break;
+        case 3:
+            alert('You won 50 gold. D   le the money!')
+            totalGold += 50
+            break;
+        case 4:
+            alert('You w n 75 gold. Trip ed!')
+            totalGold += 75
+            break;
+        case 5:
+            alert('You w   125 gold. N ce!')
+            totalGold += 125
+            break;
+        case 6:
+            alert('You won 200 g  d. AWESO E!')
+            totalGold += 200
+            break;
+        case 7:
+            alert('DING DI   DING!!!! JACKPOT!!!! 1000 GO D!!!!')
+            totalGold += 1000
+            break;
+    }
+    }
+    else if(drunk >= 3) {
+    switch(random1) {
+        case 0:
+            alert('                              ')
+            totalGold += 15
+            break;
+        case 1:
+            alert(' ')
+            totalGold += 25
+            break;
+        case 2:
+            alert(' ')
+            totalGold += 100
+            break;
+        case 3:
+            alert(' ')
+            totalGold += 50
+            break;
+        case 4:
+            alert(' ')
+            totalGold += 75
+            break;
+        case 5:
+            alert('')
+            totalGold += 125
+            break;
+        case 6:
+            alert('')
+            totalGold += 200
+            break;
+        case 7:
+            alert('')
+            totalGold += 1000
+            break;
+    }
+    }
+    else {
     switch(random1) {
         case 0:
             alert('You won 15 gold. Not very good...')
@@ -2681,9 +2801,14 @@ function FindWinnings() {
             totalGold += 1000
             break;
     }
+    }
     InCasino()
 }
 function GivingMoney() {
+    if(drunk === 1) {
+    alert('The man says, \'Hey  id. If you could lend us some money, I\'ll be able to upgrade this casino. Ya know, add a game of Blackjack or something.\' \'Ok,\' you say, pulling out your gold, \' how much is it?\' The man says, \'500 gold.\'')
+    answer = prompt('500 gold!','Yes, No').toUpperCase()
+    }
     alert('The man says, \'Hey kid. If you could lend us some money, I\'ll be able to upgrade this casino. Ya know, add a game of Blackjack or something.\' \'Ok,\' you say, pulling out your gold, \' how much is it?\' The man says, \'500 gold.\'')
     answer = prompt('500 gold!','Yes, No').toUpperCase()
     switch(answer) {
