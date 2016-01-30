@@ -2806,20 +2806,52 @@ function FindWinnings() {
 }
 function GivingMoney() {
     if(drunk === 1) {
-    alert('The man says, \'Hey  id. If you could lend us some money, I\'ll be able to upgrade this casino. Ya know, add a game of Blackjack or something.\' \'Ok,\' you say, pulling out your gold, \' how much is it?\' The man says, \'500 gold.\'')
-    answer = prompt('500 gold!','Yes, No').toUpperCase()
+    alert('The man says, \'Hey  id. If you could lend us some money, I\'ll be able to upgrade this casino. Ya k ow, add a game of Blackjack or something.\' \'Ok,\' you say, pulling out your gold, \' how much is it?\' The man says, \'500 gold.\'')
+    answer = prompt('500 go d!','Yes, No').toUpperCase()
     }
+    else if(drunk === 2) {
+    alert('The man says, \'Hey kid. If   u could lend us some money, I\'ll be able to upgrade t  s casino. Ya know, add a game of Blackjack or something.\' \'Ok,\' you say, pul   g out your gold, \' how much is it?\' The man says, \'500 go  .\'')
+    answer = prompt('500 gold!','Ye   No').toUpperCase()
+    }
+    else if(drunk >= 3) {
+    alert(' ')
+    answer = prompt(' ',' ').toUpperCase()
+    }
+    else {
     alert('The man says, \'Hey kid. If you could lend us some money, I\'ll be able to upgrade this casino. Ya know, add a game of Blackjack or something.\' \'Ok,\' you say, pulling out your gold, \' how much is it?\' The man says, \'500 gold.\'')
     answer = prompt('500 gold!','Yes, No').toUpperCase()
+    }
     switch(answer) {
         case 'YES':
             if(totalGold < 500) {
+                if(drunk === 1) {
+                alert('You don\'t have en ugh money.')
+                }
+                else if(drunk === 2) {
+                alert('Y u don\'t have    ugh money.')
+                }
+                else if(drunk >= 3) {
+                alert('              ')
+                }
+                else {
                 alert('You don\'t have enough money.')
+                }
                 InCasino()
             }
             else {
                 totalGold -= 500
+                if(drunk === 1) {
+                alert('As you hand the man you  hard-earned money, he grins. \'Thanks, kiddo. Let me go look up som  casino-y things.\'')
+                }
+                else if(drunk === 2) {
+                alert('As you hand the man   ur hard-earned   ney, he grins. \'Thanks, kiddo. Let me go loo  up some casino-y things.\'')
+                }
+                else if(drunk >= 3) {
+                alert('      ')
+                }
+                else {
                 alert('As you hand the man your hard-earned money, he grins. \'Thanks, kiddo. Let me go look up some casino-y things.\'')
+                }
                 casinoLevel += 1
                 InCasino()
             }
