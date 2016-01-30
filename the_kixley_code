@@ -25,6 +25,7 @@ var listAchieveOrLeave;
 var allAchievements = ['Kill 5 monsters', 'Kill 10 monsters', 'Kill 20 monsters', 'Reach Level 5', 'Reach Level 10', 'Reach Level 20', 'Get 1000 cumulative gold', 'Get 2000 cumulative gold', 'Get 5000 cumulative gold'];
 var e;
 var compAchieve = [];
+var secretAchieve = [];
 var achieveCompletion = (compAchieve.length / 9) * 100;
 var killCounter = 0;
 var cumulativeGold = 0;
@@ -39,6 +40,7 @@ var slotResult1
 var slotResult2
 var slotResult3
 var casinoLevel = 1
+var drunk = 0
 //in the fight
 var hit;
 var combo;
@@ -110,6 +112,7 @@ var levelUpHealth = 50;
 var totalExtraHealth = levelUpHealth * levelMinusOne;
 var levelUpBlobsOfDoom = 50;
 // other
+var beatTheGame = false
 var goldCheat = 0;
 var expCheat = 0;
 var attackCheat = 0;
@@ -220,7 +223,15 @@ function ListingAchievements() {
             alert(compAchieve[e]);
         }
     }
+    if(secretAchieve.length === 0) {
     achievementMenu();
+    }
+    else {
+        for (e = 0; e < secretAchieve.length; e += 1) {
+            alert(secretAchieve[e])
+        }
+        achievementMenu()
+    }
 }
 
 function achievementMenu() {
@@ -273,7 +284,7 @@ diffSetting = paseInt(diffSetting, 10)
 chosenClass = localStorage.getItem(username + ' default class')
 }
 }
-    answer = prompt('Alpha 1.4.', 'Start, Options, Guide, Load, Achievements, Exit').toUpperCase()
+    answer = prompt('Alpha 1.4.', 'Start, Options, Guide, Load, Credits, Achievements, Exit').toUpperCase()
     switch (answer) {
         case 'START':
             if (signedIn === false) {
@@ -299,6 +310,10 @@ chosenClass = localStorage.getItem(username + ' default class')
             break;
         case 'LOAD':
             load()
+            break;
+        case 'CREDITS':
+            Credits()
+            StartUpMenu()
             break;
         case 'ACHIEVEMENTS':
             achievementMenu()
@@ -326,13 +341,13 @@ alert('Check out the plush fox in the store! https://gear.mozilla.org/?utm_sourc
         case 'GO DIE IN A HOLE':
             alert('No. Go sit in an infinite loop.')
             while (true) {
-                alert('-\4rAQZdew')
+                alert('-\\4rAQZdew')
                 alert('That message was brought to you by Murphy, one of the programmer\'s dog.')
                 alert('Also, this is an infinite loop')
                 x += 1
             }
             while (true) {
-                alert('-\4rAQZdew')
+                alert('-\\4rAQZdew')
                 alert('That message was brought to you by Murphy, one of the programmer\'s dog.')
             }
         default:
@@ -1898,7 +1913,7 @@ function fightingBalbeag() {
             break;
     }
     alert('You use some blobs of doom that you find in A\'Abea\'s bag to blast down the door and fight Balbeag!')
-    if (youCheated) {
+    if (youCheated === true && beatTheGame === false) {
         while (true) {
             if (noCheating = 0) {
                 alert('We\'re sorry, but this final fight is for people who didn\'t cheat. So remember, kids: NO CHEATING.')
@@ -1909,6 +1924,8 @@ function fightingBalbeag() {
                 timerCounter += 1
             }
         }
+        }
+        else {
         monsLev = 150
         actualMonsName = 'Balbeag'
         actualMonsNameNoThe = actualMonsName
@@ -1926,9 +1943,13 @@ function beatTheGame() {
 
 function beatTheGameAfterCredits() {
     answer = (prompt('You beat the game! Would you like to continue?', yesNo).toLowerCase())
+    beatTheGame = true
     switch (answer) {
         case 'yes':
             alert('You return to Smatino, ready to fight Balbeag’s remaining monsters who still are evil, though their master is dead');
+            alert('Because you beat the game, you will have access to developer cheats. The password is 62089.')
+            alert('Congrats! You got the secret achievement: \'Beat the Game\'! (2/2)')
+            secretAchieve.push('Beat the Game')
             InTown()
             break;
         case 'no':
@@ -2136,12 +2157,44 @@ inAccount()
 }
 function InCasino() {
     if(casinoLevel === 1) {
-        alert('You walk into a somewhat dingy room, where a man stands behind a counter. He smiles at you, showing you his teeth sharpened to the shape of a knife. \'Hey, kiddo. You ready to get rich?\' he asks. \'Uhhhhhh.... sure?\' you respond, shying away. \'Well, \' he says, \' we\'ve got all sorts of games up in here. Slots, uhhhhhh.... actually, we only have slots. Never mind. The slots cost 25 gold to play.\'')
-    answer = prompt('Whadda you say?','Slots, Give Money, Leave').toUpperCase()
+        if(drunk > 0) {
+            if(drunk === 1) {
+                alert('You walk into   somewhat  ingy room, where a man stands behind a counter. He smiles at y u, showing you his teeth sharpened to the shape of a knife. \'Hey, kiddo. You ready to get  ich?\' he asks. \'Uhhhhhh.... sure?\' you respond, shying away. \'Well, \' he  ays, \' we\'ve got all sorts of games up in her . Slots, uhhhhhh.... actually, we only have slots. Never mind. The slots cost 25 gold to play.\'')
+            answer = prompt('Whadda yo  say?','Slo s, Give Money  Get Drunk, L ave').toUpperCase()
+            }
+            else if(drunk === 2) {
+                alert('You w lk in o   somewhat  ingy room, wh re a m n stan s behi d a co nter. He s il s at you, show ng you his te th sha pened to the shape of a kni e. \'Hey, kid o. You r ady to get ri h?\' he a ks  \'Uhh hhh.... sure?\' you respo d, shy ng a ay. \'We l, \' he s ys, \' we\'ve got all s rts of games up  n here. Slo s, uhhh hh. .. actu lly, we onl  have sl ts. Never m nd. The s ots cost  5 gold to play \'')
+                answer = prompt('Wh   a you s y?','Slo s, Give M   y, Get D    , Le  e').toUpperCase()
+            }
+            else if(drunk >= 3) {
+                alert('                                                       ')
+                answer = prompt('                ','               ').toUpperCase()
+            }
+        }
+        else {
+            alert('You walk into a somewhat dingy room, where a man stands behind a counter. He smiles at you, showing you his teeth sharpened to the shape of a knife. \'Hey, kiddo. You ready to get rich?\' he asks. \'Uhhhhhh.... sure?\' you respond, shying away. \'Well, \' he says, \' we\'ve got all sorts of games up in here. Slots, uhhhhhh.... actually, we only have slots. Never mind. The slots cost 25 gold to play.\'')
+            answer = prompt('Whadda you say?','Slots, Give Money, Get Drunk, Leave').toUpperCase()
+        }
     }
     else if(casinoLevel === 2) {
-        alert('You walk into a somewhat dingy room, where a man stands behind a counter. He smiles at you, showing you his teeth sharpened to the shape of a knife. \'Hey, kiddo. You ready to get rich?\' he asks. \'Uhhhhhh.... sure?\' you respond, shying away. \'Well, \' he says, \' we\'ve got all sorts of games up in here. Slots, that High And Low game, and... that\' about it. The slots cost 25 gold to play, and the High And Low costs 50.\'')
-        answer = prompt('Whadda you say?','Slots, High And Low, Give Money, Leave').toUpperCase()
+        if(drunk > 0) {
+            if(drunk === 1) {
+                alert('You walk into a som what dingy room, where a man stands behind a counter. He smiles at you, showing you his teeth sharpened to the shape of a  nife. \'Hey, kiddo. You ready to get rich?\' he  sks. \'Uhhhhhh.... sure?\' you respond, shying away. \'Well, \' he says, \' we\'ve got all sorts of games up in here. Slots, that H gh And Low game, and... that\'s about it. The slots cost 25 gold to  lay, and the High And Low you bet how much y u want.\'')
+        answer = prompt('Wha da you  ay?','Slots, High And Low, Give Money,  et Drunk, Leave').toUpperCase()
+            }
+            else if(drunk === 2) {
+                alert('You w lk in   a somewhat d ngy room, where a ma  stands behind a coun er. He smiles at you, sh wing you his teeth shar ened to the shape of a knife. \'Hey, kiddo. You ready  o get rich?\' he asks. \'Uhhhhhh.... sure?\' you resp nd, shying away. \' ell, \' he says, \' we\'ve got all sorts of g mes up in here. Slots, that High  nd Low ga e, and... that\'s abou  it. The slots  ost 25 g ld to play, and the High And Low you b   how much y u w  t.\'')
+        answer = prompt('Wh   a yo  s y?','Slots, Hi   And L w, Give Mo ey, Ge  Drunk, Lea e').toUpperCase()
+            }
+            else if(drunk >= 3) {
+            alert('                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ')
+        answer = prompt('                                                                   ').toUpperCase()
+            }
+        }
+        else {
+        alert('You walk into a somewhat dingy room, where a man stands behind a counter. He smiles at you, showing you his teeth sharpened to the shape of a knife. \'Hey, kiddo. You ready to get rich?\' he asks. \'Uhhhhhh.... sure?\' you respond, shying away. \'Well, \' he says, \' we\'ve got all sorts of games up in here. Slots, that High And Low game, and... that\'s about it. The slots cost 25 gold to play, and the High And Low costs 50.\'')
+        answer = prompt('Whadda you say?','Slots, High And Low, Give Money, Get Drunk, Leave').toUpperCase()
+        }
     }
         switch(answer) {
             case 'SLOTS':
@@ -2158,7 +2211,18 @@ function InCasino() {
             case 'GIVE MONEY':
                 GivingMoney()
                 break;
+            case 'GET DRUNK':
+                Drinks()
+                break;
             case 'LEAVE':
+                if(drunk > 0) {
+                    alert('As you walk out into the town, you collapse due to being drunk.')
+                    while(drunk > 0) {
+                        alert('...')
+                        drunk -= 1
+                    }
+                    alert('You wake up and walk into town.')
+                }
                 InTown()
                 break;
             default:
@@ -2168,16 +2232,69 @@ function InCasino() {
 }
 function Slots() {
     if(totalGold < 25) {
+        if(drunk > 0) {
+            if(drunk === 1) {
+                alert('Not eno gh money.')
+                InCasino()
+            }
+            else if(drunk === 2) {
+                alert('N t  no gh mon y.')
+                InCasino()
+            }
+            else if(drunk >= 3) {
+                alert('                 ')
+                InCasino()
+            }
+        }
+        else {
         alert('Not enough money.')
         InCasino()
+        }
     }
     else {
+        if(drunk > 0) {
+            if(drunk === 1) {
+                alert('You wa k over to a slot machine and insert 25 go d.')
+            }
+            else if(drunk === 2) {
+                alert('You wa k over t  a s ot ma  ine a d ins rt 25 g ld.')
+            }
+            else if(drunk >= 3) {
+                alert('                                                   ')
+            }
+        }
+        else {
     alert('You walk over to a slot machine and insert 25 gold.')
+    }
     totalGold -= 25
     isSpinning = true
+    if(drunk > 0) {
+        if(drunk === 1) {
+            alert('When you wa t to stop the reels, type STOP. If you d n\'t, just hold  nter until you do.')
+        }
+        else if(drunk === 2) {
+            alert('Wh n you wa   to stop the reels, type STO . If yo  don\'t, just hold    er until y u do.')
+        }
+        else if(drunk >= 3) {
+            alert('                                                                                        ')
+        }
+    }
+    else {
     alert('When you want to stop the reels, type STOP. If you don\'t, just hold enter until you do.')
+    }
     while(isSpinning === true) {
+        if(drunk === 1) {
+            answer = prompt('Sp nning...').toUpperCase()
+        }
+        else if(drunk === 2) {
+            answer = prompt('Spi  ing...').toUpperCase()
+        }
+        else if(drunk >= 3) {
+            answer = prompt('           ').toUpperCase()
+        }
+        else {
         answer = prompt('Spinning...').toUpperCase()
+        }
         switch(answer) {
         case 'STOP':
             isSpinning = false
@@ -2188,6 +2305,247 @@ function Slots() {
             random3 = Math.floor(Math.random() * 7)
         }
     }
+    if(drunk === 1) {
+    switch(random1) {
+        case 0:
+            slotResult1 = 'che ry'
+            break;
+        case 1:
+            slotResult1 = 'g ape'
+            break;
+        case 2:
+            slotResult1 = 'coi '
+            break;
+        case 3:
+            slotResult1 = 'a ple'
+            break;
+        case 4:
+            slotResult1 = 'ora ge'
+            break;
+        case 5:
+            slotResult1 = 'lem n'
+            break;
+        case 6:
+            slotResult1 = 'water elon'
+            break;
+        case 7:
+            slotResult1 = '7'
+            break;
+    }
+    switch(random2) {
+        case 0:
+            slotResult2 = 'ch rry'
+            break;
+        case 1:
+            slotResult2 = 'gra e'
+            break;
+        case 2:
+            slotResult2 = 'c in'
+            break;
+        case 3:
+            slotResult2 = 'app e'
+            break;
+        case 4:
+            slotResult2 = 'ora ge'
+            break;
+        case 5:
+            slotResult2 = 'l mon'
+            break;
+        case 6:
+            slotResult2 = 'waterm lon'
+            break;
+        case 7:
+            slotResult2 = '7'
+            break;
+    }
+    switch(random3) {
+        case 0:
+            slotResult3 = 'c erry'
+            break;
+        case 1:
+            slotResult3 = 'gra e'
+            break;
+        case 2:
+            slotResult3 = 'c in'
+            break;
+        case 3:
+            slotResult3 = 'a ple'
+            break;
+        case 4:
+            slotResult3 = 'oran e'
+            break;
+        case 5:
+            slotResult3 = 'le on'
+            break;
+        case 6:
+            slotResult3 = 'wa ermelon'
+            break;
+        case 7:
+            slotResult3 = '7'
+            break;
+    }
+    }
+    else if(drunk === 2) {
+        switch(random1) {
+        case 0:
+            slotResult1 = 'c  rry'
+            break;
+        case 1:
+            slotResult1 = 'gra  '
+            break;
+        case 2:
+            slotResult1 = '  in'
+            break;
+        case 3:
+            slotResult1 = 'a  le'
+            break;
+        case 4:
+            slotResult1 = 'o  nge'
+            break;
+        case 5:
+            slotResult1 = 'le  n'
+            break;
+        case 6:
+            slotResult1 = 'wa  rmelon'
+            break;
+        case 7:
+            slotResult1 = '7'
+            break;
+    }
+    switch(random2) {
+        case 0:
+            slotResult2 = 'c  rry'
+            break;
+        case 1:
+            slotResult2 = 'g a e'
+            break;
+        case 2:
+            slotResult2 = ' o n'
+            break;
+        case 3:
+            slotResult2 = 'a  le'
+            break;
+        case 4:
+            slotResult2 = 'oran  '
+            break;
+        case 5:
+            slotResult2 = 'l  on'
+            break;
+        case 6:
+            slotResult2 = 'w  ermelon'
+            break;
+        case 7:
+            slotResult2 = '7'
+            break;
+    }
+    switch(random3) {
+        case 0:
+            slotResult3 = 'che  y'
+            break;
+        case 1:
+            slotResult3 = 'gra  '
+            break;
+        case 2:
+            slotResult3 = 'co  '
+            break;
+        case 3:
+            slotResult3 = 'app  '
+            break;
+        case 4:
+            slotResult3 = 'or  ge'
+            break;
+        case 5:
+            slotResult3 = 'le  n'
+            break;
+        case 6:
+            slotResult3 = 'w  ermelon'
+            break;
+        case 7:
+            slotResult3 = '7'
+            break;
+    }
+    }
+    else if(drunk >= 3) {
+        switch(random1) {
+        case 0:
+            slotResult1 = '      '
+            break;
+        case 1:
+            slotResult1 = '     '
+            break;
+        case 2:
+            slotResult1 = '    '
+            break;
+        case 3:
+            slotResult1 = '     '
+            break;
+        case 4:
+            slotResult1 = '      '
+            break;
+        case 5:
+            slotResult1 = '     '
+            break;
+        case 6:
+            slotResult1 = '          '
+            break;
+        case 7:
+            slotResult1 = ' '
+            break;
+    }
+    switch(random2) {
+        case 0:
+            slotResult2 = '      '
+            break;
+        case 1:
+            slotResult2 = '     '
+            break;
+        case 2:
+            slotResult2 = '    '
+            break;
+        case 3:
+            slotResult2 = '     '
+            break;
+        case 4:
+            slotResult2 = '      '
+            break;
+        case 5:
+            slotResult2 = '     '
+            break;
+        case 6:
+            slotResult2 = '          '
+            break;
+        case 7:
+            slotResult2 = ' '
+            break;
+    }
+    switch(random3) {
+        case 0:
+            slotResult3 = '      '
+            break;
+        case 1:
+            slotResult3 = '     '
+            break;
+        case 2:
+            slotResult3 = '    '
+            break;
+        case 3:
+            slotResult3 = '     '
+            break;
+        case 4:
+            slotResult3 = '      '
+            break;
+        case 5:
+            slotResult3 = '     '
+            break;
+        case 6:
+            slotResult3 = '          '
+            break;
+        case 7:
+            slotResult3 = ' '
+            break;
+    }
+    }
+    else {
     switch(random1) {
         case 0:
             slotResult1 = 'cherry'
@@ -2266,17 +2624,149 @@ function Slots() {
             slotResult3 = '7'
             break;
     }
+    }
+    if(drunk === 1) {
+        alert('The reels sl w to a crawl, before stop ing at a picture of a ' + slotResult1 + ',   ' + slotResult2 + ', an  a ' + slotResult3 + '.')
+    }
+    else if(drunk === 2) {
+        alert('The re  s slow to a c  wl, before stop  ng at a   cture of a ' + slotResult1 + ', a ' + slotResult2 + ', a d a ' + slotResult3 + '.')
+    }
+    else if(drunk >= 3) {
+        alert('                                                             ' + slotResult1 + '    ' + slotResult2 + '        ' + slotResult3 + ' ')
+    }
+    else {
     alert('The reels slow to a crawl, before stopping at a picture of a ' + slotResult1 + ', a ' + slotResult2 + ', and a ' + slotResult3 + '.')
+    }
     if(random1 === random2 && random2 === random3) {
         FindWinnings()
     }
     else {
+        if(drunk === 1) {
+            alert('You didn\'  win anything. :(')
+        }
+        else if(drunk === 2) {
+            alert('Yo  d dn\'t win an thing. : ')
+        }
+        else if(drunk >= 3) {
+            alert('                            ')
+        }
+        else {
         alert('You didn\'t win anything. :(')
+        }
         InCasino()
     }
     }
 }
 function FindWinnings() {
+    if(drunk === 1) {
+    switch(random1) {
+        case 0:
+            alert('You w n 15 gold. Not very good...')
+            totalGold += 15
+            break;
+        case 1:
+            alert('You won 25 gold. You b oke even.')
+            totalGold += 25
+            break;
+        case 2:
+            alert('You won 100 gold. That\'s pre ty good!')
+            totalGold += 100
+            break;
+        case 3:
+            alert('You won 50 gold. Doubl  the money!')
+            totalGold += 50
+            break;
+        case 4:
+            alert('You w n 75 gold. Tripled!')
+            totalGold += 75
+            break;
+        case 5:
+            alert('You won 125 gold. Ni e!')
+            totalGold += 125
+            break;
+        case 6:
+            alert('You wo  200 gold. AWESOME!')
+            totalGold += 200
+            break;
+        case 7:
+            alert('DING DING DING!!!! JAC POT!!!! 1000 GOLD!!!!')
+            totalGold += 1000
+            break;
+    }
+    }
+    else if(drunk === 2) {
+        switch(random1) {
+        case 0:
+            alert('You w   15 gold. Not very good...')
+            totalGold += 15
+            break;
+        case 1:
+            alert('You won 25 gold. You b  ke even.')
+            totalGold += 25
+            break;
+        case 2:
+            alert('You w n 100 go d. That\'s pretty   od!')
+            totalGold += 100
+            break;
+        case 3:
+            alert('You won 50 gold. D   le the money!')
+            totalGold += 50
+            break;
+        case 4:
+            alert('You w n 75 gold. Trip ed!')
+            totalGold += 75
+            break;
+        case 5:
+            alert('You w   125 gold. N ce!')
+            totalGold += 125
+            break;
+        case 6:
+            alert('You won 200 g  d. AWESO E!')
+            totalGold += 200
+            break;
+        case 7:
+            alert('DING DI   DING!!!! JACKPOT!!!! 1000 GO D!!!!')
+            totalGold += 1000
+            break;
+    }
+    }
+    else if(drunk >= 3) {
+    switch(random1) {
+        case 0:
+            alert('                              ')
+            totalGold += 15
+            break;
+        case 1:
+            alert(' ')
+            totalGold += 25
+            break;
+        case 2:
+            alert(' ')
+            totalGold += 100
+            break;
+        case 3:
+            alert(' ')
+            totalGold += 50
+            break;
+        case 4:
+            alert(' ')
+            totalGold += 75
+            break;
+        case 5:
+            alert('')
+            totalGold += 125
+            break;
+        case 6:
+            alert('')
+            totalGold += 200
+            break;
+        case 7:
+            alert('')
+            totalGold += 1000
+            break;
+    }
+    }
+    else {
     switch(random1) {
         case 0:
             alert('You won 15 gold. Not very good...')
@@ -2311,22 +2801,71 @@ function FindWinnings() {
             totalGold += 1000
             break;
     }
+    }
     InCasino()
 }
 function GivingMoney() {
+    if(drunk === 1) {
+    alert('The man says, \'Hey  id. If you could lend us some money, I\'ll be able to upgrade this casino. Ya k ow, add a game of Blackjack or something.\' \'Ok,\' you say, pulling out your gold, \' how much is it?\' The man says, \'500 gold.\'')
+    answer = prompt('500 go d!','Yes, No').toUpperCase()
+    }
+    else if(drunk === 2) {
+    alert('The man says, \'Hey kid. If   u could lend us some money, I\'ll be able to upgrade t  s casino. Ya know, add a game of Blackjack or something.\' \'Ok,\' you say, pul   g out your gold, \' how much is it?\' The man says, \'500 go  .\'')
+    answer = prompt('500 gold!','Ye   No').toUpperCase()
+    }
+    else if(drunk >= 3) {
+    alert(' ')
+    answer = prompt(' ',' ').toUpperCase()
+    }
+    else {
     alert('The man says, \'Hey kid. If you could lend us some money, I\'ll be able to upgrade this casino. Ya know, add a game of Blackjack or something.\' \'Ok,\' you say, pulling out your gold, \' how much is it?\' The man says, \'500 gold.\'')
     answer = prompt('500 gold!','Yes, No').toUpperCase()
+    }
     switch(answer) {
         case 'YES':
             if(totalGold < 500) {
+                if(drunk === 1) {
+                alert('You don\'t have en ugh money.')
+                }
+                else if(drunk === 2) {
+                alert('Y u don\'t have    ugh money.')
+                }
+                else if(drunk >= 3) {
+                alert('              ')
+                }
+                else {
                 alert('You don\'t have enough money.')
+                }
                 InCasino()
             }
             else {
                 totalGold -= 500
+                if(drunk === 1) {
+                alert('As you hand the man you  hard-earned money, he grins. \'Thanks, kiddo. Let me go look up som  casino-y things.\'')
+                }
+                else if(drunk === 2) {
+                alert('As you hand the man   ur hard-earned   ney, he grins. \'Thanks, kiddo. Let me go loo  up some casino-y things.\'')
+                }
+                else if(drunk >= 3) {
+                alert('      ')
+                }
+                else {
                 alert('As you hand the man your hard-earned money, he grins. \'Thanks, kiddo. Let me go look up some casino-y things.\'')
+                }
                 casinoLevel += 1
                 InCasino()
             }
+    }
+}
+function Drinks() {
+    alert('You grab a drink.')
+    drunk += 1
+    if(drunk === 99) {
+        alert('Congratulations! You got the secret achievement: \'99 Bottles of Beer on the Wall\'! (1/2)')
+        secretAchieve.push('99 Bottles of Beer on the Wall')
+        InCasino()
+    }
+    else {
+        InCasino()
     }
 }
