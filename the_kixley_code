@@ -149,6 +149,16 @@ var userCheck;
 var username;
 var useDefaults = false;
 var signedIn;
+//fight redo
+var timesLeft
+var move1 = {type:undefined, defaultDamage:0, damageString:'undefined' effects:undefined, name:undefined, acuuracy:0, accuracyString:'undefined%', sEType:undefined, nVEType:undefined}
+var move2 = move1
+var move3 = move1
+var move4 = move1
+var monsType1
+var monsType2
+var normal = {accuracy:25, accuracyString:25%}
+
 // functions
 function CheckIfGotAchieve(whichOne) {
     switch (whichOne) {
@@ -682,10 +692,6 @@ alert('You head off into the plains, where you find a newly regenerated Master, 
                 alert('You have heard rumors of this place, but have never been able to find out where it is.')
                 Places();
             } else {
-
-
-
-
                 if (swampCounter === 7) {
                     alert('As you are walking through the swamp, you meet someone. He says his name is A\'Abea, and he is heading towards Smatino, but doesn’t tell why.')
                     aabeaDestroysTown = 1
@@ -803,18 +809,67 @@ function Story() {
 }
 
 function FightMenu() {
-    answer = prompt('What do you do? Health: ' + hitPoints + ' ' + actualMonsName + ' health: ' + hitCounter + '.', 'Fight, Item, Magic, Run').toUpperCase()
+    switch(actualMonsName) {
+    case 'Goblin':
+        monsType1 = 'Bipedal'
+        monsType2 = 'Fighting'
+        break;
+    case 'Rabbit':
+        monsType1 = 'Quadroped'
+        monsType2 = 'LOLOLOL'
+        break;
+    case 'Spearman':
+        monsType1 = 'Bipedal'
+        monsType2 = 'Fighting'
+        break;
+    case 'Lizard':
+        monsType1 = 'Quadroped'
+        monsType2 = 'Poison'
+        break;
+    case 'Death Snake':
+        monsType1 = 'Stomp-able'
+        monsType2 = 'Poison'
+        break;
+    case 'Rabid Pineapple':
+        monsType1 = 'Stomp-able'
+        monsType2 = 'LOLOLOL'
+    case 'Ferocious Lion':
+        monsType1 = 'Quadroped'
+        monsType2 = 'Fighting'
+    case 'Velociraptor':
+        monsType1 = 'Bipedal'
+        monsType2 = 'Fighting'
+        break;
+    default:
+        monsType1 = undefined
+        monsName2 = null
+        }
+    answer = prompt('What do you do? Health: ' + hitPoints + ' ' + actualMonsName + ' health: ' + hitCounter + '. Monster\'s types: ' + monsType1 + ' and ' + monsType2 + '.', 'Fight, Item, Magic, Run').toUpperCase()
     switch (answer) {
         case 'FIGHT':
-            missChance = ((1 / (1 - accuracy)) - 1)
-            hit = Math.floor(Math.random() * useThisAccuracy)
-    randomNumber(1, 10)
-            monsAtt = monsLev + 15 - x
-            monsAttAndDiff = monsAtt * diffSetting
-            HitOrMiss()
+            answer = prompt('What move?', move1.name + ', ' + move2.name + ', ' + move3.name + ', ' + move4.name + ', Normal Move. Monster\'s types: ' + monsType1 + ' and ' + monsType2 + '.').toLowerCase()
+            switch(answer) {
+            case 'normal move':
+            HitOrMiss(normal, 'normal')
+            break;
+            case move1.name:
+                areYouSure(1)
+                break;
+            case move2.name:
+                areYouSure(2)
+                break;
+            case move3.name:
+                areYouSure(3)
+                break;
+            case move4.name:
+                areYouSure(4)
+                break;
+            case 'use the force':
+            case 'use the force, luke':
+            }
             break;
         case 'POKEMON':
-            alert('No. This is not a Pokemon game. What are you talking about.')
+            alert('No. This is not a Pokemon game. What are you talking about?')
             FightMenu()
             break;
         case 'ITEM':
@@ -850,8 +905,10 @@ function FightMenu() {
     }
 }
 
-function HitOrMiss() {
-    if (hit === 0) {
+function HitOrMiss(whichMove, whatName) {
+    randomNumber(1, 100) 
+    hit = x
+    if (hit <= whichMove.accuracy) {
         alert('You miss.')
         burn()
         alert('The ' + actualMonsName + ' has ' + hitCounter + ' health left.')
@@ -869,15 +926,51 @@ function HitOrMiss() {
             case 1:
             case 2:
                 alert('You weren\'t able to get a combo.')
+                if (whatMove === normal) {
+                alert('The normal attack did ' + attackPower + '.')
                 hitCounter -= attackPower
+                }
+                else if (monsType1 != whatMove.sEType && monsTYPE1 != whatMove.nVEType) {
+                alert('The ' + whatMove.name + ' did ' + whatMove.damageString + ' damage.')
+                if (monsType1 != whatMove.sEType && monsType1 != whatMove.nVEType) {
+                hitCounter -= whatMove.defaultDamage
+                }
+                else if (monsType1 === whatMove.sEType) {
+                alert('It\'s 30% more effective!!!')
+                alert('The ' + whatMove.name + ' did ' + (whatMove.defaultDame + (whatMove.defaultDamage * 0.3)) + ' damage.')
+                hitCounter -= whatMove.defaultDamage + (whatMove.defaultDamage * 0.3)
+                }
+                else if (monsType1 === whatMove.nVEType) {
+                alert('It\'s 30% less effective...')
+                alert('The ' + whatMove.name + ' did ' + (whatMove.defaultDamage - (whatMove.defaultDamage * 0.3)) + ' damage.')
+                hitCounter -= whatMove.defaultDamage - (whatMove.defaultDamage * 0.3)
+                }
                 burn()
                 break;
             case 3:
             case 4:
                 comboNums = Math.floor(Math.random() * 15) + 2
                 multiplier()
-                alert('You got a ' + comboNums + ' combo.')
+                alert('You got a ' + combeNums + 'combo!')
+                if (whatMove === normal) {
+                alert('The normal attack did ' + (attackPower * comboNums) + '.')
                 hitCounter -= attackPower * comboNums
+                }
+                else if (monsType1 != whatMove.sEType && monsTYPE1 != whatMove.nVEType) {
+                alert('The ' + whatMove.name + ' did ' + (whatMove.defaultDamage * comboNums) + ' damage.')
+                if (monsType1 != whatMove.sEType && monsType1 != whatMove.nVEType) {
+                hitCounter -= whatMove.defaultDamage
+                }
+                else if (monsType1 === whatMove.sEType) {
+                alert('It\'s 30% more effective!!!')
+                alert('The ' + whatMove.name + ' did ' + ((whatMove.defaultDamage + (whatMove.defaultDamage * 0.3)) * comboNums) + ' damage.')
+                hitCounter -= (whatMove.defaultDamage + (whatMove.defaultDamage * 0.3))  * comboNums
+                }
+                else if (monsType1 === whatMove.nVEType) {
+                alert('It\'s 30% less effective...')
+                alert('The ' + whatMove.name + ' did ' + ((whatMove.defaultDamage - (whatMove.defaultDamage * 0.3)) * comboNums) + ' damage.')
+                hitCounter -= whatMove.defaultDamage - (whatMove.defaultDamage * 0.3) * comboNums
+                }
                 burn()
                 break;
         }
@@ -2111,5 +2204,53 @@ default:
 NotAnOption()
 inAccount() 
 }
+}
+}
+function areYouSure(whatMove) {
+switch(whatMove) {
+case 1:
+    answer = prompt('Are you sure? ' + move1.name + '\'s type is ' + move1.type + ', it\'s effects are ' + move1.effects + ', it does ' + move1.damageString + ' damage, and it\'s accuracy is ' + move1.accuracyString + '.', 'Yes, No').toLowerCase()
+    switch(answer) {
+    case 'yes':
+        HitOrMiss(move1, move1.name)
+        break;
+    case 'no':
+        FightMenu()
+        break;
+        }
+        break;
+case 2:
+    answer = prompt('Are you sure? ' + move2.name + '\'s type is ' + move2.type + ', it\'s effects are ' + move2.effects + ', it does ' + move2.damageString + ' damage, and it\'s accuracy is ' + move2.accuracyString + '.', 'Yes, No').toLowerCase()
+    switch(answer) {
+    case 'yes':
+        HitOrMiss(move2, move2.name)
+        break;
+    case 'no':
+        FightMenu()
+        break;
+        }
+        break;
+case 3:
+    answer = prompt('Are you sure? ' + move3.name + '\'s type is ' + move3.type + ', it\'s effects are ' + move3.effects + ', it does ' + move3.damageString + ' damage, and it\'s accuracy is ' + move3.accuracyString + '.', 'Yes, No').toLowerCase()
+    switch(answer) {
+    case 'yes':
+        HitOrMiss(move3, move3.name)
+        break;
+    case 'no':
+        FightMenu()
+        break;
+        }
+        break;
+case 4:
+answer = prompt('Are you sure? ' + move4.name + '\'s type is ' + move4.type + ', it\'s effects are ' + move4.effects + ', it does ' + move4.damageString + ' damage, and it\'s accuracy is ' + move4.accuracyString + '.', 'Yes, No').toLowerCase()
+    switch(answer) {
+    case 'yes':
+        HitOrMiss(move4, move4.name)
+        break;
+    case 'no':
+        FightMenu()
+        break;
+        }
+        break;
 }
 }
