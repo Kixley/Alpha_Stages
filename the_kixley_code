@@ -158,6 +158,7 @@ var move4 = move1
 var monsType1
 var monsType2
 var normal = {accuracy:25, accuracyString:25%}
+var turns
 
 // functions
 function CheckIfGotAchieve(whichOne) {
@@ -749,8 +750,41 @@ function multiplier() {
 }
 
 function MonsAtt() {
+            if (monsType2 === 'Fighting') {
+            randomNumber(1, 10)
+            monsAtt = monsLev + 15 - x
+            monsAttAndDiff = monsAtt * diffSetting
+            }
+            else if (monsType2 === 'LOLOLOL') {
+            randomNumber(4, 13)
+            monsAtt = monsLev + 15 - x
+            monsAttAndDiff = monsAtt * diffSetting
+            }
+            else if (monsType2 === 'Poison') {
+            randomNumber(4, 13)
+            monsAtt = monsLev + 15 - x
+            monsAttAndDiff = monsAtt * diffSetting
+            randomNumber(1, 3) 
+            switch(x) {
+            case 1:
+            poisoned = true
+            turns = 1
+            break;
+            default:
+            break;
+            }
+            }
     alert('The ' + actualMonsName + ' hit you for ' + monsAttAndDiff + ' damage.')
     hitPoints -= monsAttAndDiff
+    if (poisoned = true && turns <= 5) {
+    alert('You take 5 damage from being poisoned.')
+    hitPoints -= 5
+    turns += 1
+    }
+    else if (turns === 5) {
+    turns = 1
+    poisoned = false
+    }
     if (hitPoints <= 0) {
         alert('You died.')
         GameOver()
@@ -866,6 +900,9 @@ function FightMenu() {
                 break;
             case 'use the force':
             case 'use the force, luke':
+            alert('As you use the Force, an lightsaber comes flying an hits the ' + actualMonsName + '. Sadly, it flies right past you, but the monster does\'t attack.')
+            hitCounter -= 10
+            FightMenu()
             }
             break;
         case 'POKEMON':
@@ -1426,45 +1463,28 @@ function expQuest() {
     expQuestChoice()
 }
 function save() {
-    var saveHealth = 'saveHealth = ' + hitPoints
-    document.cookie = saveHealth
-    var saveAttackPower = 'saveAttackPower = ' + attackPower
-    document.cookie = saveAttackPower
-    var saveClass = 'saveClass = ' + chosenClass
-    document.cookie = saveClass
-    var saveLevel = 'saveLevel = ' + level
-    document.cookie = saveLevel
-    var saveTotalHealth = 'saveTotalHealth = ' + totalHealth
-    document.cookie = saveTotalHealth
-    var saveBlobsOfDoom = 'saveBlobsOfDoom = ' + blobsOfDoom
-    document.cookie = saveBlobsOfDoom
-    var saveHealthPotions = 'saveHealthPotions = ' + healthPotion
-    document.cookie = saveHealthPotions
-    var saveWoodenSword = 'saveWoodenSword = ' + woodenSword
-    document.cookie = saveWoodenSword
-    var saveSwampDiscover = 'saveSwampDiscovery = ' + swampDiscovery
-    document.cookie = saveSwampDiscover
-    var saveLevel = 'saveLevel = ' + level
-    document.cookie = saveLevel
-    var saveDiff = 'saveDiff = ' + diffSetting
-    document.cookie = saveDiff
-    var saveTotalGold = 'saveTotalGold = ' + totalGold
-    document.cookie = saveTotalGold
-    var saveSpeedBoots = 'saveSpeedBoots = ' + speedBoots
-    document.cookie = saveSpeedBoots
-    var savePlainsCounter = 'savePlainsCounter = ' + plainsCounter
-    document.cookie = savePlainsCounter
-    var saveLevelReq = 'saveLevelReq = ' + levelReq
-    document.cookie = saveLevelReq
-    var saveTotalExp = 'saveTotalExp = ' + totalExp
-    document.cookie = saveTotalExp
-    var saveLocation = 'saveLocation = ' + savingLocation
+    localStorage.setItem('Health', hitPoints.toString())
+    localStorage.setItem('Attack Power', attackPower.toString())
+    localStorage.setItem('Class', chosenClass.toString())
+    localStorage.setItem('Level', level.toString())
+    localStorage.setItem('Total Health', totalHealth.toString())
+    localStorage.setItem('Blobs of Doom', blobsOfDoom.toString())
+    localStorage.setItem('Health Potions', healthPotions.toString())
+    localStorage.setItem('Wooden Sword', woodenSword.toString())
+    localStorage.setItem('Swamp Discovery', swampDiscovery.toString())
+    localStorage.setItem('Difficulty', diffSetting.toString())
+    localStorage.setItem('Gold', totalGold.toString())
+    localStorage.setItem('Speed Boots', speedBoots.toString())
+    localStorage.setItem('PLains Counter', plainsCounter.toString())
+    localStorage.setItem('Level Requirement', levelReq.toString())
+    localStorage.setItem('Experience', totalExp.toString())
+    localStorage.setItem('Location', location.toString())
 }
 function savePlaces() {
     answer = prompt('Are you sure you want to save? Please make sure to use the same website when loading. This will overwrite any previous saves on this website.', 'Yes, No').toLowerCase()
     switch (answer) {
         case 'yes':
-            savingLocation = 1
+            location = 1
             alert('Saving...')
             save()
             alert('Done!')
@@ -1484,7 +1504,7 @@ function saveTown() {
     answer = prompt('Are you sure you want to save? Please make sure to use the same website when loading. This will overwrite any previous saves on this website.', 'Yes, No').toLowerCase()
     switch (answer) {
         case 'yes':
-            savingLocation = 2
+            location = 2
             alert('Saving...')
             save()
             alert('Done!')
@@ -1502,38 +1522,22 @@ function saveTown() {
 
 function load() {
     alert('Loading...')
-    var loadedDiff = document.cookie.replace(/(?:(?:^|.*;\s*)saveDiff\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    Diff = parseInt(loadedDiff, 10);
-    var loadedHealth = document.cookie.replace(/(?:(?:^|.*;\s*)saveHealth\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    hitPoints = parseInt(loadedHealth, 10);
-    var loadedTotalHealth = document.cookie.replace(/(?:(?:^|.*;\s*)saveTotalHealth\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    TotalHealth = parseInt(loadedTotalHealth, 10);
-    var loadedLevel = document.cookie.replace(/(?:(?:^|.*;\s*)saveLevel\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    hitPoints = parseInt(loadedLevel, 10)
-    var loadedPlainsCounter = document.cookie.replace(/(?:(?:^|.*;\s*)savePlainsCounter\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    plainsCounter = parseInt(loadedPlainsCounter, 10)
-    var loadedSwampDiscovery = document.cookie.replace(/(?:(?:^|.*;\s*)saveSwampDiscovery\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    swampDiscovery = parseInt(loadedSwampDiscovery, 10)
-    var loadedWoodenSword = document.cookie.replace(/(?:(?:^|.*;\s*)saveWoodenSword\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    woodenSword = parseInt(loadedWoodenSword, 10)
-    var loadedSpeedBoots = document.cookie.replace(/(?:(?:^|.*;\s*)saveSpeedBoots\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    speedBoots = parseInt(loadedSpeedBoots, 10)
-    var loadedHealthPotions = document.cookie.replace(/(?:(?:^|.*;\s*)saveHealthPotions\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    healthPotion = parseInt(loadedHealthPotions, 10)
-    var loadedLevelReq = document.cookie.replace(/(?:(?:^|.*;\s*)saveLevelReq\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    levelReq = parseInt(loadedLevelReq, 10)
-    var loadedAttackPower = document.cookie.replace(/(?:(?:^|.*;\s*)saveHealth\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    attackPower = parseInt(loadedAttackPower, 10)
-    var loadedClass = document.cookie.replace(/(?:(?:^|.*;\s*)saveHealth\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    chosenClass = parseInt(loadedClass, 10)
-    var loadedGold = document.cookie.replace(/(?:(?:^|.*;\s*)saveTotalGold\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    totalGold = parseInt(loadedGold, 10)
-    var loadedExp = document.cookie.replace(/(?:(?:^|.*;\s*)saveTotalExp\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    totalExp = parseInt(loadedExp, 10)
-    var loadedBlobsOfDoom = document.cookie.replace(/(?:(?:^|.*;\s*)saveBlobsOfDoom\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    blobsOfDoom = parseInt(loadedBlobsOfDoom, 10)
-    var loadLocation = document.cookie.replace(/(?:(?:^|.*;\s*)saveLocation\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    location = parseInt(loadLocation, 10)
+    health = parseInt(localStorage.getItem('Health'), 10)
+    attackPower = parseInt(localStorage.getItem('Attack Power'), 10)
+    chosenClass = parseInt(localStorage.getItem('Class'), 10)
+    level = parseInt(localStorage.getItem('Level'), 10)
+    totalHealth = parseInt(localStorage.getItem('Total Health'), 10)
+    blobsOfDoom = parseInt(localStorage.getItem('Blobs of Doom'), 10)
+    healthPotions = parseInt(localStorage.getItem('Health Potions'), 10)
+    woodenSword = parseInt(localStorage.getItem('Wooden Sword'), 10)
+    swampDiscovery = parseInt(localStorage.getItem('Swamp Discovery'), 10)
+    diffSetting = parseInt(localStorage.getItem('Difficulty'), 10)
+    totalGold = parseInt(localStorage.getItem('Gold'), 10)
+    speedBoots = parseInt(localStorage.getItem('Speed Boots'), 10)
+    plainsCounter = parseInt(localStorage.getItem('PLains Counter'), 10)
+    levelReq = parseInt(localStorage.getItem('Level Requirement'), 10)
+    totalExp = parseInt(localStorage.getItem('Experience'), 10)
+    location = parseInt(localStorage.getItem('Location'), 10)
     alert('Done!')
     switch (location) {
         case 1:
