@@ -973,6 +973,7 @@ function HitOrMiss(whichMove, whatName) {
                 if (monsType1 != whatMove.sEType && monsType1 != whatMove.nVEType) {
                 hitCounter -= whatMove.defaultDamage
                 }
+                }
                 else if (monsType1 === whatMove.sEType) {
                 alert('It\'s 30% more effective!!!')
                 alert('The ' + whatMove.name + ' did ' + (whatMove.defaultDame + (whatMove.defaultDamage * 0.3)) + ' damage.')
@@ -1020,7 +1021,6 @@ function HitOrMiss(whichMove, whatName) {
         alert('The ' + actualMonsName + ' has ' + hitCounter + ' health left.')
         MonsAtt()
     }
-}
 }
 }
 
