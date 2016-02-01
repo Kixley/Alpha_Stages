@@ -157,7 +157,7 @@ var move3 = move1
 var move4 = move1
 var monsType1
 var monsType2
-var normal = {accuracy:25, accuracyString:25%}
+var normal = {accuracy:25, accuracyString:'25%'}
 var turns
 
 // functions
