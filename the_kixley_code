@@ -2212,7 +2212,7 @@ NotAnOption()
 inAccount() 
 }
 }
-}
+
 function areYouSure(whatMove) {
 switch(whatMove) {
 case 1:
