@@ -159,6 +159,7 @@ var monsType1
 var monsType2
 var normal = {accuracy:25, accuracyString:'25%'}
 var turns
+var useTheForceCount = 0
 
 // functions
 function CheckIfGotAchieve(whichOne) {
@@ -901,10 +902,15 @@ function FightMenu() {
                 break;
             case 'use the force':
             case 'use the force, luke':
+            if (useTheForceCount <= 8) {
             alert('As you use the Force, an lightsaber comes flying an hits the ' + actualMonsName + '. Sadly, it flies right past you, but the monster does\'t attack.')
             hitCounter -= 10
-            FightMenu()
+            useTheForceCount += 1
             }
+            else {
+            alert('Exhausted you are. Realize that you cannot use the Force as well as you thought you do. Yoda, you seek Yoda.')
+            }
+            FightMenu()
             break;
         case 'POKEMON':
             alert('No. This is not a Pokemon game. What are you talking about?')
