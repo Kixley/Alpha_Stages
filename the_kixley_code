@@ -151,7 +151,7 @@ var useDefaults = false;
 var signedIn;
 //fight redo
 var timesLeft
-var move1 = {type:undefined, defaultDamage:0, damageString:'undefined' effects:undefined, name:undefined, acuuracy:0, accuracyString:'undefined%', sEType:undefined, nVEType:undefined}
+var move1 = {type:undefined, defaultDamage:0, damageString:'undefined', effects:undefined, name:undefined, acuuracy:0, accuracyString:'undefined%', sEType:undefined, nVEType:undefined}
 var move2 = move1
 var move3 = move1
 var move4 = move1
@@ -330,6 +330,7 @@ alert('Check out the plush fox in the store! https://gear.mozilla.org/?utm_sourc
             StartUpMenu()
             break;
     }
+}
 }
 
 function Guide() {
@@ -1019,6 +1020,8 @@ function HitOrMiss(whichMove, whatName) {
         alert('The ' + actualMonsName + ' has ' + hitCounter + ' health left.')
         MonsAtt()
     }
+}
+}
 }
 
 function GameOver() {
