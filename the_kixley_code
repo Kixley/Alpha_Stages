@@ -30,6 +30,15 @@ var killCounter = 0;
 var cumulativeGold = 0;
 var getGoldAchieve = 0;
 var getLevelAchieve = 0;
+// casino
+var random1
+var random2
+var random3
+var isSpinning
+var slotResult1
+var slotResult2
+var slotResult3
+var casinoLevel = 1
 //in the fight
 var hit;
 var combo;
@@ -124,6 +133,8 @@ var theWholeShebang = [
     'John Georgiades',
     'Playtesters:',
     'Nickel Asher',
+    'Ian Hopper',
+    'Sam Stagner',
     'Thank you for playing Kixley! More content will be released in the future.'
 ];
 var i = 0;
@@ -752,7 +763,7 @@ function MonsAtt() {
 }
 
 function InTown() {
-    answer = prompt('Where to?', 'Marketplace, Inn, Save, Leave')
+    answer = prompt('Where to?', 'Marketplace, Inn, Save, Casino, Leave')
 if(answer != 'the TARDIS') {
 answer = answer.toUpperCase()
 }
@@ -765,6 +776,9 @@ answer = answer.toUpperCase()
             break;
         case 'SAVE':
             saveTown()
+            break;
+        case 'CASINO':
+            InCasino()
             break;
         case 'LEAVE':
             alert('You leave town.')
@@ -2108,5 +2122,232 @@ default:
 NotAnOption()
 inAccount() 
 }
+}
+}
+function InCasino() {
+    if(casinoLevel === 1) {
+        alert('You walk into a somewhat dingy room, where a man stands behind a counter. He smiles at you, showing you his teeth sharpened to the shape of a knife. \'Hey, kiddo. You ready to get rich?\' he asks. \'Uhhhhhh.... sure?\' you respond, shying away. \'Well, \' he says, \' we\'ve got all sorts of games up in here. Slots, uhhhhhh.... actually, we only have slots. Never mind. The slots cost 25 gold to play.\'')
+    answer = prompt('Whadda you say?','Slots, Give Money, Leave').toUpperCase()
+    }
+    else if(casinoLevel === 2) {
+        alert('You walk into a somewhat dingy room, where a man stands behind a counter. He smiles at you, showing you his teeth sharpened to the shape of a knife. \'Hey, kiddo. You ready to get rich?\' he asks. \'Uhhhhhh.... sure?\' you respond, shying away. \'Well, \' he says, \' we\'ve got all sorts of games up in here. Slots, that High And Low game, and... that\' about it. The slots cost 25 gold to play, and the High And Low costs 50.\'')
+        answer = prompt('Whadda you say?','Slots, High And Low, Give Money, Leave').toUpperCase()
+    }
+        switch(answer) {
+            case 'SLOTS':
+                Slots()
+                break;
+            case 'HIGH AND LOW':
+                if(casinoLevel === 1) {
+                    alert('The man says, \'What are you talking about? We don\'t have a High And Low Table.')
+                    InCasino()
+                }
+                else {
+                    HighAndLow()
+                }
+            case 'GIVE MONEY':
+                GivingMoney()
+                break;
+            case 'LEAVE':
+                InTown()
+                break;
+            default:
+                NotAnOption()
+                InCasino()
+        }
+}
+function Slots() {
+    if(totalGold < 25) {
+        alert('Not enough money.')
+        InCasino()
+    }
+    else {
+    alert('You walk over to a slot machine and insert 25 gold.')
+    totalGold -= 25
+    isSpinning = true
+    alert('When you want to stop the reels, type STOP. If you don\'t, just hold enter until you do.')
+    while(isSpinning === true) {
+        answer = prompt('Spinning...').toUpperCase()
+        switch(answer) {
+        case 'STOP':
+            isSpinning = false
+            break;
+        default:
+            random1 = Math.floor(Math.random() * 7)
+            random2 = Math.floor(Math.random() * 7)
+            random3 = Math.floor(Math.random() * 7)
+        }
+    }
+    switch(random1) {
+        case 0:
+            slotResult1 = 'cherry'
+            break;
+        case 1:
+            slotResult1 = 'grape'
+            break;
+        case 2:
+            slotResult1 = 'coin'
+            break;
+        case 3:
+            slotResult1 = 'apple'
+            break;
+        case 4:
+            slotResult1 = 'orange'
+            break;
+        case 5:
+            slotResult1 = 'lemon'
+            break;
+        case 6:
+            slotResult1 = 'watermelon'
+            break;
+        case 7:
+            slotResult1 = '7'
+            break;
+    }
+    switch(random2) {
+        case 0:
+            slotResult2 = 'cherry'
+            break;
+        case 1:
+            slotResult2 = 'grape'
+            break;
+        case 2:
+            slotResult2 = 'coin'
+            break;
+        case 3:
+            slotResult2 = 'apple'
+            break;
+        case 4:
+            slotResult2 = 'orange'
+            break;
+        case 5:
+            slotResult2 = 'lemon'
+            break;
+        case 6:
+            slotResult2 = 'watermelon'
+            break;
+        case 7:
+            slotResult2 = '7'
+            break;
+    }
+    switch(random3) {
+        case 0:
+            slotResult3 = 'cherry'
+            break;
+        case 1:
+            slotResult3 = 'grape'
+            break;
+        case 2:
+            slotResult3 = 'coin'
+            break;
+        case 3:
+            slotResult3 = 'apple'
+            break;
+        case 4:
+            slotResult3 = 'orange'
+            break;
+        case 5:
+            slotResult3 = 'lemon'
+            break;
+        case 6:
+            slotResult3 = 'watermelon'
+            break;
+        case 7:
+            slotResult3 = '7'
+            break;
+    }
+    alert('The reels slow to a crawl, before stopping at a picture of a ' + slotResult1 + ', a ' + slotResult2 + ', and a ' + slotResult3 + '.')
+    if(random1 === random2 && random2 === random3) {
+        FindWinnings()
+    }
+    else {
+        alert('You didn\'t win anything. :(')
+        InCasino()
+    }
+    }
+}
+function FindWinnings() {
+    switch(random1) {
+        case 0:
+            alert('You won 15 gold. Not very good...')
+            totalGold += 15
+            break;
+        case 1:
+            alert('You won 25 gold. You broke even.')
+            totalGold += 25
+            break;
+        case 2:
+            alert('You won 100 gold. That\'s pretty good!')
+            totalGold += 100
+            break;
+        case 3:
+            alert('You won 50 gold. Double the money!')
+            totalGold += 50
+            break;
+        case 4:
+            alert('You won 75 gold. Tripled!')
+            totalGold += 75
+            break;
+        case 5:
+            alert('You won 125 gold. Nice!')
+            totalGold += 125
+            break;
+        case 6:
+            alert('You won 200 gold. AWESOME!')
+            totalGold += 200
+            break;
+        case 7:
+            alert('DING DING DING!!!! JACKPOT!!!! 1000 GOLD!!!!')
+            totalGold += 1000
+            break;
+    }
+    InCasino()
+}
+function GivingMoney() {
+    if(casinoLevel === 1) {
+    alert('The man says, \'Hey kid. If you could lend us some money, I\'ll be able to upgrade this casino. Ya know, add a game of Blackjack or something.\' \'Ok,\' you say, pulling out your gold, \' how much is it?\' The man says, \'500 gold.\'')
+    answer = prompt('500 gold!','Yes, No').toUpperCase()
+    switch(answer) {
+        case 'YES':
+            if(totalGold < 500) {
+                alert('You don\'t have enough money.')
+                InCasino()
+            }
+            else {
+                totalGold -= 500
+                alert('As you hand the man your hard-earned money, he grins. \'Thanks, kiddo. Let me go look up some casino-y things.\'')
+                casinoLevel += 1
+                InCasino()
+            }
+        case 'NO':
+            InCasino()
+            break;
+        default:
+            NotAnOption()
+            GivingMoney()
+    }
+    }
+    else if(casinoLevel === 2) {
+    alert('The man says, \'Hey kiddo. If you could lend me some money, I\'d be able to get a new game. Like, say, Poker or somethin\'.\' \'Ok,\' you say, pulling out your gold, \' how much do you need?\' The man says, \'1000 gold.\'')
+    answer = prompt('1000 gold!','Yes, No').toUpperCase()
+    switch(answer) {
+        case 'YES':
+            if(totalGold < 1000) {
+                alert('You don\'t have enough money.')
+                InCasino()
+            }
+            else {
+                totalGold -= 1000
+                alert('As you hand the man your hard-earned money, he grins. \'Thanks, kiddo. Let me go look up some casino-y things.\'')
+                casinoLevel += 1
+                InCasino()
+            }
+        case 'NO':
+            InCasino()
+            break;
+        default:
+            NotAnOption()
+            GivingMoney()
+    }
 }
 }
