@@ -948,6 +948,7 @@ function FightMenu() {
             break;
     }
 }
+}
 
 function HitOrMiss(whichMove, whatName) {
     randomNumber(1, 100) 
