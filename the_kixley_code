@@ -2314,6 +2314,7 @@ function FindWinnings() {
     InCasino()
 }
 function GivingMoney() {
+    if(casinoLevel === 1) {
     alert('The man says, \'Hey kid. If you could lend us some money, I\'ll be able to upgrade this casino. Ya know, add a game of Blackjack or something.\' \'Ok,\' you say, pulling out your gold, \' how much is it?\' The man says, \'500 gold.\'')
     answer = prompt('500 gold!','Yes, No').toUpperCase()
     switch(answer) {
@@ -2328,5 +2329,34 @@ function GivingMoney() {
                 casinoLevel += 1
                 InCasino()
             }
+        case 'NO':
+            InCasino()
+            break;
+        default:
+            NotAnOption()
+            GivingMoney()
+    }
+    }
+    else if(casinoLevel === 2) {
+    alert('The man says, \'Hey kiddo. If you could lend me some money, I\'d be able to get a new game. Like, say, Poker or somethin\'.\' \'Ok,\' you say, pulling out your gold, \' how much do you need?\' The man says, \'1000 gold.\'')
+    answer = prompt('1000 gold!','Yes, No').toUpperCase()
+    switch(answer) {
+        case 'YES':
+            if(totalGold < 1000) {
+                alert('You don\'t have enough money.')
+                InCasino()
+            }
+            else {
+                totalGold -= 1000
+                alert('As you hand the man your hard-earned money, he grins. \'Thanks, kiddo. Let me go look up some casino-y things.\'')
+                casinoLevel += 1
+                InCasino()
+            }
+        case 'NO':
+            InCasino()
+            break;
+        default:
+            NotAnOption()
+            GivingMoney()
     }
 }
