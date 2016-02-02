@@ -149,6 +149,115 @@ var username;
 var useDefaults = false;
 var signedIn;
 // functions
+function Places() {
+    answer = prompt('Where do you go now? You have ' + totalGold + ' gold, and ' + hitPoints + ' health.', 'Town, Plains, Swamp, Save, Menu').toUpperCase()
+    switch (answer) {
+        case 'TOWN':
+            if (aabeaDestroysTown === 0) {
+                alert('You walk into town, where there is a marketplace and an inn.')
+                InTown()
+            } else {
+                alert('As you near the outskirts of town, you notice the stream of people leaving town. Then you notice that the entire place is now just a gigantic blast crater. Somebody blew it up!!! You decide to investigate, and walk over to the stream of people.')
+                alert('When you reach the people, they all say this person named A\'Abea had just come to town and started fires all over, and then used some weird, magical powers to blow up Smatino.')
+                alert('You are sure this A\'Abea is the same as the one who you met in the swamp, and wish you had used some \'weird, magical powers\' to blow him up')
+                alert('You race back to the swamp, and see him from a distance. You can\'t, however, blow him up. There are too many vines in the way. So, you follow him. You see a large tower in the distance, and finally, after a few hours, reach it at night. You see A\'Abea enter, and then, as the gate is clanging down above him, you slide under it and manage to get in.')
+                inTower()
+            }
+            break;
+        case 'PLAINS':
+            plainsCounter += 1
+            if (plainsCounter === 7) {
+                alert('As you are walking through the plains you see a map lying on the ground. It shows a path leading to a nearby swamp.')
+                swampDiscovery = 1
+                }
+        if (dwNamesB === false) {
+            randName = Math.floor(Math.random() * (monsName.length + 1))
+            actualMonsName = monsName[randName]
+            randNum = Math.floor(Math.random() * 4)
+            monsLev = level + (Math.floor(Math.random() * 2))
+            alert('You head off into the plains, where you find a ' + monsLev + ' ' + actualMonsName + '!')
+            randHealth = monsLev * randNum 
+            hitCounter = (100 + randHealth) * diffSetting
+            FightMenu()
+        }
+        else {
+        randomNumber(1, dwNames.length)
+        randName = x
+        actualMonsName = dwNames[randName]
+        randomNumber(0, 4)
+randNum = x
+randomNumber(1, 2)
+monsLev = level + x
+if (actualMonsName != 'Master') {    
+alert('You head off into the plains, where you find a level ' + monsLev + ' ' + actualMonsName + '!')
+}
+else if (foughtMaster === 1) {
+alert('You head off into the plains, where you find the Master, who is level ' + monsLev + '.')
+foughtMaster = 1
+}
+else if (actualMonsName === 'Master') {
+alert('You head off into the plains, where you find a newly regenerated Master, who is level ' + monsLev + '.')
+}
+            randHealth = monsLev * randNum
+            hitCounter = (100 + randHealth) * diffSetting
+            FightMenu()
+}
+            break; 
+        case 'SWAMP':
+            if (swampDiscovery === 0) {
+                alert('You have heard rumors of this place, but have never been able to find out where it is.')
+                Places();
+            } else {
+                if (swampCounter === 7) {
+                    alert('As you are walking through the swamp, you meet someone. He says his name is A\'Abea, and he is heading towards Smatino, but doesn’t tell why.')
+                    aabeaDestroysTown = 1
+                }
+                swampCounter += 1
+                randomNumber(1, 2)
+                monsLev = level * (x + 1)
+                randomNumber(-10, 10)
+                hitCounter = (100 + x) * diffSetting + Math.pow(monsLev, 2)
+            if (dwNamesB === false) {
+                randomNumber(1, 8)
+                randName = x
+                actualMonsName = monsName[randName]
+                alert('You get lost in the swamp, where you find a level ' + monsLev + ' ' + actualMonsName + '!')
+                inSwamp = 1
+                FightMenu()
+            }
+        else {
+        randomNumber(1, 8)
+                randName = x
+                actualMonsName = dwNames[randName]
+                if (actualMonsName != 'Master') {    
+                alert('You get lost in the swamp, where you find a level ' + monsLev + ' ' + actualMonsName + '!')
+                }   
+else if (foughtMaster === 0) {
+alert('You get lost in the swamp, where you find the Master, who is level ' + monsLev + '.')
+foughtMaster = 1
+}
+else if (foughtMaster === 1) {
+alert('You get lost in the swamp, where you find a newly regenerated Master, who is level ' + monsLev + '.')
+}
+                inSwamp = 1
+                FightMenu()
+            }
+        }
+        
+            break;
+        case 'SAVE':
+            savePlaces()
+            break;
+        case 'MENU':
+            StartUpMenu()
+            break;
+        default:
+            NotAnOption()
+            Places()
+            break;
+    }
+}
+
 function CheckIfGotAchieve(whichOne) {
     switch (whichOne) {
         case 'Kill':
@@ -619,115 +728,6 @@ function SuperHardcoreClass() {
             alert('-\4rAQZdew')
             alert('That message was brought to you by Murphy, one of the programmer\'s dog.')
         }
-    }
-}
-
-function Places() {
-    answer = prompt('Where do you go now? You have ' + totalGold + ' gold, and ' + hitPoints + ' health.', 'Town, Plains, Swamp, Save, Menu').toUpperCase()
-    switch (answer) {
-        case 'TOWN':
-            if (aabeaDestroysTown === 0) {
-                alert('You walk into town, where there is a marketplace and an inn.')
-                InTown()
-            } else {
-                alert('As you near the outskirts of town, you notice the stream of people leaving town. Then you notice that the entire place is now just a gigantic blast crater. Somebody blew it up!!! You decide to investigate, and walk over to the stream of people.')
-                alert('When you reach the people, they all say this person named A\'Abea had just come to town and started fires all over, and then used some weird, magical powers to blow up Smatino.')
-                alert('You are sure this A\'Abea is the same as the one who you met in the swamp, and wish you had used some \'weird, magical powers\' to blow him up')
-                alert('You race back to the swamp, and see him from a distance. You can\'t, however, blow him up. There are too many vines in the way. So, you follow him. You see a large tower in the distance, and finally, after a few hours, reach it at night. You see A\'Abea enter, and then, as the gate is clanging down above him, you slide under it and manage to get in.')
-                inTower()
-            }
-            break;
-        case 'PLAINS':
-            plainsCounter += 1
-            if (plainsCounter === 7) {
-                alert('As you are walking through the plains you see a map lying on the ground. It shows a path leading to a nearby swamp.')
-                swampDiscovery = 1
-                }
-        if (dwNamesB === false) {
-            randName = Math.floor(Math.random() * (monsName.length + 1))
-            actualMonsName = monsName[randName]
-            randNum = Math.floor(Math.random() * 4)
-            monsLev = level + (Math.floor(Math.random() * 2))
-            alert('You head off into the plains, where you find a ' + monsLev + ' ' + actualMonsName + '!')
-            randHealth = monsLev * randNum 
-            hitCounter = (100 + randHealth) * diffSetting
-            FightMenu()
-        }
-        else {
-        randomNumber(1, dwNames.length)
-        randName = x
-        actualMonsName = dwNames[randName]
-        randomNumber(0, 4)
-randNum = x
-randomNumber(1, 2)
-monsLev = level + x
-if (actualMonsName != 'Master') {    
-alert('You head off into the plains, where you find a level ' + monsLev + ' ' + actualMonsName + '!')
-}
-else if (foughtMaster === 1) {
-alert('You head off into the plains, where you find the Master, who is level ' + monsLev + '.')
-foughtMaster = 1
-}
-else if (actualMonsName === 'Master') {
-alert('You head off into the plains, where you find a newly regenerated Master, who is level ' + monsLev + '.')
-}
-            randHealth = monsLev * randNum
-            hitCounter = (100 + randHealth) * diffSetting
-            FightMenu()
-}
-            break; 
-        case 'SWAMP':
-            if (swampDiscovery === 0) {
-                alert('You have heard rumors of this place, but have never been able to find out where it is.')
-                Places();
-            } else {
-                if (swampCounter === 7) {
-                    alert('As you are walking through the swamp, you meet someone. He says his name is A\'Abea, and he is heading towards Smatino, but doesn’t tell why.')
-                    aabeaDestroysTown = 1
-                }
-                swampCounter += 1
-                randomNumber(1, 2)
-                monsLev = level * (x + 1)
-                randomNumber(-10, 10)
-                hitCounter = (100 + x) * diffSetting + Math.pow(monsLev, 2)
-            if (dwNamesB === false) {
-                randomNumber(1, 8)
-                randName = x
-                actualMonsName = monsName[randName]
-                alert('You get lost in the swamp, where you find a level ' + monsLev + ' ' + actualMonsName + '!')
-                inSwamp = 1
-                FightMenu()
-            }
-        else {
-        randomNumber(1, 8)
-                randName = x
-                actualMonsName = dwNames[randName]
-                if (actualMonsName != 'Master') {    
-                alert('You get lost in the swamp, where you find a level ' + monsLev + ' ' + actualMonsName + '!')
-                }   
-else if (foughtMaster === 0) {
-alert('You get lost in the swamp, where you find the Master, who is level ' + monsLev + '.')
-foughtMaster = 1
-}
-else if (foughtMaster === 1) {
-alert('You get lost in the swamp, where you find a newly regenerated Master, who is level ' + monsLev + '.')
-}
-                inSwamp = 1
-                FightMenu()
-            }
-        }
-        
-            break;
-        case 'SAVE':
-            savePlaces()
-            break;
-        case 'MENU':
-            StartUpMenu()
-            break;
-        default:
-            NotAnOption()
-            Places()
-            break;
     }
 }
 
