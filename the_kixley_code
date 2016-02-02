@@ -681,10 +681,6 @@ alert('You head off into the plains, where you find a newly regenerated Master, 
                 alert('You have heard rumors of this place, but have never been able to find out where it is.')
                 Places();
             } else {
-
-
-
-
                 if (swampCounter === 7) {
                     alert('As you are walking through the swamp, you meet someone. He says his name is A\'Abea, and he is heading towards Smatino, but doesn’t tell why.')
                     aabeaDestroysTown = 1
@@ -720,15 +716,17 @@ alert('You get lost in the swamp, where you find a newly regenerated Master, who
                 FightMenu()
             }
         }
+        
             break;
         case 'SAVE':
             savePlaces()
-        default:
-            NotAnOption()
-            Places()
             break;
         case 'MENU':
             StartUpMenu()
+            break;
+        default:
+            NotAnOption()
+            Places()
             break;
     }
 }
