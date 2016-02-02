@@ -67,6 +67,7 @@ var totalExp = 0;
 var expLeft;
 // travel
 var inSwamp;
+var townName = 'INSERT NAME HERE'
 var min;
 var max;
 var x;
@@ -623,11 +624,11 @@ function SuperHardcoreClass() {
 }
 
 function Places() {
-    answer = prompt('Where do you go now? You have ' + totalGold + ' gold, and ' + hitPoints + ' health.', 'Town, Plains, Swamp, Save, Menu').toUpperCase()
+    answer = prompt('Where do you go now? You have ' + totalGold + ' gold, and ' + hitPoints + ' health.', 'Town, Plains, Swamp, Save, Travel, Menu').toUpperCase()
     switch (answer) {
         case 'TOWN':
             if (aabeaDestroysTown === 0) {
-                alert('You walk into town, where there is a marketplace and an inn.')
+                alert('You walk into ' + townName + ', where there is a marketplace and an inn.')
                 InTown()
             } else {
                 alert('As you near the outskirts of town, you notice the stream of people leaving town. Then you notice that the entire place is now just a gigantic blast crater. Somebody blew it up!!! You decide to investigate, and walk over to the stream of people.')
@@ -720,6 +721,9 @@ alert('You get lost in the swamp, where you find a newly regenerated Master, who
             break;
         case 'SAVE':
             savePlaces()
+            break;
+        case 'TRAVEL':
+            ToNewTown()
             break;
         case 'MENU':
             StartUpMenu()
@@ -2109,4 +2113,22 @@ NotAnOption()
 inAccount() 
 }
 }
+}
+function ToNewTown() {
+    alert('Not happening. Sorry.')
+    Places()
+    /* alert('You walk up to the map shown in the middle of town square. It shows ' + townName + ' in the center, with other towns sprinkled in the plains surronding it.')
+    answer = prompt('Where to?','INSERT TOWN NAME HERE, INSERT TOWN NAME HERE, INSERT TOWN NAME HERE').toUpperCase()
+        switch(answer) {
+            case 'INSERT TOWN NAME HERE':
+                if(townName === 'INSERT TOWN NAME HERE') {
+                    alert('You\'re already there, dummy!')
+                    Places()
+                }
+                else {
+                    townName = 'INSERT TOWN NAME HERE'
+                    Places()
+                }
+        }
+        */
 }
