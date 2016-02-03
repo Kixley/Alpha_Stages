@@ -38,16 +38,13 @@ var getLevelAchieve = 0;
 //in the fight
 var hit;
 var combo;
-var you.attackPow = Math.floor(Math.random() * 5) + 5;
 var comboNums;
-var hitPoints = 100;
 var totalHealth = 100;
 var comboMultiplier = 0;
 var runChance;
 var runAway = 0;
 var accuracy = 0.25;
 var missChance;
-var you.blobsOfDoom = 50;
 var totalyou.blobsOfDoom = 50;
 var magicalSpells = [
     'Fire (20 blobs of doom)',
@@ -442,8 +439,8 @@ function Difficulty() {
     mons.attackPow= mons.objLev + 15 - Math.floor(Math.random() * 10)
     mons.attackPow = mons.attackPow * diffSetting
     mons.objLev = level + randNum
-    mons.hitPoints = 100
-    mons.hitPoints = mons.hitPoints * diffSetting
+    mons.you.hitPoints = 100
+    mons.you.hitPoints = mons.you.hitPoints * diffSetting
     ChooseClass()
 }
 function KnightClass() {
@@ -513,7 +510,7 @@ function ChoosingAClass(chosenClass) {
             alert('You are now a ' + chosenClass + '!')
             if (chosenClass === 'knight') {
                 you.attackPow += 2
-                hitPoints += 50
+                you.hitPoints += 50
                 you.blobsOfDoom -= 100
             } else if (chosenClass === 'mage') {
                 you.attackPow -= 2
@@ -521,18 +518,18 @@ function ChoosingAClass(chosenClass) {
                 magicSkillz += 1.5
             } else if (chosenClass = 'barbarian') {
                 you.attackPow += 4
-                hitPoints -= 25
+                you.hitPoints -= 25
             } else if (chosenClass = 'super legendary') {
                 magicSkillz = (1 / x)
                 you.attackPow -= 5
                 totalHealth -= 75
-                hitPoints -= 75
+                you.hitPoints -= 75
                 you.blobsOfDoom -= 300
             } else if (chosenClass = 'super hardcore') {
                 magicSkillz = -(Math.log(0))
                 you.attackPow = -(Math.log(0))
                 totalHealth = -(Math.log(0))
-                hitPoints = -(Math.log(0))
+                you.hitPoints = -(Math.log(0))
                 you.blobsOfDoom = -(Math.log(0))
                 totalyou.blobsOfDoom = -(Math.log(0))
                 youCheated = true
@@ -639,7 +636,7 @@ function SuperHardcoreClass() {
 }
 
 function Places() {
-    answer = prompt('Where do you go now? You have ' + totalGold + ' gold, and ' + hitPoints + ' health.', 'Town, Plains, Swamp, Save, Menu').toUpperCase()
+    answer = prompt('Where do you go now? You have ' + totalGold + ' gold, and ' + you.hitPoints + ' health.', 'Town, Plains, Swamp, Save, Menu').toUpperCase()
     switch (answer) {
         case 'TOWN':
             if (aabeaDestroysTown === 0) {
@@ -665,7 +662,7 @@ function Places() {
             randNum = Math.floor(Math.random() * 4)
             mons.objLev = level + (Math.floor(Math.random() * 2))
             alert('You head off into the plains, where you find a ' + mons.objLev + ' ' + mons.called + '!')
-            mons.hitPoints = 100 + ((mons.objLev * randNum)) * diffSetting
+            mons.you.hitPoints = 100 + ((mons.objLev * randNum)) * diffSetting
             FightMenu()
         }
         else {
@@ -687,7 +684,7 @@ else if (mons.called === 'Master') {
 alert('You head off into the plains, where you find a newly regenerated Master, who is level ' + mons.objLev + '.')
 }
             randHealth = mons.objLev * randNum
-            mons.hitPoints = (100 + randHealth) * diffSetting
+            mons.you.hitPoints = (100 + randHealth) * diffSetting
             FightMenu()
 }
             break; 
@@ -704,7 +701,7 @@ alert('You head off into the plains, where you find a newly regenerated Master, 
                 randomNumber(1, 2)
                 mons.objLev = level * (x + 1)
                 randomNumber(-10, 10)
-                mons.hitPoints = (100 + x) * diffSetting + Math.pow(mons.objLev, 2)
+                mons.you.hitPoints = (100 + x) * diffSetting + Math.pow(mons.objLev, 2)
             if (dwNamesB === false) {
                 randomNumber(1, 8)
                 randName = x
@@ -778,21 +775,21 @@ function MonsAtt() {
             }
             }
     alert('The ' + mons.called + ' hit you for ' + mons.attackPow + ' damage.')
-    hitPoints -= monsAttAndDiff
+    you.hitPoints -= monsAttAndDiff
     if (poisoned = true && turns <= 5) {
     alert('You take 5 damage from being poisoned.')
-    hitPoints -= 5
+    you.hitPoints -= 5
     turns += 1
     }
     else if (turns === 5) {
     turns = 1
     poisoned = false
     }
-    if (hitPoints <= 0) {
+    if (you.hitPoints <= 0) {
         alert('You died.')
         GameOver()
     } else {
-        alert('You have ' + hitPoints + ' health left.')
+        alert('You have ' + you.hitPoints + ' health left.')
         FightMenu()
     }
 }
@@ -852,7 +849,7 @@ function FightMenu() {
         mons.secondaryType = 'Fighting'
         break;
     case 'Rabbit':
-        mons.type = 'Quadroped'
+        mons.type = 'Quadruped'
         mons.secondaryType = 'LOLOLOL'
         break;
     case 'Spearman':
@@ -860,7 +857,7 @@ function FightMenu() {
         mons.secondaryType = 'Fighting'
         break;
     case 'Lizard':
-        mons.type = 'Quadroped'
+        mons.type = 'Quadruped'
         mons.secondaryType = 'Poison'
         break;
     case 'Death Snake':
@@ -871,7 +868,7 @@ function FightMenu() {
         mons.type = 'Stomp-able'
         mons.secondaryType = 'LOLOLOL'
     case 'Ferocious Lion':
-        mons.type = 'Quadroped'
+        mons.type = 'Quadruped'
         mons.secondaryType = 'Fighting'
     case 'Velociraptor':
         mons.type = 'Bipedal'
@@ -879,7 +876,7 @@ function FightMenu() {
         break;
     default:
         mons.type = undefined
-        monsName2 = null
+        mons.secondaryType = null
         }
     answer = prompt('What do you do? Health: ' + you.hitPoints + ' ' + mons.called + ' health: ' + mons.health + '. Monster\'s types: ' + mons.type + ' and ' + mons.secondaryType + '.', 'Fight, Item, Magic, Run').toUpperCase()
     switch (answer) {
@@ -904,7 +901,7 @@ function FightMenu() {
             case 'use the force':
             case 'use the force, luke':
             if (useTheForceCount <= 8) {
-            alert('As you use the Force, an lightsaber comes flying an hits the ' + mons.called + '. Sadly, it flies right past you, but the monster does\'t attack.')
+            alert('As you use the Force, an lightsaber comes flying and hits the ' + mons.called + '. Sadly, it flies right past you, but the monster does\'t attack.')
             mons.health -= 10
             useTheForceCount += 1
             }
@@ -957,12 +954,12 @@ function HitOrMiss(whichMove, whatName) {
     if (hit <= whichMove.accuracy) {
         alert('You miss.')
         burn()
-        alert('The ' + mons.called + ' has ' + mons.hitPoints + ' health left.')
+        alert('The ' + mons.called + ' has ' + mons.you.hitPoints + ' health left.')
         MonsAtt()
-        if (hitPoints <= 0) {
+        if (you.hitPoints <= 0) {
             alert('You died.')
         } else {
-            alert('You have ' + hitPoints + ' health left.')
+            alert('You have ' + you.hitPoints + ' health left.')
             FightMenu()
         }
     } else {
@@ -974,23 +971,23 @@ function HitOrMiss(whichMove, whatName) {
                 alert('You weren\'t able to get a combo.')
                 if (whatMove === normal) {
                 alert('The normal attack did ' + you.attackPow + '.')
-                mons.hitPoints -= you.attackPow
+                mons.you.hitPoints -= you.attackPow
                 }
                 else if (mons.type != whatMove.sEType && mons.type != whatMove.nVEType) {
                 alert('The ' + whatMove.name + ' did ' + whatMove.damageString + ' damage.')
                 if (mons.type != whatMove.sEType && mons.type != whatMove.nVEType) {
-                mons.hitPoints -= whatMove.defaultDamage
+                mons.you.hitPoints -= whatMove.defaultDamage
                 }
                 }
                 else if (mons.type === whatMove.sEType) {
                 alert('It\'s 30% more effective!!!')
                 alert('The ' + whatMove.name + ' did ' + (whatMove.defaultDame + (whatMove.defaultDamage * 0.3)) + ' damage.')
-                mons.hitPoints -= whatMove.defaultDamage + (whatMove.defaultDamage * 0.3)
+                mons.you.hitPoints -= whatMove.defaultDamage + (whatMove.defaultDamage * 0.3)
                 }
                 else if (mons.type === whatMove.nVEType) {
                 alert('It\'s 30% less effective...')
                 alert('The ' + whatMove.name + ' did ' + (whatMove.defaultDamage - (whatMove.defaultDamage * 0.3)) + ' damage.')
-                mons.hitPoints -= whatMove.defaultDamage - (whatMove.defaultDamage * 0.3)
+                mons.you.hitPoints -= whatMove.defaultDamage - (whatMove.defaultDamage * 0.3)
                 }
                 burn()
                 break;
@@ -1001,32 +998,32 @@ function HitOrMiss(whichMove, whatName) {
                 alert('You got a ' + combeNums + 'combo!')
                 if (whatMove === normal) {
                 alert('The normal attack did ' + (you.attackPow * comboNums) + '.')
-                mons.hitPoints -= you.attackPow * comboNums
+                mons.you.hitPoints -= you.attackPow * comboNums
                 }
                 else if (mons.type != whatMove.sEType && mons.type != whatMove.nVEType) {
                 alert('The ' + whatMove.name + ' did ' + (whatMove.defaultDamage * comboNums) + ' damage.')
                 if (mons.type != whatMove.sEType && mons.type != whatMove.nVEType) {
-                mons.hitPoints -= whatMove.defaultDamage
+                mons.you.hitPoints -= whatMove.defaultDamage
                 }
                 else if (mons.type === whatMove.sEType) {
                 alert('It\'s 30% more effective!!!')
                 alert('The ' + whatMove.name + ' did ' + ((whatMove.defaultDamage + (whatMove.defaultDamage * 0.3)) * comboNums) + ' damage.')
-                mons.hitPoints -= (whatMove.defaultDamage + (whatMove.defaultDamage * 0.3))  * comboNums
+                mons.you.hitPoints -= (whatMove.defaultDamage + (whatMove.defaultDamage * 0.3))  * comboNums
                 }
                 else if (mons.type === whatMove.nVEType) {
                 alert('It\'s 30% less effective...')
                 alert('The ' + whatMove.name + ' did ' + ((whatMove.defaultDamage - (whatMove.defaultDamage * 0.3)) * comboNums) + ' damage.')
-                mons.hitPoints -= whatMove.defaultDamage - (whatMove.defaultDamage * 0.3) * comboNums
+                mons.you.hitPoints -= whatMove.defaultDamage - (whatMove.defaultDamage * 0.3) * comboNums
                 }
                 burn()
                 break;
         }
     }
 
-    if (mons.hitPoints <= 0) {
+    if (mons.you.hitPoints <= 0) {
         WonTheFight()
     } else {
-        alert('The ' + mons.called + ' has ' + mons.hitPoints + ' health left.')
+        alert('The ' + mons.called + ' has ' + mons.you.hitPoints + ' health left.')
         MonsAtt()
     }
 }
@@ -1219,11 +1216,11 @@ function useHealthPotion() {
     } else {
         alert('You pull a health potion out of your bag and drink it! Yum! It tastes like snickerdoodle cookies!')
         alert('Hit points restored!')
-        hitPoints += 50
+        you.hitPoints += 50
         healthPotion -= 1
-        alert('You now have ' + hitPoints + ' health!')
-        if (hitPoints > totalHealth) {
-            hitPoints = totalHealth
+        alert('You now have ' + you.hitPoints + ' health!')
+        if (you.hitPoints > totalHealth) {
+            you.hitPoints = totalHealth
         }
     }
     ItemMenu()
@@ -1274,7 +1271,7 @@ function InInn() {
                 alert('The man gestures towards a room door. "There\'s your room, room 104. Have a good night\'s rest.')
                 alert('You wake up fully refreshed, and new vigor fills your heart.')
                 alert('Hit points fully restored!')
-                hitPoints = totalHealth
+                you.hitPoints = totalHealth
                 alert('You walk out of the room.')
                 InInn()
             } else if (totalGold <= 50) {
@@ -1332,7 +1329,7 @@ function ChooseSpell() {
                 ChooseSpell()
             } else {
                 alert('You summon a ball of fire and throw it at the ' + mons.called + '.')
-                mons.hitPoints -= (30 * magicSkillz)
+                mons.you.hitPoints -= (30 * magicSkillz)
                 you.blobsOfDoom -= 20
                 randomNumber(1, 10)
                 switch (x) {
@@ -1344,7 +1341,7 @@ function ChooseSpell() {
                         burnEffect = 1
                         break;
                 }
-                if (mons.hitPoints <= 0) {
+                if (mons.you.hitPoints <= 0) {
                     WonTheFight()
                     alert('You won the fight!')
                 } else {
@@ -1474,7 +1471,7 @@ function expQuest() {
     expQuestChoice()
 }
 function save() {
-    localStorage.setItem('Health', hitPoints.toString())
+    localStorage.setItem('Health', you.hitPoints.toString())
     localStorage.setItem('Attack Power', you.attackPow.toString())
     localStorage.setItem('Class', chosenClass.toString())
     localStorage.setItem('Level', level.toString())
@@ -1852,16 +1849,16 @@ function DevCheats() {
             break;
         case 'infinite health':
             if (healthCheat === 0) {
-                hitPoints = -(Math.log(0))
-                totalHealth = hitPoints
+                you.hitPoints = -(Math.log(0))
+                totalHealth = you.hitPoints
                 alert('Cheat successfully activated!')
                 healthCheat = 1
                 youCheated = true
                 DevCheats()
             } else {
                 alert('Deactivating cheat...')
-                hitPoints = 100
-                totalHealth = hitPoints
+                you.hitPoints = 100
+                totalHealth = you.hitPoints
                 alert('You now have 100 health.')
                 DevCheats()
             }
@@ -1886,8 +1883,8 @@ function DevCheats() {
             totalExp = -(Math.log(0))
             you.attackPow = -(Math.log(0))
             realAttackPow = you.attackPow
-            hitPoints = -(Math.log(0))
-            totalHealth = hitPoints
+            you.hitPoints = -(Math.log(0))
+            totalHealth = you.hitPoints
             you.blobsOfDoom = -(Math.log(0))
             totalyou.blobsOfDoom = you.blobsOfDoom
             goldCheat = 1
@@ -1923,7 +1920,7 @@ function hideOrFight() {
     fightingGroup = 1
     mons.objLev = 10
     randomNumber(-10, 10)
-    mons.hitPoints = (100 + x) * diffSetting + Math.pow(level, 2)
+    mons.you.hitPoints = (100 + x) * diffSetting + Math.pow(level, 2)
     switch (answer) {
         case 'hide from them':
             alert('As they pass your hiding place, they see you and say \'Hey, look at that little rat hiding in a garbage can!\'')
@@ -1965,7 +1962,7 @@ function inTowerPostDoomedGroup() {
     FightMenu()
     fightingAAbea = 1
     randomNumber(-10, 10)
-    mons.hitPoints = (100 + x) * diffSetting + Math.pow(level, 2)
+    mons.you.hitPoints = (100 + x) * diffSetting + Math.pow(level, 2)
 }
 
 function fightingBalbeag() {
@@ -2002,7 +1999,7 @@ function fightingBalbeag() {
         mons.calledLowerThe = mons.called
         fightingBalbeag = 1
         randomNumber(-10, 10)
-        mons.hitPoints = (100 + x) * diffSetting + Math.pow(level, 2)
+        mons.you.hitPoints = (100 + x) * diffSetting + Math.pow(level, 2)
     }
 }
 
@@ -2037,7 +2034,7 @@ function StatToLevelUp() {
             break;
         case 'HEALTH':
             alert('You got ' + levelUpHealth + ' health!')
-            hitPoints += levelUpHealth
+            you.hitPoints += levelUpHealth
             totalHealth += levelUpHealth
             break;
         case 'BLOBS OF DOOM':
@@ -2076,7 +2073,7 @@ function burn() {
             burnTimer = 0
         }
         alert('The ' + mons.called + ' takes 5 damage from burning.')
-        mons.hitPoints -= 5
+        mons.you.hitPoints -= 5
     }
 }
 
