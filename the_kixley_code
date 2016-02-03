@@ -1269,14 +1269,7 @@ function WonTheFight() {
         questKillAmt += 1
     }
     if (totalExp >= levelReq) {
-        level += 1
         checkForLevelUp()
-        temp = Math.floor(1.2 * level)
-        tempMinusOne = temp - 1
-        alert('You leveled up!')
-        levelReq += levelReq
-        StatToLevelUp()
-        CheckIfGotAchieve('Level')
     } else {
         expLeft = levelReq - totalExp
         alert('You have ' + expLeft + ' experience to go!')
