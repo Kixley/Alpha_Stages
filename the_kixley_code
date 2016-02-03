@@ -362,16 +362,6 @@ function StartUpMenu() {
     openingMenu = false
     }
     }
-    if ((localStorage.getItem('staySignedInAs')) != null) {
-    username = localStorage.getItem(staySignedInAs)
-    if ((localStorage.getItem(username +  ' default difficulty')) != null) {
-diffSetting = localStorage.getItem(username +  ' default difficulty')
-diffSetting = paseInt(diffSetting, 10)
-}
-    if ((localStorage.getItem(username + ' default class')) != null) {
-chosenClass = localStorage.getItem(username + ' default class')
-}
-}
     answer = prompt('Alpha 1.4.', 'Start, Options, Guide, Load, Achievements, Exit').toUpperCase()
     switch (answer) {
         case 'START':
