@@ -912,9 +912,9 @@ function BuyHealthPotion() {
                     InShop()
                 } else {
                     alert('Health potion(s) bought!')
-                    healthPotion += answer
+                    healthPotion += howMany
                     answer = 0
-                    totalGold -= (10 * answer)
+                    totalGold -= (10 * howMany)
                     InShop()
                 }
                 break;
