@@ -9,6 +9,13 @@ CHANGELOG FOR 1.4:
     If you find any bugs, or have a good suggestion, make a new issue. Label bugs 'bug' and suggestions 'enhancement'
 */
 //monster variables
+function person(health, attack, name, level) = {
+    this.hitPoints = health
+    this.attackPow = attack
+    this.called = name
+    this.objLev = level
+}
+var mons = new person(100, monsLev + 15 - Math.floor(Math.random() * 10), 'Goblin', monsLev)
 var hitCounter = 100;
 var monsAtt = 0;
 var randNum= Math.floor(Math.random() * 2);
