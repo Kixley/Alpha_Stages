@@ -1,5 +1,3 @@
-//Fork the file, then do  a pull request
-//This is for the fight redo
 /*
 WHAT ARE WE WORKING ON?: Alpha 1.4. (Currently for Easter eggs and New classes)
 CHANGELOG FOR 1.4: 
@@ -9,22 +7,21 @@ CHANGELOG FOR 1.4:
     If you find any bugs, or have a good suggestion, make a new issue. Label bugs 'bug' and suggestions 'enhancement'
 */
 //monster variables
-function person(health, attack, name, level) = {
+function person(health, attack, name, level, BoD, type1, type2) = {
     this.hitPoints = health
     this.attackPow = attack
     this.called = name
     this.objLev = level
+    this.blobsOfDoom = BoD
+    this.type = type1
+    this.secondaryType = type2
 }
-var mons = new person(100, monsLev + 15 - Math.floor(Math.random() * 10), 'Goblin', monsLev)
-var hitCounter = 100;
-var monsAtt = 0;
+var you = new person(100, 0, 'Kixley', 1, 100, 'Super Cool', 'Main Protagonist')
+var mons = new person(100, 0, 'Goblin', level + randNum, 0, 'Bipedal', 'Fighting')
 var randNum= Math.floor(Math.random() * 2);
-var monsLev = level + randNum;
 var monsName = ['Goblin', 'Rabbit', 'Spearman', 'Lizard', 'Death Snake', 'Rabid Pineapple', 'Ferocious Lion', 'Velociraptor'];
-var actualMonsName = 'Goblin';
 var randName;
 var randHealth;
-var monsAttAndDiff;
 var aabeaDestroysTown = 0;
 var dwNamesB = false;
 var dwNames = ['Dalek', 'Cyberman', 'Weeping Angel', 'Zygon', 'Silurian', 'Silent', 'Master', 'Special Weapons Dalek'];
@@ -41,18 +38,17 @@ var getLevelAchieve = 0;
 //in the fight
 var hit;
 var combo;
-var attackPower = Math.floor(Math.random() * 5) + 5;
+var you.attackPow = Math.floor(Math.random() * 5) + 5;
 var comboNums;
 var hitPoints = 100;
 var totalHealth = 100;
 var comboMultiplier = 0;
 var runChance;
 var runAway = 0;
-var realAttackPower;
 var accuracy = 0.25;
 var missChance;
-var blobsOfDoom = 50;
-var totalBlobsOfDoom = 50;
+var you.blobsOfDoom = 50;
+var totalyou.blobsOfDoom = 50;
 var magicalSpells = [
     'Fire (20 blobs of doom)',
     'Rage (40 blobs of doom)'
@@ -67,6 +63,7 @@ var fightingAAbea;
 var fightingBalbeag;
 var magicSkillz = 1;
 var useThisAccuracy;
+var realAttackPow
 // monster drops
 var goldDrops;
 var expPoints;
@@ -107,7 +104,7 @@ var levelMinusOne = level - 1;
 var levelReq = 100 + level * 200;
 var levelUpHealth = 50;
 var totalExtraHealth = levelUpHealth * levelMinusOne;
-var levelUpBlobsOfDoom = 50;
+var levelUpyou.blobsOfDoom = 50;
 // other
 var goldCheat = 0;
 var expCheat = 0;
@@ -162,8 +159,6 @@ var move1 = {type:undefined, defaultDamage:0, damageString:'undefined', effects:
 var move2 = move1
 var move3 = move1
 var move4 = move1
-var monsType1
-var monsType2
 var normal = {accuracy:25, accuracyString:'25%'}
 var turns
 var useTheForceCount = 0
@@ -444,11 +439,11 @@ function Difficulty() {
             Difficulty()
             break;
     }
-    monsAtt = monsLev + 15 - Math.floor(Math.random() * 10)
-    monsAttAndDiff = monsAtt * diffSetting
-    monsLev = level + randNum
-    hitCounter = 100
-    hitCounter = hitCounter * diffSetting
+    mons.attackPow= mons.objLev + 15 - Math.floor(Math.random() * 10)
+    mons.attackPow = mons.attackPow * diffSetting
+    mons.objLev = level + randNum
+    mons.hitPoints = 100
+    mons.hitPoints = mons.hitPoints * diffSetting
     ChooseClass()
 }
 function KnightClass() {
@@ -517,29 +512,29 @@ function ChoosingAClass(chosenClass) {
         case 'YES':
             alert('You are now a ' + chosenClass + '!')
             if (chosenClass === 'knight') {
-                attackPower += 2
+                you.attackPow += 2
                 hitPoints += 50
-                blobsOfDoom -= 100
+                you.blobsOfDoom -= 100
             } else if (chosenClass === 'mage') {
-                attackPower -= 2
-                blobsOfDoom += 100
+                you.attackPow -= 2
+                you.blobsOfDoom += 100
                 magicSkillz += 1.5
             } else if (chosenClass = 'barbarian') {
-                attackPower += 4
+                you.attackPow += 4
                 hitPoints -= 25
             } else if (chosenClass = 'super legendary') {
                 magicSkillz = (1 / x)
-                attackPower -= 5
+                you.attackPow -= 5
                 totalHealth -= 75
                 hitPoints -= 75
-                blobsOfDoom -= 300
+                you.blobsOfDoom -= 300
             } else if (chosenClass = 'super hardcore') {
                 magicSkillz = -(Math.log(0))
-                attackPower = -(Math.log(0))
+                you.attackPow = -(Math.log(0))
                 totalHealth = -(Math.log(0))
                 hitPoints = -(Math.log(0))
-                blobsOfDoom = -(Math.log(0))
-                totalBlobsOfDoom = -(Math.log(0))
+                you.blobsOfDoom = -(Math.log(0))
+                totalyou.blobsOfDoom = -(Math.log(0))
                 youCheated = true
             }
             Story()
@@ -666,34 +661,33 @@ function Places() {
                 }
         if (dwNamesB === false) {
             randName = Math.floor(Math.random() * (monsName.length + 1))
-            actualMonsName = monsName[randName]
+            mons.called = monsName[randName]
             randNum = Math.floor(Math.random() * 4)
-            monsLev = level + (Math.floor(Math.random() * 2))
-            alert('You head off into the plains, where you find a ' + monsLev + ' ' + actualMonsName + '!')
-            randHealth = monsLev * randNum 
-            hitCounter = (100 + randHealth) * diffSetting
+            mons.objLev = level + (Math.floor(Math.random() * 2))
+            alert('You head off into the plains, where you find a ' + mons.objLev + ' ' + mons.called + '!')
+            mons.hitPoints = 100 + ((mons.objLev * randNum)) * diffSetting
             FightMenu()
         }
         else {
         randomNumber(1, dwNames.length)
         randName = x
-        actualMonsName = dwNames[randName]
+        mons.called = dwNames[randName]
         randomNumber(0, 4)
 randNum = x
 randomNumber(1, 2)
-monsLev = level + x
-if (actualMonsName != 'Master') {    
-alert('You head off into the plains, where you find a level ' + monsLev + ' ' + actualMonsName + '!')
+mons.objLev = level + x
+if (mons.called != 'Master') {    
+alert('You head off into the plains, where you find a level ' + mons.objLev + ' ' + mons.called + '!')
 }
 else if (foughtMaster === 1) {
-alert('You head off into the plains, where you find the Master, who is level ' + monsLev + '.')
+alert('You head off into the plains, where you find the Master, who is level ' + mons.objLev + '.')
 foughtMaster = 1
 }
-else if (actualMonsName === 'Master') {
-alert('You head off into the plains, where you find a newly regenerated Master, who is level ' + monsLev + '.')
+else if (mons.called === 'Master') {
+alert('You head off into the plains, where you find a newly regenerated Master, who is level ' + mons.objLev + '.')
 }
-            randHealth = monsLev * randNum
-            hitCounter = (100 + randHealth) * diffSetting
+            randHealth = mons.objLev * randNum
+            mons.hitPoints = (100 + randHealth) * diffSetting
             FightMenu()
 }
             break; 
@@ -708,30 +702,30 @@ alert('You head off into the plains, where you find a newly regenerated Master, 
                 }
                 swampCounter += 1
                 randomNumber(1, 2)
-                monsLev = level * (x + 1)
+                mons.objLev = level * (x + 1)
                 randomNumber(-10, 10)
-                hitCounter = (100 + x) * diffSetting + Math.pow(monsLev, 2)
+                mons.hitPoints = (100 + x) * diffSetting + Math.pow(mons.objLev, 2)
             if (dwNamesB === false) {
                 randomNumber(1, 8)
                 randName = x
-                actualMonsName = monsName[randName]
-                alert('You get lost in the swamp, where you find a level ' + monsLev + ' ' + actualMonsName + '!')
+                mons.called = monsName[randName]
+                alert('You get lost in the swamp, where you find a level ' + mons.objLev + ' ' + mons.called + '!')
                 inSwamp = 1
                 FightMenu()
             }
         else {
         randomNumber(1, 8)
                 randName = x
-                actualMonsName = dwNames[randName]
-                if (actualMonsName != 'Master') {    
-                alert('You get lost in the swamp, where you find a level ' + monsLev + ' ' + actualMonsName + '!')
+                mons.called = dwNames[randName]
+                if (mons.called != 'Master') {    
+                alert('You get lost in the swamp, where you find a level ' + mons.objLev + ' ' + mons.called + '!')
                 }   
 else if (foughtMaster === 0) {
-alert('You get lost in the swamp, where you find the Master, who is level ' + monsLev + '.')
+alert('You get lost in the swamp, where you find the Master, who is level ' + mons.objLev + '.')
 foughtMaster = 1
 }
 else if (foughtMaster === 1) {
-alert('You get lost in the swamp, where you find a newly regenerated Master, who is level ' + monsLev + '.')
+alert('You get lost in the swamp, where you find a newly regenerated Master, who is level ' + mons.objLev + '.')
 }
                 inSwamp = 1
                 FightMenu()
@@ -759,20 +753,20 @@ function multiplier() {
 }
 
 function MonsAtt() {
-            if (monsType2 === 'Fighting') {
+            if (mons.secondaryType === 'Fighting') {
             randomNumber(1, 10)
-            monsAtt = monsLev + 15 - x
-            monsAttAndDiff = monsAtt * diffSetting
+            mons.attackPow= mons.objLev + 15 - x
+            mons.attackPow = mons.attackPow* diffSetting
             }
-            else if (monsType2 === 'LOLOLOL') {
+            else if (mons.secondaryType === 'LOLOLOL') {
             randomNumber(4, 13)
-            monsAtt = monsLev + 15 - x
-            monsAttAndDiff = monsAtt * diffSetting
+            mons.attackPow = mons.objLev + 15 - x
+            mons.attackPow = mons.attackPow* diffSetting
             }
-            else if (monsType2 === 'Poison') {
+            else if (mons.secondaryType === 'Poison') {
             randomNumber(4, 13)
-            monsAtt = monsLev + 15 - x
-            monsAttAndDiff = monsAtt * diffSetting
+            mons.attackPow = mons.objLev + 15 - x
+            mons.attackPow = mons.attackPow* diffSetting
             randomNumber(1, 3) 
             switch(x) {
             case 1:
@@ -783,7 +777,7 @@ function MonsAtt() {
             break;
             }
             }
-    alert('The ' + actualMonsName + ' hit you for ' + monsAttAndDiff + ' damage.')
+    alert('The ' + mons.called + ' hit you for ' + mons.attackPow + ' damage.')
     hitPoints -= monsAttAndDiff
     if (poisoned = true && turns <= 5) {
     alert('You take 5 damage from being poisoned.')
@@ -847,50 +841,50 @@ answer = answer.toUpperCase()
 
 function Story() {
     alert('You are a person named Kixley. You live in the land of Nulm. You are in the Vacant Plains, and you know the town called Smatino resides nearby. You know where it is, but there are monsters in the plains, and one has just spotted you.')
-    alert('Your attack power is ' + attackPower + '.')
+    alert('Your attack power is ' + you.attackPow + '.')
     FightMenu()
 }
 
 function FightMenu() {
-    switch(actualMonsName) {
+    switch(mons.called) {
     case 'Goblin':
-        monsType1 = 'Bipedal'
-        monsType2 = 'Fighting'
+        mons.type = 'Bipedal'
+        mons.secondaryType = 'Fighting'
         break;
     case 'Rabbit':
-        monsType1 = 'Quadroped'
-        monsType2 = 'LOLOLOL'
+        mons.type = 'Quadroped'
+        mons.secondaryType = 'LOLOLOL'
         break;
     case 'Spearman':
-        monsType1 = 'Bipedal'
-        monsType2 = 'Fighting'
+        mons.type = 'Bipedal'
+        mons.secondaryType = 'Fighting'
         break;
     case 'Lizard':
-        monsType1 = 'Quadroped'
-        monsType2 = 'Poison'
+        mons.type = 'Quadroped'
+        mons.secondaryType = 'Poison'
         break;
     case 'Death Snake':
-        monsType1 = 'Stomp-able'
-        monsType2 = 'Poison'
+        mons.type = 'Stomp-able'
+        mons.secondaryType = 'Poison'
         break;
     case 'Rabid Pineapple':
-        monsType1 = 'Stomp-able'
-        monsType2 = 'LOLOLOL'
+        mons.type = 'Stomp-able'
+        mons.secondaryType = 'LOLOLOL'
     case 'Ferocious Lion':
-        monsType1 = 'Quadroped'
-        monsType2 = 'Fighting'
+        mons.type = 'Quadroped'
+        mons.secondaryType = 'Fighting'
     case 'Velociraptor':
-        monsType1 = 'Bipedal'
-        monsType2 = 'Fighting'
+        mons.type = 'Bipedal'
+        mons.secondaryType = 'Fighting'
         break;
     default:
-        monsType1 = undefined
+        mons.type = undefined
         monsName2 = null
         }
-    answer = prompt('What do you do? Health: ' + hitPoints + ' ' + actualMonsName + ' health: ' + hitCounter + '. Monster\'s types: ' + monsType1 + ' and ' + monsType2 + '.', 'Fight, Item, Magic, Run').toUpperCase()
+    answer = prompt('What do you do? Health: ' + you.hitPoints + ' ' + mons.called + ' health: ' + mons.health + '. Monster\'s types: ' + mons.type + ' and ' + mons.secondaryType + '.', 'Fight, Item, Magic, Run').toUpperCase()
     switch (answer) {
         case 'FIGHT':
-            answer = prompt('What move?', move1.name + ', ' + move2.name + ', ' + move3.name + ', ' + move4.name + ', Normal Move. Monster\'s types: ' + monsType1 + ' and ' + monsType2 + '.').toLowerCase()
+            answer = prompt('What move?', move1.name + ', ' + move2.name + ', ' + move3.name + ', ' + move4.name + ', Normal Move. Monster\'s types: ' + mons.type + ' and ' + mons.secondaryType + '.').toLowerCase()
             switch(answer) {
             case 'normal move':
             HitOrMiss(normal, 'normal')
@@ -910,8 +904,8 @@ function FightMenu() {
             case 'use the force':
             case 'use the force, luke':
             if (useTheForceCount <= 8) {
-            alert('As you use the Force, an lightsaber comes flying an hits the ' + actualMonsName + '. Sadly, it flies right past you, but the monster does\'t attack.')
-            hitCounter -= 10
+            alert('As you use the Force, an lightsaber comes flying an hits the ' + mons.called + '. Sadly, it flies right past you, but the monster does\'t attack.')
+            mons.health -= 10
             useTheForceCount += 1
             }
             else {
@@ -940,7 +934,7 @@ function FightMenu() {
                     Places()
                     break;
                 case 4:
-                    alert('The ' + actualMonsName + ' got to you before you could get away.')
+                    alert('The ' + mons.called + ' got to you before you could get away.')
                     hit = 0
                     HitOrMiss()
                     break;
@@ -963,7 +957,7 @@ function HitOrMiss(whichMove, whatName) {
     if (hit <= whichMove.accuracy) {
         alert('You miss.')
         burn()
-        alert('The ' + actualMonsName + ' has ' + hitCounter + ' health left.')
+        alert('The ' + mons.called + ' has ' + mons.hitPoints + ' health left.')
         MonsAtt()
         if (hitPoints <= 0) {
             alert('You died.')
@@ -979,24 +973,24 @@ function HitOrMiss(whichMove, whatName) {
             case 2:
                 alert('You weren\'t able to get a combo.')
                 if (whatMove === normal) {
-                alert('The normal attack did ' + attackPower + '.')
-                hitCounter -= attackPower
+                alert('The normal attack did ' + you.attackPow + '.')
+                mons.hitPoints -= you.attackPow
                 }
-                else if (monsType1 != whatMove.sEType && monsTYPE1 != whatMove.nVEType) {
+                else if (mons.type != whatMove.sEType && mons.type != whatMove.nVEType) {
                 alert('The ' + whatMove.name + ' did ' + whatMove.damageString + ' damage.')
-                if (monsType1 != whatMove.sEType && monsType1 != whatMove.nVEType) {
-                hitCounter -= whatMove.defaultDamage
+                if (mons.type != whatMove.sEType && mons.type != whatMove.nVEType) {
+                mons.hitPoints -= whatMove.defaultDamage
                 }
                 }
-                else if (monsType1 === whatMove.sEType) {
+                else if (mons.type === whatMove.sEType) {
                 alert('It\'s 30% more effective!!!')
                 alert('The ' + whatMove.name + ' did ' + (whatMove.defaultDame + (whatMove.defaultDamage * 0.3)) + ' damage.')
-                hitCounter -= whatMove.defaultDamage + (whatMove.defaultDamage * 0.3)
+                mons.hitPoints -= whatMove.defaultDamage + (whatMove.defaultDamage * 0.3)
                 }
-                else if (monsType1 === whatMove.nVEType) {
+                else if (mons.type === whatMove.nVEType) {
                 alert('It\'s 30% less effective...')
                 alert('The ' + whatMove.name + ' did ' + (whatMove.defaultDamage - (whatMove.defaultDamage * 0.3)) + ' damage.')
-                hitCounter -= whatMove.defaultDamage - (whatMove.defaultDamage * 0.3)
+                mons.hitPoints -= whatMove.defaultDamage - (whatMove.defaultDamage * 0.3)
                 }
                 burn()
                 break;
@@ -1006,40 +1000,40 @@ function HitOrMiss(whichMove, whatName) {
                 multiplier()
                 alert('You got a ' + combeNums + 'combo!')
                 if (whatMove === normal) {
-                alert('The normal attack did ' + (attackPower * comboNums) + '.')
-                hitCounter -= attackPower * comboNums
+                alert('The normal attack did ' + (you.attackPow * comboNums) + '.')
+                mons.hitPoints -= you.attackPow * comboNums
                 }
-                else if (monsType1 != whatMove.sEType && monsTYPE1 != whatMove.nVEType) {
+                else if (mons.type != whatMove.sEType && mons.type != whatMove.nVEType) {
                 alert('The ' + whatMove.name + ' did ' + (whatMove.defaultDamage * comboNums) + ' damage.')
-                if (monsType1 != whatMove.sEType && monsType1 != whatMove.nVEType) {
-                hitCounter -= whatMove.defaultDamage
+                if (mons.type != whatMove.sEType && mons.type != whatMove.nVEType) {
+                mons.hitPoints -= whatMove.defaultDamage
                 }
-                else if (monsType1 === whatMove.sEType) {
+                else if (mons.type === whatMove.sEType) {
                 alert('It\'s 30% more effective!!!')
                 alert('The ' + whatMove.name + ' did ' + ((whatMove.defaultDamage + (whatMove.defaultDamage * 0.3)) * comboNums) + ' damage.')
-                hitCounter -= (whatMove.defaultDamage + (whatMove.defaultDamage * 0.3))  * comboNums
+                mons.hitPoints -= (whatMove.defaultDamage + (whatMove.defaultDamage * 0.3))  * comboNums
                 }
-                else if (monsType1 === whatMove.nVEType) {
+                else if (mons.type === whatMove.nVEType) {
                 alert('It\'s 30% less effective...')
                 alert('The ' + whatMove.name + ' did ' + ((whatMove.defaultDamage - (whatMove.defaultDamage * 0.3)) * comboNums) + ' damage.')
-                hitCounter -= whatMove.defaultDamage - (whatMove.defaultDamage * 0.3) * comboNums
+                mons.hitPoints -= whatMove.defaultDamage - (whatMove.defaultDamage * 0.3) * comboNums
                 }
                 burn()
                 break;
         }
     }
 
-    if (hitCounter <= 0) {
+    if (mons.hitPoints <= 0) {
         WonTheFight()
     } else {
-        alert('The ' + actualMonsName + ' has ' + hitCounter + ' health left.')
+        alert('The ' + mons.called + ' has ' + mons.hitPoints + ' health left.')
         MonsAtt()
     }
 }
 }
 
 function GameOver() {
-    alert('You died with ' + totalGold + ' gold, were level ' + level + ', had ' + attackPower + ' power, and had a total of ' + totalHealth + ' health.')
+    alert('You died with ' + totalGold + ' gold, were level ' + level + ', had ' + you.attackPow + ' power, and had a total of ' + totalHealth + ' health.')
     Credits()
 }
 
@@ -1196,8 +1190,8 @@ function useWoodenSword() {
             alert('You pull a wooden sword out of a sheath!')
             alert('You attack power was increased by 5% for this battle!')
             usedWoodenSword = 1
-            realAttackPower = attackPower
-            attackPower += (0.05 * attackPower)
+            realAttackPow = you.attackPow
+            you.attackPow += (0.05 * you.attackPow)
         }
     }
     ItemMenu()
@@ -1323,7 +1317,7 @@ function ListSpells() {
 function ChooseSpell() {
     alert('What spell do you want? You have...')
     ListSpells()
-    answer = prompt('What spell? You have ' + blobsOfDoom + ' blobs of doom.', 'List, Fire, Rage, Cancel').toUpperCase()
+    answer = prompt('What spell? You have ' + you.blobsOfDoom + ' blobs of doom.', 'List, Fire, Rage, Cancel').toUpperCase()
     switch (answer) {
         case 'LIST':
             alert('You have...')
@@ -1333,24 +1327,24 @@ function ChooseSpell() {
             FightMenu()
             break;
         case 'FIRE':
-            if (blobsOfDoom < 20) {
+            if (you.blobsOfDoom < 20) {
                 alert('You don\'t have enough blobs of doom!')
                 ChooseSpell()
             } else {
-                alert('You summon a ball of fire and throw it at the ' + actualMonsName + '.')
-                hitCounter -= (30 * magicSkillz)
-                blobsOfDoom -= 20
+                alert('You summon a ball of fire and throw it at the ' + mons.called + '.')
+                mons.hitPoints -= (30 * magicSkillz)
+                you.blobsOfDoom -= 20
                 randomNumber(1, 10)
                 switch (x) {
                     case 1:
-                        alert('The ' + actualMonsName + ' does not catch on fire.')
+                        alert('The ' + mons.called + ' does not catch on fire.')
                         break;
                     default:
-                        alert('The ' + actualMonsName + ' CATCHES ON FIRE!!!!!!!!!')
+                        alert('The ' + mons.called + ' CATCHES ON FIRE!!!!!!!!!')
                         burnEffect = 1
                         break;
                 }
-                if (hitCounter <= 0) {
+                if (mons.hitPoints <= 0) {
                     WonTheFight()
                     alert('You won the fight!')
                 } else {
@@ -1360,7 +1354,7 @@ function ChooseSpell() {
             }
             break;
         case 'RAGE':
-            if (blobsOfDoom < 40) {
+            if (you.blobsOfDoom < 40) {
                 alert('You don\'t have enough blobs of doom!')
                 ChooseSpell()
             } else {
@@ -1369,10 +1363,10 @@ function ChooseSpell() {
                 } else {
                     alert('You feel inexplicably angry.')
                     alert('Attack power up!')
-                    realAttackPower = attackPower
-                    attackPower = (attackPower * 1.3 * magicSkillz)
+                    realAttackPow = you.attackPow
+                    you.attackPow = (you.attackPow * 1.3 * magicSkillz)
                     useRage = 1
-                    blobsOfDoom -= 40
+                    you.blobsOfDoom -= 40
                     burn()
                     MonsAtt()
                 }
@@ -1384,17 +1378,17 @@ function ChooseSpell() {
 
 function WonTheFight() {
     if (inSwamp === 1) {
-        alert('As the ' + actualMonsName + ' dies, you get teleported out of the swamp.')
+        alert('As the ' + mons.called + ' dies, you get teleported out of the swamp.')
         inSwamp = 0
     } else {
-        alert('The ' + actualMonsName + ' is defeated!')
+        alert('The ' + mons.called + ' is defeated!')
     }
     goldDrops = Math.floor(Math.random() * 50) + 25
     expPoints = Math.floor(Math.random() * 100) + 50
     comboMultiplier = 0
     killCounter += 1
     if (usedWoodenSword === 1) {
-        attackPower = realAttackPower
+        you.attackPow = realAttackPow
         alert('You put your sword back in its sheath.')
         usedWoodenSword = 0
     }
@@ -1405,7 +1399,7 @@ function WonTheFight() {
     }
     if (useRage === 1) {
         alert('You calm down.')
-        attackPower = realAttackPower
+        you.attackPow = realAttackPow
     }
     burnEffect = 0
     alert('You got ' + goldDrops + ' gold and ' + expPoints + ' experience!')
@@ -1481,11 +1475,11 @@ function expQuest() {
 }
 function save() {
     localStorage.setItem('Health', hitPoints.toString())
-    localStorage.setItem('Attack Power', attackPower.toString())
+    localStorage.setItem('Attack Power', you.attackPow.toString())
     localStorage.setItem('Class', chosenClass.toString())
     localStorage.setItem('Level', level.toString())
     localStorage.setItem('Total Health', totalHealth.toString())
-    localStorage.setItem('Blobs of Doom', blobsOfDoom.toString())
+    localStorage.setItem('Blobs of Doom', you.blobsOfDoom.toString())
     localStorage.setItem('Health Potions', healthPotions.toString())
     localStorage.setItem('Wooden Sword', woodenSword.toString())
     localStorage.setItem('Swamp Discovery', swampDiscovery.toString())
@@ -1540,11 +1534,11 @@ function saveTown() {
 function load() {
     alert('Loading...')
     health = parseInt(localStorage.getItem('Health'), 10)
-    attackPower = parseInt(localStorage.getItem('Attack Power'), 10)
+    you.attackPow = parseInt(localStorage.getItem('Attack Power'), 10)
     chosenClass = parseInt(localStorage.getItem('Class'), 10)
     level = parseInt(localStorage.getItem('Level'), 10)
     totalHealth = parseInt(localStorage.getItem('Total Health'), 10)
-    blobsOfDoom = parseInt(localStorage.getItem('Blobs of Doom'), 10)
+    you.blobsOfDoom = parseInt(localStorage.getItem('Blobs of Doom'), 10)
     healthPotions = parseInt(localStorage.getItem('Health Potions'), 10)
     woodenSword = parseInt(localStorage.getItem('Wooden Sword'), 10)
     swampDiscovery = parseInt(localStorage.getItem('Swamp Discovery'), 10)
@@ -1569,22 +1563,22 @@ function load() {
     }
 }
 
-function GettingBlobsOfDoom() {
+function Gettingyou.blobsOfDoom() {
     if (totalGold >= 5) {
         totalGold -= 5
-        blobsOfDoom += 6
+        you.blobsOfDoom += 6
         alert('Ther\’ ya go, pardner. Nice doin\’ business with ya.')
     } else {
         alert('I\'m not gonna give ya the blobs of doom if ya don\'t give me the monay. Sorry, pardner.')
     }
     if (totalGold >= 5 && timeGTOne === 1) {
-        blobsOfDoom += 1
+        you.blobsOfDoom += 1
         timeGTOne = 0
     }
-    if (blobsOfDoom > totalBlobsOfDoom) {
-        blobsOfDoom = totalBlobsOfDoom
+    if (you.blobsOfDoom > totalyou.blobsOfDoom) {
+        you.blobsOfDoom = totalyou.blobsOfDoom
     }
-    alert('You now have ' + blobsOfDoom + ' blobs of doom.')
+    alert('You now have ' + you.blobsOfDoom + ' blobs of doom.')
     wantingMoreBlobs()
 }
 
@@ -1593,7 +1587,7 @@ function wantingMoreBlobs() {
     switch (answer) {
         case 'YES':
             timeGTOne = 1
-            GettingBlobsOfDoom()
+            Gettingyou.blobsOfDoom()
             break;
         case 'NO':
             alert('All righty then. See ya later!')
@@ -1606,11 +1600,11 @@ function wantingMoreBlobs() {
     }
 }
 
-function blobsOfDoomShop() {
+function you.blobsOfDoomShop() {
     answer = prompt('You walk up to Mithròmen. He says, \'Hey kid. I\'m runnin\' low on money, so I\'m selling my blobs o\' doom. So far there\'s been no buyers. You up for it? Only 5 gold for 6 blobs o\' doom.\'', 'Yes, No').toUpperCase()
     switch (answer) {
         case 'YES':
-            GettingBlobsOfDoom()
+            Gettingyou.blobsOfDoom()
             break;
         case 'NO':
             alert('Mithròmen sighs as you leave.')
@@ -1618,7 +1612,7 @@ function blobsOfDoomShop() {
             break;
         default:
             NotAnOption()
-            blobsOfDoomShop()
+            you.blobsOfDoomShop()
             break;
     }
 }
@@ -1842,17 +1836,17 @@ function DevCheats() {
             break;
         case 'infinite attack':
             if (attackCheat === 0) {
-                attackPower = -(Math.log(0))
-                realAttackPower = attackPower
+                you.attackPow = -(Math.log(0))
+                realAttackPow = you.attackPow
                 alert('Cheat successfully activated!')
                 attackCheat = 1
                 youCheated = true
                 DevCheats()
             } else {
                 alert('Deactivating cheat...')
-                attackPower = Math.floor(Math.random() * 5) + 5
-                realAttackPower = attackPower
-                alert('You now have ' + attackPower + ' attack.')
+                you.attackPow = Math.floor(Math.random() * 5) + 5
+                realAttackPow = you.attackPow
+                alert('You now have ' + you.attackPow + ' attack.')
                 DevCheats()
             }
             break;
@@ -1874,28 +1868,28 @@ function DevCheats() {
             break;
         case 'infinite blobs of doom':
             if (blobOfDoomCheat === 0) {
-                blobsOfDoom = -(Math.log(0))
-                totalBlobsOfDoom = blobsOfDoom
+                you.blobsOfDoom = -(Math.log(0))
+                totalyou.blobsOfDoom = you.blobsOfDoom
                 alert('Cheat successfully activated!')
                 blobOfDoomCheat = 1
                 youCheated = true
                 DevCheats()
             } else {
                 alert('Deactivating cheat...')
-                blobsOfDoom = 0
-                totalBlobsOfDoom = blobsOfDoom
+                you.blobsOfDoom = 0
+                totalyou.blobsOfDoom = you.blobsOfDoom
                 alert('You now have 0 blobs of doom.')
             }
             break;
         case 'activate all':
             totalGold = -(Math.log(0))
             totalExp = -(Math.log(0))
-            attackPower = -(Math.log(0))
-            realAttackPower = attackPower
+            you.attackPow = -(Math.log(0))
+            realAttackPow = you.attackPow
             hitPoints = -(Math.log(0))
             totalHealth = hitPoints
-            blobsOfDoom = -(Math.log(0))
-            totalBlobsOfDoom = blobsOfDoom
+            you.blobsOfDoom = -(Math.log(0))
+            totalyou.blobsOfDoom = you.blobsOfDoom
             goldCheat = 1
             expCheat = 1
             attackCheat = 1
@@ -1922,14 +1916,14 @@ function inTower() {
 
 function hideOrFight() {
     answer = (prompt('Suddenly, you see soldiers talking about how great their master Balbeag is. Do you take them down, or hide from them?', 'Take them down, hide').toLowerCase())
-    actualMonsName = 'The Group of Balbeag\'s Soldiers'
-    actualMonsNameNoThe = 'Group of Balbeag\'s Soldiers'
-    actualMonsNameLowerThe = 'the Group of Balbeag\'s soldiers'
+    mons.called = 'The Group of Balbeag\'s Soldiers'
+    mons.calledNoThe = 'Group of Balbeag\'s Soldiers'
+    mons.calledLowerThe = 'the Group of Balbeag\'s soldiers'
     location = 3
     fightingGroup = 1
-    monsLev = 10
+    mons.objLev = 10
     randomNumber(-10, 10)
-    hitCounter = (100 + x) * diffSetting + Math.pow(level, 2)
+    mons.hitPoints = (100 + x) * diffSetting + Math.pow(level, 2)
     switch (answer) {
         case 'hide from them':
             alert('As they pass your hiding place, they see you and say \'Hey, look at that little rat hiding in a garbage can!\'')
@@ -1964,14 +1958,14 @@ function inTowerPostDoomedGroup() {
     }
     location = 4
     alert('You climb on up the tower, and meet a trembling A\'Abea, who has just reported to Balbeag. You then have to fight him.')
-    monsLev = 25
-    actualMonsName = 'A\'Abea'
-    actualMonsNameNoThe = actualMonsName
-    actualMonsNameLowerThe = actualMonsName
+    mons.objLev = 25
+    mons.called = 'A\'Abea'
+    mons.calledNoThe = mons.called
+    mons.calledLowerThe = mons.called
     FightMenu()
     fightingAAbea = 1
     randomNumber(-10, 10)
-    hitCounter = (100 + x) * diffSetting + Math.pow(level, 2)
+    mons.hitPoints = (100 + x) * diffSetting + Math.pow(level, 2)
 }
 
 function fightingBalbeag() {
@@ -2002,13 +1996,13 @@ function fightingBalbeag() {
                 timerCounter += 1
             }
         }
-        monsLev = 150
-        actualMonsName = 'Balbeag'
-        actualMonsNameNoThe = actualMonsName
-        actualMonsNameLowerThe = actualMonsName
+        mons.objLev = 150
+        mons.called = 'Balbeag'
+        mons.calledNoThe = mons.called
+        mons.calledLowerThe = mons.called
         fightingBalbeag = 1
         randomNumber(-10, 10)
-        hitCounter = (100 + x) * diffSetting + Math.pow(level, 2)
+        mons.hitPoints = (100 + x) * diffSetting + Math.pow(level, 2)
     }
 }
 
@@ -2035,11 +2029,11 @@ function beatTheGameAfterCredits() {
 }
 
 function StatToLevelUp() {
-    answer = prompt('Please choose a stat to level up.', 'Attack + ' + tempMinusOne + ', Health + ' + levelUpHealth + ', Blobs of Doom + ' + levelUpBlobsOfDoom + '.').toUpperCase()
+    answer = prompt('Please choose a stat to level up.', 'Attack + ' + tempMinusOne + ', Health + ' + levelUpHealth + ', Blobs of Doom + ' + levelUpyou.blobsOfDoom + '.').toUpperCase()
     switch (answer) {
         case 'ATTACK':
             alert('You got ' + tempMinusOne + ' attack!')
-            attackPower += tempMinusOne
+            you.attackPow += tempMinusOne
             break;
         case 'HEALTH':
             alert('You got ' + levelUpHealth + ' health!')
@@ -2047,9 +2041,9 @@ function StatToLevelUp() {
             totalHealth += levelUpHealth
             break;
         case 'BLOBS OF DOOM':
-            alert('You got ' + levelUpBlobsOfDoom + ' blobs of doom!')
-            blobsOfDoom += levelUpBlobsOfDoom
-            totalBlobsOfDoom += levelUpBlobsOfDoom
+            alert('You got ' + levelUpyou.blobsOfDoom + ' blobs of doom!')
+            you.blobsOfDoom += levelUpyou.blobsOfDoom
+            totalyou.blobsOfDoom += levelUpyou.blobsOfDoom
             break;
         default:
             NotAnOption()
@@ -2081,8 +2075,8 @@ function burn() {
             burnEffect = 0
             burnTimer = 0
         }
-        alert('The ' + actualMonsName + ' takes 5 damage from burning.')
-        hitCounter -= 5
+        alert('The ' + mons.called + ' takes 5 damage from burning.')
+        mons.hitPoints -= 5
     }
 }
 
@@ -2137,7 +2131,7 @@ function inCommonRoom() {
                     case 'talk':
                         switch (commonRoomAnswerNumber) {
                             case 1:
-                                blobsOfDoomShop()
+                                you.blobsOfDoomShop()
                                 break;
                             case 2:
                                 quest()
