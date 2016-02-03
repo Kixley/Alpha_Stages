@@ -167,6 +167,7 @@ var monsType2
 var normal = {accuracy:25, accuracyString:'25%'}
 var turns
 var useTheForceCount = 0
+var newMove
 
 // functions
 function CheckIfGotAchieve(whichOne) {
@@ -243,6 +244,8 @@ function achievementMenu() {
         case 'PINEAPPLES':
             alert('The mighty pineapple sits on his throne atop the highest mountain of Uruloki. In his slow, booming, voice, he says, \'Whoever has called upon me shall perish!\' Then he turns on you and shoots you with lasers coming from his eyes.')
             alert('\'GAHHH!!!\' you scream as you wake up. \'Oh,\' you think. \'That was just a dream. Whew!\' You stand up and continue browsing your achievements.');
+            newMove = {type:'slicing', defaultDamage:(attackPower + 3), damageString:'a little more than normal', effects:'none', name:'Machete', acuuracy:0.20, accuracyString:'80%', sEType:'Bipedal', nVEType:'Quadruped'}
+            newMove(newMove)
             achievementMenu();
             break;
         case 'EXIT':
@@ -854,11 +857,11 @@ function Story() {
 function FightMenu() {
     switch(actualMonsName) {
     case 'Goblin':
-        monsType1 = 'Bipedal'
+        monsType1 = 'Bipedal' // 3
         monsType2 = 'Fighting'
         break;
     case 'Rabbit':
-        monsType1 = 'Quadroped'
+        monsType1 = 'Quadruped' // 3
         monsType2 = 'LOLOLOL'
         break;
     case 'Spearman':
@@ -866,18 +869,18 @@ function FightMenu() {
         monsType2 = 'Fighting'
         break;
     case 'Lizard':
-        monsType1 = 'Quadroped'
+        monsType1 = 'Quadruped'
         monsType2 = 'Poison'
         break;
     case 'Death Snake':
-        monsType1 = 'Stomp-able'
+        monsType1 = 'Small' // 2
         monsType2 = 'Poison'
         break;
     case 'Rabid Pineapple':
-        monsType1 = 'Stomp-able'
+        monsType1 = 'Small'
         monsType2 = 'LOLOLOL'
     case 'Ferocious Lion':
-        monsType1 = 'Quadroped'
+        monsType1 = 'Quadruped'
         monsType2 = 'Fighting'
     case 'Velociraptor':
         monsType1 = 'Bipedal'
