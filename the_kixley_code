@@ -361,6 +361,7 @@ function StartUpMenu() {
     alert('WELCOME TO KIXLEY!');
     openingMenu = false
     }
+    }
     if ((localStorage.getItem('staySignedInAs')) != null) {
     username = localStorage.getItem(staySignedInAs)
     if ((localStorage.getItem(username +  ' default difficulty')) != null) {
@@ -2107,6 +2108,5 @@ case 'stay signed in':
 default:
 NotAnOption()
 inAccount() 
-}
 }
 }
