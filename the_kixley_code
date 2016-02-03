@@ -168,6 +168,8 @@ var normal = {accuracy:25, accuracyString:'25%'}
 var turns
 var useTheForceCount = 0
 var newMove
+var doTheThingOfDoom = true
+var doingTheThingOfDoom = false
 
 // functions
 function CheckIfGotAchieve(whichOne) {
@@ -182,6 +184,11 @@ function CheckIfGotAchieve(whichOne) {
             } else if (killCounter === 20) {
                 alert('You got the Achievement: Kill 20 Monsters.');
                 compAchieve.push('Kill 20 Monsters');
+                if (getGoldAchieve === infinity && level >= 20 && doTheThingOfDoom === true) {
+                newMove = {type:'TODOS LOS TIPOS', defaultDamage:(-(Math.log(0))), damageString:'a whole lot of', effects:'unneeded', name:'TOTAL SUPER LEET MLG PRO SILLZ', acuuracy:0, accuracyString:'100%', sEType:undefined, nVEType:undefined}
+                doingTheThingOfDoom = false
+                newMove(newMove)
+                }
             }
             Places();
             break;
