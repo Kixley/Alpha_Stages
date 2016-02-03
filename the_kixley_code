@@ -916,8 +916,8 @@ function BuyHealthPotion() {
                 BuyHealthPotion()
         }
     } else {
-        alert('You don’t have enough money.')
-        InShop()
+        alert('That wasn\'t a number! You can\'t buy ' + answer + ' health potions!')
+        BuyHealthPotion()
     }
 }
 
