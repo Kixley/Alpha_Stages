@@ -8,6 +8,13 @@ CHANGELOG FOR 1.4:
     If you find any bugs, or have a good suggestion, make a new issue. Label bugs 'bug' and suggestions 'enhancement'
 */
 //monster variables
+function person(health, attack, name, level) = {
+    this.hitPoints = health
+    this.attackPow = attack
+    this.called = name
+    this.objLev = level
+}
+var mons = new person(100, monsLev + 15 - Math.floor(Math.random() * 10), 'Goblin', monsLev)
 var hitCounter = 100;
 var monsAtt = 0;
 var randNum= Math.floor(Math.random() * 2);
@@ -148,6 +155,22 @@ var userCheck;
 var username;
 var useDefaults = false;
 var signedIn;
+//fight redo
+var timesLeft
+var move1 = {type:undefined, defaultDamage:0, damageString:'undefined', effects:undefined, name:undefined, acuuracy:0, accuracyString:'undefined%', sEType:undefined, nVEType:undefined}
+var move2 = move1
+var move3 = move1
+var move4 = move1
+var monsType1
+var monsType2
+var normal = {accuracy:25, accuracyString:'25%'}
+var turns
+var useTheForceCount = 0
+var newMove
+var doTheThingOfDoom = true
+var doingTheThingOfDoom = false
+var questCounter
+
 // functions
 function Places() {
     answer = prompt('Where do you go now? You have ' + totalGold + ' gold, and ' + hitPoints + ' health.', 'Town, Plains, Swamp, Save, Menu').toUpperCase()
@@ -271,6 +294,11 @@ function CheckIfGotAchieve(whichOne) {
                 alert('You got the Achievement: Kill 20 Monsters.');
                 compAchieve.push('Kill 20 Monsters');
             }
+            if (getGoldAchieve === infinity && level >= 20 && kilCounter >= 20 && doTheThingOfDoom === true) {
+                newMove = {type:'TODOS LOS TIPOS', defaultDamage:Math.pow(attackPower, 4)), damageString:'a whole lot of', effects:'unneeded', name:'70TA1 $UP4H 1337 M1G PR0 360 N0-$C0P3 $K33LZ!!11!1!', acuuracy:0, accuracyString:'100%', sEType:undefined, nVEType:undefined}
+                doingTheThingOfDoom = true
+                newMove(newMove)
+                }
             Places();
             break;
         case 'Level':
