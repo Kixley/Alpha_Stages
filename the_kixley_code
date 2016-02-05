@@ -360,6 +360,8 @@ function achievementMenu() {
         case 'PINEAPPLES':
             alert('The mighty pineapple sits on his throne atop the highest mountain of Uruloki. In his slow, booming, voice, he says, \'Whoever has called upon me shall perish!\' Then he turns on you and shoots you with lasers coming from his eyes.')
             alert('\'GAHHH!!!\' you scream as you wake up. \'Oh,\' you think. \'That was just a dream. Whew!\' You stand up and continue browsing your achievements.');
+            newMove = {type:'slicing', defaultDamage:(attackPower + 3), damageString:'a little more than normal', effects:'none', name:'Machete', acuuracy:0.20, accuracyString:'80%', sEType:'Bipedal', nVEType:'Quadruped'}
+             newMove(newMove)
             achievementMenu();
             break;
         case 'EXIT':
@@ -446,6 +448,7 @@ alert('Check out the plush fox in the store! https://gear.mozilla.org/?utm_sourc
             StartUpMenu()
             break;
     }
+}
 }
 
 function Guide() {
@@ -759,6 +762,30 @@ function multiplier() {
 }
 
 function MonsAtt() {
+if (monsType2 === 'Fighting') {
+             randomNumber(1, 10)
+             monsAtt = monsLev + 15 - x
+             monsAttAndDiff = monsAtt * diffSetting
+             }
+             else if (monsType2 === 'LOLOLOL') {
+             randomNumber(4, 13)
+             monsAtt = monsLev + 15 - x
+             monsAttAndDiff = monsAtt * diffSetting
+             }
+             else if (monsType2 === 'Poison') {
+             randomNumber(4, 13)
+             monsAtt = monsLev + 15 - x
+             monsAttAndDiff = monsAtt * diffSetting
+             randomNumber(1, 3) 
+             switch(x) {
+             case 1:
+             poisoned = true
+             turns = 1
+             break;
+             default:
+             break;
+             }
+             }
     alert('The ' + actualMonsName + ' hit you for ' + monsAttAndDiff + ' damage.')
     hitPoints -= monsAttAndDiff
     if (hitPoints <= 0) {
@@ -819,16 +846,71 @@ function Story() {
 }
 
 function FightMenu() {
-    answer = prompt('What do you do? Health: ' + hitPoints + ' ' + actualMonsName + ' health: ' + hitCounter + '.', 'Fight, Item, Magic, Run').toUpperCase()
+switch(actualMonsName) {
+     case 'Goblin':
+         monsType1 = 'Bipedal' // 3
+         monsType2 = 'Fighting'
+         break;
+     case 'Rabbit':
+         monsType1 = 'Quadruped' // 3
+         monsType2 = 'LOLOLOL'
+         break;
+     case 'Spearman':
+         monsType1 = 'Bipedal'
+         monsType2 = 'Fighting'
+         break;
+     case 'Lizard':
+         monsType1 = 'Quadruped'
+         monsType2 = 'Poison'
+         break;
+     case 'Death Snake':
+         monsType1 = 'Small' // 2
+         monsType2 = 'Poison'
+         break;
+     case 'Rabid Pineapple':
+         monsType1 = 'Small'
+         monsType2 = 'LOLOLOL'
+     case 'Ferocious Lion':
+         monsType1 = 'Quadruped'
+         monsType2 = 'Fighting'
+     case 'Velociraptor':
+         monsType1 = 'Bipedal'
+         monsType2 = 'Fighting'
+         break;
+     default:
+         monsType1 = undefined
+         monsName2 = null
+         }
+    answer = prompt('What do you do? Health: ' + hitPoints + ' ' + actualMonsName + ' health: ' + hitCounter + '. Monster\'s types: ' + monsType1 + ' and ' + monsType2 + '.', 'Fight, Item, Magic, Run').toUpperCase()
     switch (answer) {
-        case 'FIGHT':
-            missChance = ((1 / (1 - accuracy)) - 1)
-            hit = Math.floor(Math.random() * useThisAccuracy)
-    randomNumber(1, 10)
-            monsAtt = monsLev + 15 - x
-            monsAttAndDiff = monsAtt * diffSetting
-            HitOrMiss()
-            break;
+        answer = prompt('What move?', move1.name + ', ' + move2.name + ', ' + move3.name + ', ' + move4.name + ', Normal Move. Monster\'s types: ' + monsType1 + ' and ' + monsType2 + '.').toLowerCase()
+            switch(answer) {
+            case move1.name:
+                 areYouSure(1)
+                 break;
+             case move2.name:
+                 areYouSure(2)
+                 break;
+             case move3.name:
+                 areYouSure(3)
+                 break;
+             case move4.name:
+                 areYouSure(4)
+                 break;
+                }
+                break;
+             case 'use the force':
+             case 'use the force, luke':
+             if (useTheForceCount <= 8) {
+             alert('As you use the Force, an lightsaber comes flying an hits the ' + actualMonsName + '. Sadly, it flies right past you, but the monster does\'t attack.')
+             hitCounter -= 10
+             useTheForceCount += 1
+             }
+             else {
+             alert('Exhausted you are. Realize that you cannot use the Force as well as you thought you do. Yoda, you seek Yoda.')
+             }
+             FightMenu()
+             break;
         case 'POKEMON':
             alert('No. This is not a Pokemon game. What are you talking about.')
             FightMenu()
