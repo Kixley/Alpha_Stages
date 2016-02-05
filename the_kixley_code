@@ -1173,13 +1173,13 @@ function BuySpeedBoots() {
 function InShop() {
     alert('The marketplace master greets you.')
     if (woodenSword === 1 && speedBoots === 1) {
-        answer = prompt('One person in the marketplace says, “All I have is health potions for 10 gold.” You have ' + totalGold + ' gold.', 'Health Potions, Leave').toUpperCase()
+        answer = prompt('One person in the marketplace says, “All I have is health potions for 10 gold.” You have ' + totalGold + ' gold.', 'Health Potions, Buy Moves, Leave').toUpperCase()
     } else if (woodenSword === 1) {
-        answer = prompt('One person in the marketplace says, “What do you want? I have a health potions for 10 gold and a pair of speed boots for 100 gold.” You have ' + totalGold + ' gold.', 'Health Potion, Speed Boots, Leave').toUpperCase()
+        answer = prompt('One person in the marketplace says, “What do you want? I have a health potions for 10 gold and a pair of speed boots for 100 gold.” You have ' + totalGold + ' gold.', 'Health Potion, Speed Boots, Buy Moves, Leave').toUpperCase()
     } else if (speedBoots === 1) {
-        answer = prompt('One person in the marketplace says, “What do you want? I have a health potions for 10 gold and a wooden sword for 50 gold.” You have ' + totalGold + ' gold.', 'Health Potion, Wooden Sword, Leave').toUpperCase()
+        answer = prompt('One person in the marketplace says, “What do you want? I have a health potions for 10 gold and a wooden sword for 50 gold.” You have ' + totalGold + ' gold.', 'Health Potion, Wooden Sword, Buy Moves, Leave').toUpperCase()
     } else if (!(woodenSword === 1)) {
-        answer = prompt('One person in the marketplace says, "What do you want? I have a health potions for 10 gold, a wooden sword for 50 gold, and some speed boots for 100 gold." You have ' + totalGold + ' gold.', 'Health Potion, Wooden Sword, Speed Boots, Leave').toUpperCase()
+        answer = prompt('One person in the marketplace says, "What do you want? I have a health potions for 10 gold, a wooden sword for 50 gold, and some speed boots for 100 gold." You have ' + totalGold + ' gold.', 'Health Potion, Wooden Sword, Buy Moves, Speed Boots, Leave').toUpperCase()
     }
     switch (answer) {
         case 'HEALTH POTION':
@@ -2227,7 +2227,7 @@ function endGame() {
 }
 //bottom
 function inCommonRoom() {
-                answer = (prompt('The Innkeeper gestures towards a loud, brightly lit room. It is filled with people. You walk over to a corner of the room, where there are four guys. One is named Mithròmen, another is named Galkemen, another is named Maegfin, and the fourth is named Gurthmereth. All four say \'Hi!\'. Do you run away from him in fear, or talk to one of them? If you talk who do you talk to?', 'Run away in fear, Talk to Mithròmen, talk to Galkemen, talk to Maegfin, talk to Gurthmereth').toLowerCase())
+                answer = (prompt('The Innkeeper gestures towards a loud, brightly lit room. It is filled with people. You walk over to a corner of the room, where there are four guys. One is named Mithròmen, another is named Galkemen, another is named Maegfin, and the fourth is named Gurthmereth. All four say \'Hi!\'. Do you run away from them in fear, or talk to one of them? If you talk who do you talk to?', 'Run away in fear, Talk to Mithròmen, talk to Galkemen, talk to Maegfin, talk to Gurthmereth').toLowerCase())
                 if (answer === 'talk to mithromen') {
                     commonRoomAnswerNumber = 1
                     answer = 'talk'
@@ -2402,7 +2402,15 @@ function NIY() {
 alert("Sorry. That feauture hasn't been implemented yet.")
 }
 function killQuestEvaluate() {
-NIY()
+if (killQuestReq >= (killCounter -= questKillStart)) {
+alert('Galkemen says \'Thanks fer killin\' those monsters. Have ' + killQuestGold + ' gold.\'')
+totalGold += killQuestGold
+requestChoice()
+}
+else {
+alert('Galkemen says \'GO KILL MORE MONSTERS!!!\'')
+InTown()
+}
 }
 function goldQuestEvaluate() {
 NIY()
