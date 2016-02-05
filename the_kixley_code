@@ -170,6 +170,7 @@ var useTheForceCount = 0
 var newMove
 var doTheThingOfDoom = true
 var doingTheThingOfDoom = false
+var questLevel
 
 // functions
 function CheckIfGotAchieve(whichOne) {
@@ -186,7 +187,7 @@ function CheckIfGotAchieve(whichOne) {
                 compAchieve.push('Kill 20 Monsters');
                 if (getGoldAchieve === infinity && level >= 20 && doTheThingOfDoom === true) {
                 newMove = {type:'TODOS LOS TIPOS', defaultDamage:(-(Math.log(0))), damageString:'a whole lot of', effects:'unneeded', name:'TOTAL SUPER LEET MLG PRO SILLZ', acuuracy:0, accuracyString:'100%', sEType:undefined, nVEType:undefined}
-                doingTheThingOfDoom = false
+                doingTheThingOfDoom = true
                 newMove(newMove)
                 }
             }
@@ -673,6 +674,16 @@ function Places() {
             if (plainsCounter === 7) {
                 alert('As you are walking through the plains you see a map lying on the ground. It shows a path leading to a nearby swamp.')
                 swampDiscovery = 1
+                }
+            if (plainsCounter === 2) {
+                randomNumber(-5, 5)
+                newMove = attackPower + (attackPower * (x / 100))
+                newMove = {type:'Stomping', defaultDamage:newMove, damageString:newMove, effects:'none', name:'Heel Crush', acuuracy:0.20, accuracyString:'80%', sEType:'Small', nVEType:'Bipedal'}
+                newMove(newMove)
+                }
+            if (plainsCounter === 42) {
+                newMove = {type:'Whacking', defaultDamage:(-(Math.log(0))), damageString:(-(Math.log(0))), effects:'none', name:'Hiyaaah!', acuuracy:0.00, accuracyString:'100%', sEType:'Quadruped', nVEType:'Small'}
+                newMove(newMove)
                 }
         if (dwNamesB === false) {
             randName = Math.floor(Math.random() * (monsName.length + 1))
@@ -1444,6 +1455,7 @@ function WonTheFight() {
 }
 
 function quest() {
+    if (onAQuest === 0) {
     randomNumber(1, 4)
     alert('You got a ' + questType[x] + ' quest!')
     x = y
@@ -1462,6 +1474,22 @@ function quest() {
             break;
         case 4:
             itemQuest()
+    }
+    }
+    else {
+    switch(y) {
+    case 1:
+    killQuestEvaluate()
+    break;
+    case 2:
+    goldQuestEvaluate()
+    break;
+    case 3:
+    expQuestEvaluate()
+    break;
+    case 4:
+    itemQuestEvaluate()
+    break;
     }
 }
 function requestChoice() {
@@ -1490,22 +1518,58 @@ function expQuest() {
     expQuestChoice()
 }
 function save() {
-    localStorage.setItem('Health', hitPoints.toString())
-    localStorage.setItem('Attack Power', attackPower.toString())
-    localStorage.setItem('Class', chosenClass.toString())
-    localStorage.setItem('Level', level.toString())
-    localStorage.setItem('Total Health', totalHealth.toString())
-    localStorage.setItem('Blobs of Doom', blobsOfDoom.toString())
-    localStorage.setItem('Health Potions', healthPotions.toString())
-    localStorage.setItem('Wooden Sword', woodenSword.toString())
-    localStorage.setItem('Swamp Discovery', swampDiscovery.toString())
-    localStorage.setItem('Difficulty', diffSetting.toString())
-    localStorage.setItem('Gold', totalGold.toString())
-    localStorage.setItem('Speed Boots', speedBoots.toString())
-    localStorage.setItem('PLains Counter', plainsCounter.toString())
-    localStorage.setItem('Level Requirement', levelReq.toString())
-    localStorage.setItem('Experience', totalExp.toString())
-    localStorage.setItem('Location', location.toString())
+    localStorage.setItem('Health', hitPoints)
+    localStorage.setItem('Attack Power', attackPower)
+    localStorage.setItem('Class', chosenClass)
+    localStorage.setItem('Level', level)
+    localStorage.setItem('Total Health', totalHealth)
+    localStorage.setItem('Blobs of Doom', blobsOfDoom)
+    localStorage.setItem('Health Potions', healthPotions)
+    localStorage.setItem('Wooden Sword', woodenSword)
+    localStorage.setItem('Swamp Discovery', swampDiscovery)
+    localStorage.setItem('Difficulty', diffSetting)
+    localStorage.setItem('Gold', totalGold)
+    localStorage.setItem('Speed Boots', speedBoots)
+    localStorage.setItem('PLains Counter', plainsCounter)
+    localStorage.setItem('Level Requirement', levelReq)
+    localStorage.setItem('Experience', totalExp)
+    localStorage.setItem('Location', location)
+    localStorage.setItem("Move 1's Type", move1.type)
+    localStorage.setItem("Move 1's Default Damage", move1.defaultDamage)
+    localStorage.setItem("Move 1's Damage String", move1.damageString)
+    localStorage.setItem("Move 1's Effects", move1.effects)
+    localStorage.setItem("Move 1's Name", move1.name)
+    localStorage.setItem("Move 1's Accuracy", move1.accuracy)
+    localStorage.setItem("Move 1's Accuracy String", move1.accuracyString)
+    localStorage.setItem("Move 1's SE Type", move1.sEType)
+    localStorage.setItem("Move 1's NVE Type", move1.nVEType)
+    localStorage.setItem("Move 2's Type", move2.type)
+    localStorage.setItem("Move 2's Default Damage", move2.defaultDamage)
+    localStorage.setItem("Move 2's Damage String", move2.damageString)
+    localStorage.setItem("Move 2's Effects", move2.effects)
+    localStorage.setItem("Move 2's Name", move2.name)
+    localStorage.setItem("Move 2's Accuracy", move2.accuracy)
+    localStorage.setItem("Move 2's Accuracy String", move2.accuracyString)
+    localStorage.setItem("Move 2's SE Type", move2.sEType)
+    localStorage.setItem("Move 2's NVE Type", move2.nVEType)
+    localStorage.setItem("Move 3's Type", move3.type)
+    localStorage.setItem("Move 3's Default Damage", move3.defaultDamage)
+    localStorage.setItem("Move 3's Damage String", move3.damageString)
+    localStorage.setItem("Move 3's Effects", move3.effects)
+    localStorage.setItem("Move 3's Name", move3.name)
+    localStorage.setItem("Move 3's Accuracy", move3.accuracy)
+    localStorage.setItem("Move 3's Accuracy String", move3.accuracyString)
+    localStorage.setItem("Move 3's SE Type", move3.sEType)
+    localStorage.setItem("Move 3's NVE Type", move3.nVEType)
+    localStorage.setItem("Move 4's Type", move4.type)
+    localStorage.setItem("Move 4's Default Damage", move4.defaultDamage)
+    localStorage.setItem("Move 4's Damage String", move4.damageString)
+    localStorage.setItem("Move 4's Effects", move4.effects)
+    localStorage.setItem("Move 4's Name", move4.name)
+    localStorage.setItem("Move 4's Accuracy", move4.accuracy)
+    localStorage.setItem("Move 4's Accuracy String", move4.accuracyString)
+    localStorage.setItem("Move 4's SE Type", move4.sEType)
+    localStorage.setItem("Move 4's NVE Type", move4.nVEType)
 }
 function savePlaces() {
     answer = prompt('Are you sure you want to save? Please make sure to use the same website when loading. This will overwrite any previous saves on this website.', 'Yes, No').toLowerCase()
@@ -1565,6 +1629,50 @@ function load() {
     levelReq = parseInt(localStorage.getItem('Level Requirement'), 10)
     totalExp = parseInt(localStorage.getItem('Experience'), 10)
     location = parseInt(localStorage.getItem('Location'), 10)
+    move1 = {
+    type:(localStorage.getItem("Move 1's Type")), 
+    defaultDamage:(parseInt((localStorage.getItem("Move 1's Default Damage")), 10), 
+    damageString:(localStorage.getItem("Move 1's Damage String")),
+    effects:(localStorage.getItem("Move 1's Effects")),
+    name:(localStorage.getItem("Move 1's Name")),
+    accuracy:(parseInt((localStorage.getItem("Move 1's Accuracy")), 10))
+    accuracyString:(localStorage.getItem("Move 1's Accuracy String"))
+    sEType:(localStorage.getItem("Move 1's SE Type"))
+    nVEType:(localStorage.getItem("Move 1's NVE Type"))
+    }
+    move2 = {
+    type:(localStorage.getItem("Move 2's Type")),
+    defaultDamage:(parseInt((localStorage.getItem("Move 2's Default Damage")), 10),
+    damageString:(localStorage.getItem("Move 2's Damage String")),
+    effects:(localStorage.getItem("Move 2's Effects")),
+    name:(localStorage.getItem("Move 2's Name")),
+    accuracy:(parseInt((localStorage.getItem("Move 2's Accuracy")), 10))
+    accuracyString:(localStorage.getItem("Move 2's Accuracy String"))
+    sEType:(localStorage.getItem("Move 2's SE Type"))
+    nVEType:(localStorage.getItem("Move 2's NVE Type"))
+    }
+    move3 = {
+    type:(localStorage.getItem("Move 3's Type")),
+    defaultDamage:(parseInt((localStorage.getItem("Move 3's Default Damage")), 10),
+    damageString:(localStorage.getItem("Move 3's Damage String")),
+    effects:(localStorage.getItem("Move 3's Effects")),
+    name:(localStorage.getItem("Move 3's Name")),
+    accuracy:(parseInt((localStorage.getItem("Move 3's Accuracy")), 10))
+    accuracyString:(localStorage.getItem("Move 3's Accuracy String"))
+    sEType:(localStorage.getItem("Move 3's SE Type"))
+    nVEType:(localStorage.getItem("Move 3's NVE Type"))
+    }
+    move4 = {
+    type:(localStorage.getItem("Move 4's Type")),
+    defaultDamage:(parseInt((localStorage.getItem("Move 4's Default Damage")), 10),
+    damageString:(localStorage.getItem("Move 4's Damage String")),
+    effects:(localStorage.getItem("Move 4's Effects")),
+    name:(localStorage.getItem("Move 4's Name")),
+    accuracy:(parseInt((localStorage.getItem("Move 4's Accuracy")), 10))
+    accuracyString:(localStorage.getItem("Move 4's Accuracy String"))
+    sEType:(localStorage.getItem("Move 4's SE Type"))
+    nVEType:(localStorage.getItem("Move 4's NVE Type"))
+    }
     alert('Done!')
     switch (location) {
         case 1:
@@ -2031,7 +2139,8 @@ function beatTheGameAfterCredits() {
     answer = (prompt('You beat the game! Would you like to continue?', yesNo).toLowerCase())
     switch (answer) {
         case 'yes':
-            alert('You return to Smatino, ready to fight Balbeag’s remaining monsters who still are evil, though their master is dead');
+            newMove = 
+            alert('You return to a newly re-built Smatino, ready to fight Balbeag’s remaining monsters who still are evil, though their master is dead');
             InTown()
             break;
         case 'no':
@@ -2127,7 +2236,7 @@ function inCommonRoom() {
                     commonRoomAnswerNumber = 1
                     answer = 'talk'
                 }
-                if (answer === ' talk to galkemen') {
+                if (answer === 'talk to galkemen') {
                     commonRoomAnswerNumber = 2
                     answer = 'talk'
                 }
@@ -2284,4 +2393,23 @@ answer = prompt('Are you sure? ' + move4.name + '\'s type is ' + move4.type + ',
         }
         break;
 }
+if (doingTheThingOfDoom === true) {
+doingTheTningOfDoom = false
+doTheThingOfDoom = false
+}
+}
+function NIY() {
+alert("Sorry. That feauture hasn't been implemented yet.")
+}
+function killQuestEvaluate() {
+NIY()
+}
+function goldQuestEvaluate() {
+NIY()
+}
+function expQuestEvaluate() {
+NIY()
+}
+function killQuestEvaluate() {
+NIY()
 }
