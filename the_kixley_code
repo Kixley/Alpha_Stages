@@ -948,11 +948,13 @@ switch(actualMonsName) {
     }
 }
 
-function HitOrMiss() {
-    if (hit === 0) {
+function HitOrMiss(whichMove, whatName) { 
+randomNumber(1, 100) 
+    hit = x
+    if (hit <= whichMove.accuracy) {
         alert('You miss.')
+        }
         burn()
-        alert('The ' + actualMonsName + ' has ' + hitCounter + ' health left.')
         MonsAtt()
         if (hitPoints <= 0) {
             alert('You died.')
