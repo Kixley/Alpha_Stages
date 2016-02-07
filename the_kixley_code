@@ -948,13 +948,13 @@ switch(actualMonsName) {
     }
 }
 
-function HitOrMiss(whichMove, whatName) { 
-randomNumber(1, 100) 
+function HitOrMiss(whichMove, whatName) {
+    randomNumber(1, 100) 
     hit = x
     if (hit <= whichMove.accuracy) {
         alert('You miss.')
-        }
         burn()
+        alert('The ' + actualMonsName + ' has ' + hitCounter + ' health left.')
         MonsAtt()
         if (hitPoints <= 0) {
             alert('You died.')
@@ -969,15 +969,52 @@ randomNumber(1, 100)
             case 1:
             case 2:
                 alert('You weren\'t able to get a combo.')
+                if (whatMove === normal) {
+                alert('The normal attack did ' + attackPower + '.')
                 hitCounter -= attackPower
+                }
+                else if (monsType1 != whatMove.sEType && monsTYPE1 != whatMove.nVEType) {
+                alert('The ' + whatMove.name + ' did ' + whatMove.damageString + ' damage.')
+                if (monsType1 != whatMove.sEType && monsType1 != whatMove.nVEType) {
+                hitCounter -= whatMove.defaultDamage
+                }
+                }
+                else if (monsType1 === whatMove.sEType) {
+                alert('It\'s 30% more effective!!!')
+                alert('The ' + whatMove.name + ' did ' + (whatMove.defaultDame + (whatMove.defaultDamage * 0.3)) + ' damage.')
+                hitCounter -= whatMove.defaultDamage + (whatMove.defaultDamage * 0.3)
+                }
+                else if (monsType1 === whatMove.nVEType) {
+                alert('It\'s 30% less effective...')
+                alert('The ' + whatMove.name + ' did ' + (whatMove.defaultDamage - (whatMove.defaultDamage * 0.3)) + ' damage.')
+                hitCounter -= whatMove.defaultDamage - (whatMove.defaultDamage * 0.3)
+                }
                 burn()
                 break;
             case 3:
             case 4:
                 comboNums = Math.floor(Math.random() * 15) + 2
                 multiplier()
-                alert('You got a ' + comboNums + ' combo.')
+                alert('You got a ' + combeNums + 'combo!')
+                if (whatMove === normal) {
+                alert('The normal attack did ' + (attackPower * comboNums) + '.')
                 hitCounter -= attackPower * comboNums
+                }
+                else if (monsType1 != whatMove.sEType && monsTYPE1 != whatMove.nVEType) {
+                alert('The ' + whatMove.name + ' did ' + (whatMove.defaultDamage * comboNums) + ' damage.')
+                if (monsType1 != whatMove.sEType && monsType1 != whatMove.nVEType) {
+                hitCounter -= whatMove.defaultDamage
+                }
+                else if (monsType1 === whatMove.sEType) {
+                alert('It\'s 30% more effective!!!')
+                alert('The ' + whatMove.name + ' did ' + ((whatMove.defaultDamage + (whatMove.defaultDamage * 0.3)) * comboNums) + ' damage.')
+                hitCounter -= (whatMove.defaultDamage + (whatMove.defaultDamage * 0.3))  * comboNums
+                }
+                else if (monsType1 === whatMove.nVEType) {
+                alert('It\'s 30% less effective...')
+                alert('The ' + whatMove.name + ' did ' + ((whatMove.defaultDamage - (whatMove.defaultDamage * 0.3)) * comboNums) + ' damage.')
+                hitCounter -= whatMove.defaultDamage - (whatMove.defaultDamage * 0.3) * comboNums
+                }
                 burn()
                 break;
         }
@@ -989,6 +1026,7 @@ randomNumber(1, 100)
         alert('The ' + actualMonsName + ' has ' + hitCounter + ' health left.')
         MonsAtt()
     }
+}
 }
 
 function GameOver() {
@@ -1380,6 +1418,7 @@ function WonTheFight() {
 }
 
 function quest() {
+    if (onAQuest === 0) {
     randomNumber(1, 4)
     alert('You got a ' + questType[x] + ' quest!')
     x = y
@@ -1399,22 +1438,21 @@ function quest() {
         case 4:
             itemQuest()
     }
-}
-function requestChoice() {
-    answer = prompt('Your quest is over. Would you like another?', yesNo).toLowerCase()
-    switch (answer) {
-        case 'yes':
-            alert('Ok. Here you go!')
-            break;
-        case 'no':
-            alert('You walk back into town.');
-            questResetter()
-            InTown()
-            break;
-        default:
-            NotAnOption()
-            requestChoice()
-            break;
+    }
+    else {
+    switch(y) {
+    case 1:
+    killQuestEvaluate()
+    break;
+    case 2:
+    goldQuestEvaluate()
+    break;
+    case 3:
+    expQuestEvaluate()
+    break;
+    case 4:
+    itemQuestEvaluate()
+    break;
     }
 }
 function itemQuest() {
@@ -1426,45 +1464,64 @@ function expQuest() {
     expQuestChoice()
 }
 function save() {
-    var saveHealth = 'saveHealth = ' + hitPoints
-    document.cookie = saveHealth
-    var saveAttackPower = 'saveAttackPower = ' + attackPower
-    document.cookie = saveAttackPower
-    var saveClass = 'saveClass = ' + chosenClass
-    document.cookie = saveClass
-    var saveLevel = 'saveLevel = ' + level
-    document.cookie = saveLevel
-    var saveTotalHealth = 'saveTotalHealth = ' + totalHealth
-    document.cookie = saveTotalHealth
-    var saveBlobsOfDoom = 'saveBlobsOfDoom = ' + blobsOfDoom
-    document.cookie = saveBlobsOfDoom
-    var saveHealthPotions = 'saveHealthPotions = ' + healthPotion
-    document.cookie = saveHealthPotions
-    var saveWoodenSword = 'saveWoodenSword = ' + woodenSword
-    document.cookie = saveWoodenSword
-    var saveSwampDiscover = 'saveSwampDiscovery = ' + swampDiscovery
-    document.cookie = saveSwampDiscover
-    var saveLevel = 'saveLevel = ' + level
-    document.cookie = saveLevel
-    var saveDiff = 'saveDiff = ' + diffSetting
-    document.cookie = saveDiff
-    var saveTotalGold = 'saveTotalGold = ' + totalGold
-    document.cookie = saveTotalGold
-    var saveSpeedBoots = 'saveSpeedBoots = ' + speedBoots
-    document.cookie = saveSpeedBoots
-    var savePlainsCounter = 'savePlainsCounter = ' + plainsCounter
-    document.cookie = savePlainsCounter
-    var saveLevelReq = 'saveLevelReq = ' + levelReq
-    document.cookie = saveLevelReq
-    var saveTotalExp = 'saveTotalExp = ' + totalExp
-    document.cookie = saveTotalExp
-    var saveLocation = 'saveLocation = ' + savingLocation
+    localStorage.setItem('Health', hitPoints)
+    localStorage.setItem('Attack Power', attackPower)
+    localStorage.setItem('Class', chosenClass)
+    localStorage.setItem('Level', level)
+    localStorage.setItem('Total Health', totalHealth)
+    localStorage.setItem('Blobs of Doom', blobsOfDoom)
+    localStorage.setItem('Health Potions', healthPotions)
+    localStorage.setItem('Wooden Sword', woodenSword)
+    localStorage.setItem('Swamp Discovery', swampDiscovery)
+    localStorage.setItem('Difficulty', diffSetting)
+    localStorage.setItem('Gold', totalGold)
+    localStorage.setItem('Speed Boots', speedBoots)
+    localStorage.setItem('PLains Counter', plainsCounter)
+    localStorage.setItem('Level Requirement', levelReq)
+    localStorage.setItem('Experience', totalExp)
+    localStorage.setItem('Location', location)
+    localStorage.setItem("Move 1's Type", move1.type)
+    localStorage.setItem("Move 1's Default Damage", move1.defaultDamage)
+    localStorage.setItem("Move 1's Damage String", move1.damageString)
+    localStorage.setItem("Move 1's Effects", move1.effects)
+    localStorage.setItem("Move 1's Name", move1.name)
+    localStorage.setItem("Move 1's Accuracy", move1.accuracy)
+    localStorage.setItem("Move 1's Accuracy String", move1.accuracyString)
+    localStorage.setItem("Move 1's SE Type", move1.sEType)
+    localStorage.setItem("Move 1's NVE Type", move1.nVEType)
+    localStorage.setItem("Move 2's Type", move2.type)
+    localStorage.setItem("Move 2's Default Damage", move2.defaultDamage)
+    localStorage.setItem("Move 2's Damage String", move2.damageString)
+    localStorage.setItem("Move 2's Effects", move2.effects)
+    localStorage.setItem("Move 2's Name", move2.name)
+    localStorage.setItem("Move 2's Accuracy", move2.accuracy)
+    localStorage.setItem("Move 2's Accuracy String", move2.accuracyString)
+    localStorage.setItem("Move 2's SE Type", move2.sEType)
+    localStorage.setItem("Move 2's NVE Type", move2.nVEType)
+    localStorage.setItem("Move 3's Type", move3.type)
+    localStorage.setItem("Move 3's Default Damage", move3.defaultDamage)
+    localStorage.setItem("Move 3's Damage String", move3.damageString)
+    localStorage.setItem("Move 3's Effects", move3.effects)
+    localStorage.setItem("Move 3's Name", move3.name)
+    localStorage.setItem("Move 3's Accuracy", move3.accuracy)
+    localStorage.setItem("Move 3's Accuracy String", move3.accuracyString)
+    localStorage.setItem("Move 3's SE Type", move3.sEType)
+    localStorage.setItem("Move 3's NVE Type", move3.nVEType)
+    localStorage.setItem("Move 4's Type", move4.type)
+    localStorage.setItem("Move 4's Default Damage", move4.defaultDamage)
+    localStorage.setItem("Move 4's Damage String", move4.damageString)
+    localStorage.setItem("Move 4's Effects", move4.effects)
+    localStorage.setItem("Move 4's Name", move4.name)
+    localStorage.setItem("Move 4's Accuracy", move4.accuracy)
+    localStorage.setItem("Move 4's Accuracy String", move4.accuracyString)
+    localStorage.setItem("Move 4's SE Type", move4.sEType)
+    localStorage.setItem("Move 4's NVE Type", move4.nVEType)
 }
 function savePlaces() {
     answer = prompt('Are you sure you want to save? Please make sure to use the same website when loading. This will overwrite any previous saves on this website.', 'Yes, No').toLowerCase()
     switch (answer) {
         case 'yes':
-            savingLocation = 1
+            location = 1
             alert('Saving...')
             save()
             alert('Done!')
@@ -1484,7 +1541,7 @@ function saveTown() {
     answer = prompt('Are you sure you want to save? Please make sure to use the same website when loading. This will overwrite any previous saves on this website.', 'Yes, No').toLowerCase()
     switch (answer) {
         case 'yes':
-            savingLocation = 2
+            location = 2
             alert('Saving...')
             save()
             alert('Done!')
@@ -1502,38 +1559,66 @@ function saveTown() {
 
 function load() {
     alert('Loading...')
-    var loadedDiff = document.cookie.replace(/(?:(?:^|.*;\s*)saveDiff\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    Diff = parseInt(loadedDiff, 10);
-    var loadedHealth = document.cookie.replace(/(?:(?:^|.*;\s*)saveHealth\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    hitPoints = parseInt(loadedHealth, 10);
-    var loadedTotalHealth = document.cookie.replace(/(?:(?:^|.*;\s*)saveTotalHealth\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    TotalHealth = parseInt(loadedTotalHealth, 10);
-    var loadedLevel = document.cookie.replace(/(?:(?:^|.*;\s*)saveLevel\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    hitPoints = parseInt(loadedLevel, 10)
-    var loadedPlainsCounter = document.cookie.replace(/(?:(?:^|.*;\s*)savePlainsCounter\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    plainsCounter = parseInt(loadedPlainsCounter, 10)
-    var loadedSwampDiscovery = document.cookie.replace(/(?:(?:^|.*;\s*)saveSwampDiscovery\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    swampDiscovery = parseInt(loadedSwampDiscovery, 10)
-    var loadedWoodenSword = document.cookie.replace(/(?:(?:^|.*;\s*)saveWoodenSword\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    woodenSword = parseInt(loadedWoodenSword, 10)
-    var loadedSpeedBoots = document.cookie.replace(/(?:(?:^|.*;\s*)saveSpeedBoots\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    speedBoots = parseInt(loadedSpeedBoots, 10)
-    var loadedHealthPotions = document.cookie.replace(/(?:(?:^|.*;\s*)saveHealthPotions\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    healthPotion = parseInt(loadedHealthPotions, 10)
-    var loadedLevelReq = document.cookie.replace(/(?:(?:^|.*;\s*)saveLevelReq\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    levelReq = parseInt(loadedLevelReq, 10)
-    var loadedAttackPower = document.cookie.replace(/(?:(?:^|.*;\s*)saveHealth\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    attackPower = parseInt(loadedAttackPower, 10)
-    var loadedClass = document.cookie.replace(/(?:(?:^|.*;\s*)saveHealth\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    chosenClass = parseInt(loadedClass, 10)
-    var loadedGold = document.cookie.replace(/(?:(?:^|.*;\s*)saveTotalGold\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    totalGold = parseInt(loadedGold, 10)
-    var loadedExp = document.cookie.replace(/(?:(?:^|.*;\s*)saveTotalExp\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    totalExp = parseInt(loadedExp, 10)
-    var loadedBlobsOfDoom = document.cookie.replace(/(?:(?:^|.*;\s*)saveBlobsOfDoom\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    blobsOfDoom = parseInt(loadedBlobsOfDoom, 10)
-    var loadLocation = document.cookie.replace(/(?:(?:^|.*;\s*)saveLocation\s*\=\s*([^;]*).*$)|^.*$/, '$1');
-    location = parseInt(loadLocation, 10)
+    health = parseInt(localStorage.getItem('Health'), 10)
+    attackPower = parseInt(localStorage.getItem('Attack Power'), 10)
+    chosenClass = parseInt(localStorage.getItem('Class'), 10)
+    level = parseInt(localStorage.getItem('Level'), 10)
+    totalHealth = parseInt(localStorage.getItem('Total Health'), 10)
+    blobsOfDoom = parseInt(localStorage.getItem('Blobs of Doom'), 10)
+    healthPotions = parseInt(localStorage.getItem('Health Potions'), 10)
+    woodenSword = parseInt(localStorage.getItem('Wooden Sword'), 10)
+    swampDiscovery = parseInt(localStorage.getItem('Swamp Discovery'), 10)
+    diffSetting = parseInt(localStorage.getItem('Difficulty'), 10)
+    totalGold = parseInt(localStorage.getItem('Gold'), 10)
+    speedBoots = parseInt(localStorage.getItem('Speed Boots'), 10)
+    plainsCounter = parseInt(localStorage.getItem('PLains Counter'), 10)
+    levelReq = parseInt(localStorage.getItem('Level Requirement'), 10)
+    totalExp = parseInt(localStorage.getItem('Experience'), 10)
+    location = parseInt(localStorage.getItem('Location'), 10)
+    move1 = {
+    type:(localStorage.getItem("Move 1's Type")), 
+    defaultDamage:(parseInt((localStorage.getItem("Move 1's Default Damage")), 10), 
+    damageString:(localStorage.getItem("Move 1's Damage String")),
+    effects:(localStorage.getItem("Move 1's Effects")),
+    name:(localStorage.getItem("Move 1's Name")),
+    accuracy:(parseInt((localStorage.getItem("Move 1's Accuracy")), 10))
+    accuracyString:(localStorage.getItem("Move 1's Accuracy String"))
+    sEType:(localStorage.getItem("Move 1's SE Type"))
+    nVEType:(localStorage.getItem("Move 1's NVE Type"))
+    }
+    move2 = {
+    type:(localStorage.getItem("Move 2's Type")),
+    defaultDamage:(parseInt((localStorage.getItem("Move 2's Default Damage")), 10),
+    damageString:(localStorage.getItem("Move 2's Damage String")),
+    effects:(localStorage.getItem("Move 2's Effects")),
+    name:(localStorage.getItem("Move 2's Name")),
+    accuracy:(parseInt((localStorage.getItem("Move 2's Accuracy")), 10))
+    accuracyString:(localStorage.getItem("Move 2's Accuracy String"))
+    sEType:(localStorage.getItem("Move 2's SE Type"))
+    nVEType:(localStorage.getItem("Move 2's NVE Type"))
+    }
+    move3 = {
+    type:(localStorage.getItem("Move 3's Type")),
+    defaultDamage:(parseInt((localStorage.getItem("Move 3's Default Damage")), 10),
+    damageString:(localStorage.getItem("Move 3's Damage String")),
+    effects:(localStorage.getItem("Move 3's Effects")),
+    name:(localStorage.getItem("Move 3's Name")),
+    accuracy:(parseInt((localStorage.getItem("Move 3's Accuracy")), 10))
+    accuracyString:(localStorage.getItem("Move 3's Accuracy String"))
+    sEType:(localStorage.getItem("Move 3's SE Type"))
+    nVEType:(localStorage.getItem("Move 3's NVE Type"))
+    }
+    move4 = {
+    type:(localStorage.getItem("Move 4's Type")),
+    defaultDamage:(parseInt((localStorage.getItem("Move 4's Default Damage")), 10),
+    damageString:(localStorage.getItem("Move 4's Damage String")),
+    effects:(localStorage.getItem("Move 4's Effects")),
+    name:(localStorage.getItem("Move 4's Name")),
+    accuracy:(parseInt((localStorage.getItem("Move 4's Accuracy")), 10))
+    accuracyString:(localStorage.getItem("Move 4's Accuracy String"))
+    sEType:(localStorage.getItem("Move 4's SE Type"))
+    nVEType:(localStorage.getItem("Move 4's NVE Type"))
+    }
     alert('Done!')
     switch (location) {
         case 1:
@@ -2088,7 +2173,7 @@ function endGame() {
 }
 //bottom
 function inCommonRoom() {
-                answer = (prompt('The Innkeeper gestures towards a loud, brightly lit room. It is filled with people. You walk over to a corner of the room, where there are four guys. One is named Mithròmen, another is named Galkemen, another is named Maegfin, and the fourth is named Gurthmereth. All four say \'Hi!\'. Do you run away from him in fear, or talk to one of them? If you talk who do you talk to?', 'Run away in fear, Talk to Mithròmen, talk to Galkemen, talk to Maegfin, talk to Gurthmereth').toLowerCase())
+                answer = (prompt('The Innkeeper gestures towards a loud, brightly lit room. It is filled with people. You walk over to a corner of the room, where there are four guys. One is named Mithròmen, another is named Galkemen, another is named Maegfin, and the fourth is named Gurthmereth. All four say \'Hi!\'. Do you run away from them in fear, or talk to one of them? If you talk who do you talk to?', 'Run away in fear, Talk to Mithròmen, talk to Galkemen, talk to Maegfin, talk to Gurthmereth').toLowerCase())
                 if (answer === 'talk to mithromen') {
                     commonRoomAnswerNumber = 1
                     answer = 'talk'
@@ -2097,7 +2182,7 @@ function inCommonRoom() {
                     commonRoomAnswerNumber = 1
                     answer = 'talk'
                 }
-                if (answer === ' talk to galkemen') {
+                if (answer === 'talk to galkemen') {
                     commonRoomAnswerNumber = 2
                     answer = 'talk'
                 }
@@ -2204,5 +2289,107 @@ case 'stay signed in':
 default:
 NotAnOption()
 inAccount() 
+}
+}
+function areYouSure(whatMove) {
+switch(whatMove) {
+case 1:
+    answer = prompt('Are you sure? ' + move1.name + '\'s type is ' + move1.type + ', it\'s effects are ' + move1.effects + ', it does ' + move1.damageString + ' damage, and it\'s accuracy is ' + move1.accuracyString + '.', 'Yes, No').toLowerCase()
+    switch(answer) {
+    case 'yes':
+        HitOrMiss(move1, move1.name)
+        break;
+    case 'no':
+        FightMenu()
+        break;
+        }
+        break;
+case 2:
+    answer = prompt('Are you sure? ' + move2.name + '\'s type is ' + move2.type + ', it\'s effects are ' + move2.effects + ', it does ' + move2.damageString + ' damage, and it\'s accuracy is ' + move2.accuracyString + '.', 'Yes, No').toLowerCase()
+    switch(answer) {
+    case 'yes':
+        HitOrMiss(move2, move2.name)
+        break;
+    case 'no':
+        FightMenu()
+        break;
+        }
+        break;
+case 3:
+    answer = prompt('Are you sure? ' + move3.name + '\'s type is ' + move3.type + ', it\'s effects are ' + move3.effects + ', it does ' + move3.damageString + ' damage, and it\'s accuracy is ' + move3.accuracyString + '.', 'Yes, No').toLowerCase()
+    switch(answer) {
+    case 'yes':
+        HitOrMiss(move3, move3.name)
+        break;
+    case 'no':
+        FightMenu()
+        break;
+        }
+        break;
+case 4:
+answer = prompt('Are you sure? ' + move4.name + '\'s type is ' + move4.type + ', it\'s effects are ' + move4.effects + ', it does ' + move4.damageString + ' damage, and it\'s accuracy is ' + move4.accuracyString + '.', 'Yes, No').toLowerCase()
+    switch(answer) {
+    case 'yes':
+        HitOrMiss(move4, move4.name)
+        break;
+    case 'no':
+        FightMenu()
+        break;
+        }
+        break;
+}
+if (doingTheThingOfDoom === true) {
+doingTheTningOfDoom = false
+doTheThingOfDoom = false
+}
+}
+function NIY() {
+alert("Sorry. That feauture hasn't been implemented yet.")
+}
+function killQuestEvaluate() {
+if (killQuestReq >= (killCounter -= questKillStart)) {
+alert('Galkemen says \'Thanks fer killin\' those monsters. Have ' + killQuestGold + ' gold.\'')
+totalGold += killQuestGold
+questAmt += 1
+requestChoice()
+}
+else {
+alert('Galkemen says \'GO KILL MORE MONSTERS!!!\'')
+InTown()
+}
+}
+function goldQuestEvaluate() {
+if (goldQuestReq >= totalGold) {
+alert('Galkemen says \'Thanks fer gettin\' that gold. Have ' + goldQuestExp + ' exp.\'')
+totalExp += goldQuestExp
+questAmt += 1
+requestChoice()
+}
+else {
+alert('Galkemen says \'GO GET MORE GOLD!!!\'')
+InTown()
+}
+}
+function expQuestEvaluate() {
+if (expQuestReq >= totalExp) {
+alert('Galkemen says \'Thanks fer gettin\' that exp. Have ' + expQuestGold + ' gold.\'')
+totalGold += expQuestGold
+requestChoice()
+}
+else {
+alert('Galkemen says \'GO GET MORE EXP!!!\'')
+InTown()
+}
+}
+function itemQuestEvaluate() {
+if (questItemVar >= 1) {
+alert('Galkemen says \'Thanks fer gettin\' that ' + questItem + '. Have ' + itemQuestGold + ' gold.\'')
+totalGold += killQuestGold
+questAmt += 1
+requestChoice()
+}
+else {
+alert('Galkemen says \'GO GET A ' + (questItem.toUpperCase) + '!!!\'')
+InTown()
 }
 }
