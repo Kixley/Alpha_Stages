@@ -154,10 +154,10 @@ var speedBoots = 0;
 var userCheck;
 var username;
 var useDefaults = false;
-var signedIn;
+var signedIn
 //fight redo
 var timesLeft
-var move1 = {type:undefined, defaultDamage:0, damageString:'undefined', effects:undefined, name:undefined, acuuracy:0, accuracyString:'undefined%', sEType:undefined, nVEType:undefined}
+var move1 = {type:undefined, defaultDamage:0, damageString:'undefined', effects:undefined, name:undefined, accuracy:0, accuracyString:'undefined%', sEType:undefined, nVEType:undefined}
 var move2 = move1
 var move3 = move1
 var move4 = move1
@@ -189,6 +189,14 @@ function Places() {
             break;
         case 'PLAINS':
             plainsCounter += 1
+            if (plainsCounter === 2) {
+                newMove = {type:'Crushing', defaultDamage:attackPower, damageString:attackPower, effects:'none', name:'Stick Pound', accuracy:0.25, accuracyString:'75%', sEType:'Small', nVEType:'Bipedal'}
+                newMove(newMove)
+                }
+            if (plainsCounter === 8) {
+                newMove = {type:'Whacking', defaultDamage:(attackPower + (attackPower * 0.40)), damageString:(attackPower + (attackPower * 0.40)), effects:'none', name:'Titanium Rod with Rocket Attached', accuracy:0.40, accuracyString:'60%', sEType:'Quadruped', nVEType:'Small'}
+                newMove(newMove)
+                }
             if (plainsCounter === 7) {
                 alert('As you are walking through the plains you see a map lying on the ground. It shows a path leading to a nearby swamp.')
                 swampDiscovery = 1
@@ -234,6 +242,10 @@ alert('You head off into the plains, where you find a newly regenerated Master, 
                 if (swampCounter === 7) {
                     alert('As you are walking through the swamp, you meet someone. He says his name is A\'Abea, and he is heading towards Smatino, but doesn’t tell why.')
                     aabeaDestroysTown = 1
+                }
+                if (swampCounter === 1) {
+                newMove = {type:'Slicing', defaultDamage:attackPower, damageString:attackPower, effects:'none', name:'Knife', accuracy:0.25, accuracyString:'75%', sEType:'Bipedal', nVEType:'Quadruped'}
+                newMove(newMove)
                 }
                 swampCounter += 1
                 randomNumber(1, 2)
@@ -295,7 +307,7 @@ function CheckIfGotAchieve(whichOne) {
                 compAchieve.push('Kill 20 Monsters');
             }
             if (getGoldAchieve === infinity && level >= 20 && kilCounter >= 20 && doTheThingOfDoom === true) {
-                newMove = {type:'TODOS LOS TIPOS', defaultDamage:Math.pow(attackPower, 4)), damageString:'a whole lot of', effects:'unneeded', name:'70TA1 $UP4H 1337 M1G PR0 360 N0-$C0P3 $K33LZ!!11!1!', acuuracy:0, accuracyString:'100%', sEType:undefined, nVEType:undefined}
+                newMove = {type:'TODOS LOS TIPOS', defaultDamage:(Math.pow(attackPower, 4)), damageString:'a whole lot of', effects:'unneeded', name:'70T@1 $UP@H 1337 M1G PR0 360 N0-$C0P3 $K33LZ!!11!1!', accuracy:0, accuracyString:'100%', sEType:null, nVEType:null}
                 doingTheThingOfDoom = true
                 newMove(newMove)
                 }
@@ -360,7 +372,7 @@ function achievementMenu() {
         case 'PINEAPPLES':
             alert('The mighty pineapple sits on his throne atop the highest mountain of Uruloki. In his slow, booming, voice, he says, \'Whoever has called upon me shall perish!\' Then he turns on you and shoots you with lasers coming from his eyes.')
             alert('\'GAHHH!!!\' you scream as you wake up. \'Oh,\' you think. \'That was just a dream. Whew!\' You stand up and continue browsing your achievements.');
-            newMove = {type:'slicing', defaultDamage:(attackPower + 3), damageString:'a little more than normal', effects:'none', name:'Machete', acuuracy:0.20, accuracyString:'80%', sEType:'Bipedal', nVEType:'Quadruped'}
+            newMove = {type:'slicing', defaultDamage:(attackPower + 3), damageString:'a little more than normal', effects:'none', name:'Machete', accuracy:0.20, accuracyString:'80%', sEType:'Bipedal', nVEType:'Quadruped'}
              newMove(newMove)
             achievementMenu();
             break;
@@ -1453,6 +1465,14 @@ function quest() {
     case 4:
     itemQuestEvaluate()
     break;
+    if (questAmt === 1) {
+    newMove = {type:'Whacking', defaultDamage:attackPower, damageString:attackPower, effects:'none', name:'Punch', accuracy:0.25, accuracyString:'75%', sEType:'Quadruped', nVEType:'Small'}
+    newMove(newMove)
+    }
+    if (questAmt === 10) {
+    newMove = {type:'Slicing', defaultDamage:(attackPower + (attackPower * 0.40)), damageString:(attackPower + (attackPower * 0.40)), effects:'none', name:'Greatsword', accuracy:0.40, accuracyString:'60%', sEType:'Bipedal', nVEType:'Quadruped'}
+    newMove(newMove)
+    }
     }
 }
 function itemQuest() {
