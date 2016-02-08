@@ -446,7 +446,7 @@ function StartUpMenu() {
         openingMenu = false
     }
   }
-  answer = prompt('Alpha 1.4.', 'Start, Options, Guide, Load, Achievements, Exit').toUpperCase()
+  answer = prompt('Choose an option. (Version: 1.4)', 'Start, Options, Guide, Load, Achievements, Exit').toUpperCase()
   switch (answer) {
     case 'START':
       alert('Before you start, please set the difficulty. Easier difficulties have monsters with less health and attack. Harder difficulties have monsters with more health and attack.')
@@ -924,7 +924,7 @@ function FightMenu() {
     case 'FIGHT':
       answer = prompt('     What move?       ', move1.name + ', ' + move2.name + ', ' + move3.name + ', ' + move4.name + ', Normal Move. Monster\'s types: ' + monsType1 + ' and ' + monsType2 + '.').toLowerCase()
       switch (answer) {
-        case (move1.name).toLowerCase():
+        case ((move1.name).toLowerCase()):
           areYouSure(1)
           break;
         case (move2.name).toLowerCase():
@@ -2399,18 +2399,3 @@ InTown()
 }
 }
 }
-
-/*
-Exception: TypeError: move1.name is undefined
-FightMenu@Scratchpad/10:982:1
-Story@Scratchpad/10:939:3
-ChoosingAClass@Scratchpad/10:756:7
-MageClass@Scratchpad/10:695:7
-ChooseClass@Scratchpad/10:780:7
-Difficulty@Scratchpad/10:666:3
-StartUpMenu@Scratchpad/10:508:7
-StartUpMenu@Scratchpad/10:557:7
-@Scratchpad/10:491:1
-StartUpMenu@Scratchpad/10:500:9
-@Scratchpad/10:491:1
-*/
