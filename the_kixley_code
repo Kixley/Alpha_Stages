@@ -330,6 +330,20 @@ function Places() {
           }
           newMove(newMove)
         }
+        if (swampCounter === 8) {
+         newMove = {
+            type: 'Crushing',
+            defaultDamage: (attackPower + (attackPower  * 0.40)),
+            damageString: (attackPower + (attackPower * 0.40)),
+            effects: 'none',
+            name: '707@L $UP@H 1337 $71€K P0UND',
+            accuracy: 0.40,
+            accuracyString: '60%',
+            sEType: 'Small',
+            nVEType: 'Bipedal'
+          }
+          newMove(newMove)
+        }
         swampCounter += 1
         randomNumber(1, 2)
         monsLev = level * (x + 1)
