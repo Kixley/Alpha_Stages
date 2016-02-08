@@ -191,39 +191,30 @@ var useDefaults = false;
 var signedIn;
 //fight redo
 var timesLeft
-var move1 = {
-  type: undefined,
-  defaultDamage: 0,
-  damageString: 'undefined',
-  effects: undefined,
-  name: undefined,
-  accuracy: 0,
-  accuracyString: 'undefined%',
-  sEType: undefined,
-  nVEType: undefined
-}
+var move1 = new Move(undefined, 0, 'undefined', undefined, undefined, 1, 'undefined%', undefined, undefined)
 var move2 = move1
 var move3 = move1
 var move4 = move1
 var monsType1
 var monsType2
-var normal = {
-  type:undefined,
-  defaultDamage: attackPower,
-  damageString: attackPower,
-  effects:'none',
-  name:'normal',
-  accuracy: 0.25,
-  accuracyString: '25%',
-  sEType: undefined,
-  nVEType: undefined,
-}
+var normal = new Move(undefined, attackPower, attackPower, 'none', 'normal', 0.25, '75%', undefined, undefined)
 var turns
 var useTheForceCount = 0
 var newMove
 var doTheThingOfDoom = true
 var doingTheThingOfDoom = false
 var questCounter
+function Move(type, defaultDamage, damageString, effects, name, accuracy, accuracyString, sEType, nVEType) {
+this.type = type,
+this.defaultDamage = defaultDamage,
+this.effects = effects,
+this.name = name,
+this.accuracy = accuracy,
+this.accuracyString = accuracyString,
+this.sEType = sEType,
+this.nVEType,
+}
+
 // functions
 function Places() {
   answer = prompt('Where do you go now? You have ' + totalGold + ' gold, and ' + hitPoints + ' health.', 'Town, Plains, Swamp, Save, Menu').toUpperCase()
@@ -243,31 +234,11 @@ function Places() {
     case 'PLAINS':
       plainsCounter += 1
       if (plainsCounter === 2) {
-        newMove = {
-          type: 'Crushing',
-          defaultDamage: attackPower,
-          damageString: attackPower,
-          effects: 'none',
-          name: 'Stick Pound',
-          accuracy: 0.25,
-          accuracyString: '75%',
-          sEType: 'Small',
-          nVEType: 'Bipedal'
-        }
+        newMove = new Move('Crushing', attackPower, attackPower, 'none', 'Stick Pound', 0.25, '75%', 'Small', 'Bipedal')
         newMove(newMove)
       }
       if (plainsCounter === 8) {
-        newMove = {
-          type: 'Whacking',
-          defaultDamage: (attackPower + (attackPower * 0.4)),
-          damageString: (attackPower + (attackPower * 0.4)),
-          effects: 'none',
-          name: 'Titanium Rod with Rocket Attached',
-          accuracy: 0.4,
-          accuracyString: '60%',
-          sEType: 'Quadruped',
-          nVEType: 'Small'
-        }
+        newMove = new Move('Whacking', attackPower + (attackPower * 0.40), attackPower + (attackPower * 0.40), 'none', 'Titanium Rod with Rocket Atachecd', 0.4, '60%', 'Quadruped', 'Small')
         newMove(newMove)
       }
       if (plainsCounter === 7) {
@@ -317,31 +288,11 @@ function Places() {
           aabeaDestroysTown = 1
         }
         if (swampCounter === 1) {
-          newMove = {
-            type: 'Slicing',
-            defaultDamage: attackPower,
-            damageString: attackPower,
-            effects: 'none',
-            name: 'Knife',
-            accuracy: 0.25,
-            accuracyString: '75%',
-            sEType: 'Bipedal',
-            nVEType: 'Quadruped'
-          }
+          newMove = new Move('Slicing', attackPower, attackPower, 'none', 'Knife', 0.25, '75%', 'Bipedal', 'Quadruped')
           newMove(newMove)
         }
         if (swampCounter === 8) {
-         newMove = {
-            type: 'Crushing',
-            defaultDamage: (attackPower + (attackPower  * 0.40)),
-            damageString: (attackPower + (attackPower * 0.40)),
-            effects: 'none',
-            name: '707@L $UP@H 1337 $71€K P0UND',
-            accuracy: 0.40,
-            accuracyString: '60%',
-            sEType: 'Small',
-            nVEType: 'Bipedal'
-          }
+          newMove = new Move('Crushing', attackPower + (attackPower * 0.40), attackPower + (attackPower * 0.40), 'none' '707@L $UPAH 1337 $71€K P0UND', 0.40, '60%', 'Small', 'Bipedal')
           newMove(newMove)
         }
         swampCounter += 1
@@ -402,17 +353,7 @@ function CheckIfGotAchieve(whichOne) {
         compAchieve.push('Kill 20 Monsters');
       }
       if (getGoldAchieve === infinity && level >= 20 && kilCounter >= 20 && doTheThingOfDoom === true) {
-        newMove = {
-          type: 'TODOS LOS TIPOS',
-          defaultDamage: (Math.pow(attackPower, 4)),
-          damageString: 'a whole lot of',
-          effects: 'unneeded',
-          name: '70T@1 $UP@H 1337 M1G PR0 360 N0-$C0P3 $K33LZ!!11!1!',
-          accuracy: 0,
-          accuracyString: '100%',
-          sEType: null,
-          nVEType: null
-        }
+        newMove = new Move('TODOS LOS TIPOS', Math.pow(attackPower, 4), 'a whole lot of', 'unneeded', '70T@1 $UP@H 1337 M1G PR0 360 N0-$C0P3 $K33LZ!!11!1!', 0, '100%', null, null)
         doingTheThingOfDoom = true
         newMove(newMove)
       }
@@ -475,17 +416,7 @@ function achievementMenu() {
     case 'PINEAPPLES':
       alert('The mighty pineapple sits on his throne atop the highest mountain of Uruloki. In his slow, booming, voice, he says, \'Whoever has called upon me shall perish!\' Then he turns on you and shoots you with lasers coming from his eyes.')
       alert('\'GAHHH!!!\' you scream as you wake up. \'Oh,\' you think. \'That was just a dream. Whew!\' You stand up and continue browsing your achievements.');
-      newMove = {
-        type: 'slicing',
-        defaultDamage: (attackPower + 3),
-        damageString: 'a little more than normal',
-        effects: 'none',
-        name: 'Machete',
-        accuracy: 0.2,
-        accuracyString: '80%',
-        sEType: 'Bipedal',
-        nVEType: 'Quadruped'
-      }
+      newMove = new Move('Slicing', attackPower + 3, 'a little more than normal', 'none', 'Machete', 0.20, '80%', 'Bipedal', 'Quadruped')
       newMove(newMove)
       achievementMenu();
       break;
@@ -1547,31 +1478,12 @@ case 4:
 itemQuestEvaluate()
 break;
 if (questAmt === 1) {
-newMove = {
-type: 'Whacking',
-defaultDamage: attackPower,
-damageString: attackPower,
-effects: 'none',
-name: 'Punch',
-accuracy: 0.25,
-accuracyString: '75%',
-sEType: 'Quadruped',
-nVEType: 'Small'
-}
+newMove = new Move('Whacking', attackPower, attackPower, 'none', 'Punch', 0.25, '75%', 'Quadruped', 'Small')
 newMove(newMove)
 }
 if (questAmt === 10) {
-newMove = {
-type: 'Slicing',
-defaultDamage: (attackPower + (attackPower * 0.4)),
-damageString: (attackPower + (attackPower * 0.4)),
-effects: 'none',
-name: 'Greatsword',
-accuracy: 0.4,
-accuracyString: '60%',
-sEType: 'Bipedal',
-nVEType: 'Quadruped'
-}
+newMove = new Move('Slicing', attackPower + (attackPower * 0.40), attackPower + (attackPower * 0.40), 'none' 'Greatsword', 0.40, 60%, 'Bipedal', 'Quadruped')
+newMove(newMove)
 }
 }
 }
