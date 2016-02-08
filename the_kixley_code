@@ -212,7 +212,7 @@ this.name = name,
 this.accuracy = accuracy,
 this.accuracyString = accuracyString,
 this.sEType = sEType,
-this.nVEType,
+this.nVEType = nVEType
 }
 
 // functions
