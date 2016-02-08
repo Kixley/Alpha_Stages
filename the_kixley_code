@@ -977,7 +977,7 @@ function FightMenu() {
   answer = prompt('What do you do? Health: ' + hitPoints + ' ' + actualMonsName + ' health: ' + hitCounter + '. Monster\'s types: ' + monsType1 + ' and ' + monsType2 + '.', 'Fight, Item, Magic, Run').toUpperCase()
   switch (answer) {
     case 'FIGHT':
-      answer = prompt('   What move?    ', move1.name + ', ' + move2.name + ', ' + move3.name + ', ' + move4.name + ', Normal Move. Monster\'s types: ' + monsType1 + ' and ' + monsType2 + '.').toLowerCase()
+      answer = prompt('     What move?       ', move1.name + ', ' + move2.name + ', ' + move3.name + ', ' + move4.name + ', Normal Move. Monster\'s types: ' + monsType1 + ' and ' + monsType2 + '.').toLowerCase()
       switch (answer) {
         case (move1.name).toLowerCase():
           areYouSure(1)
