@@ -215,6 +215,11 @@ this.accuracyString = accuracyString,
 this.sEType = sEType,
 this.nVEType = nVEType
 }
+// Character Creation
+var points
+var attackPowerPoints
+var healthPoints
+var BoDPoints
 
 // functions
 function Places() {
@@ -699,7 +704,7 @@ function ChoosingAClass(chosenClass) {
         totalBlobsOfDoom = - (Math.log(0))
         youCheated = true
       }
-      Story()
+      charCreation('Beginning')
       break;
     case 'NO':
       ChooseClass()
@@ -1300,7 +1305,7 @@ switch (answer) {
 case 'YES':
 if (totalGold >= 50) {
 totalGold -= 50
-alert('The man gestures towards a room door. "There\'s your room, room 104. Have a good night\'s rest.')
+alert('The man gestures towards a room door. 'There\'s your room, room 104. Have a good night\'s rest.')
 alert('You wake up fully refreshed, and new vigor fills your heart.')
 alert('Hit points fully restored!')
 hitPoints = totalHealth
@@ -2401,17 +2406,67 @@ InTown()
 }
 }
 
-/*
-Exception: TypeError: move1.name is undefined
-FightMenu@Scratchpad/10:982:1
-Story@Scratchpad/10:939:3
-ChoosingAClass@Scratchpad/10:756:7
-MageClass@Scratchpad/10:695:7
-ChooseClass@Scratchpad/10:780:7
-Difficulty@Scratchpad/10:666:3
-StartUpMenu@Scratchpad/10:508:7
-StartUpMenu@Scratchpad/10:557:7
-@Scratchpad/10:491:1
-StartUpMenu@Scratchpad/10:500:9
-@Scratchpad/10:491:1
-*/
+function charCreation(whatPart) {
+switch(whatPart) {
+case 'Beginning':
+    if (points > 0) {
+    answer = prompt('Where would you like to spend a point? You have ' + points + ' points. You have ' + hitPoints + ' health, + ' attackPower + ' attackPower + ', and ' + blobsOfDoom + ' Blobs of Doom.', 'Health, Attack Power, Blobs of Doom, Finish').toLowerCase()
+        switch(answer) {
+        case 'health':
+            hitPoints += 1
+            healthPoints += 1
+            points -= 1
+            alert('Ok!')
+            charCreation('Beginning')
+            break;
+        case 'attack power':
+            attackPower += 0.1
+            attackPowerPoints += 1
+            points -= 1
+            alert('Ok!')
+            charCreation('Beginning')
+            break;
+        case 'blobs of doom':
+            blobsOfDoom += 1
+            BoDPoints += 1
+            points -= 1
+            alert('Ok!')
+            charCreation('Beginning')
+            break;
+        case 'finish':
+            points = 0
+            charCreation('Beginning')
+            break;
+        default:
+            NotAnOption()
+            charCreation('Beginning')
+            break;
+        }
+        }
+        else {
+        saveChar()
+        }
+    break;
+case 'Taken Name':
+    saveChar()
+    break;
+default:
+    throw new RangeError('Parameter must be either \'Beginning\' or \'Taken Name\'')
+    break;
+}
+}
+function saveChar() {
+charName = prompt('What would you like to name your new character additions?')
+    if (localStorage.getItem(charName) != null) {
+        localStorage.setItem('Remaining Points' + charName, points),
+        localStorage.setItem('Health Points'+ charName, extraHealthPoints')
+        localStorage.setItem('Attack Power Points' + charName, attackPowerPoints)
+        localStorage.setItem('Blobs of Doom Points' + charName, BoDPoints)
+        localStorage.setItem(charName, 'taken')
+    }
+    else {
+        alert('That name has already been taken. Please create a new name')
+        charCreater('Taken Name')
+    }
+        Story()
+}
