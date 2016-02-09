@@ -938,7 +938,7 @@ function FightMenu() {
           break;
         case 'normal':
         case 'normal move':
-          hitOrMiss(normal, 'normal')
+          HitOrMiss()
       }
       break;
     case 'USE THE FORCE':
@@ -989,85 +989,38 @@ default:
   break;
 }
 }
-function HitOrMiss(whichMove, whatName) {
-randomNumber(1, 100)
-hit = x
-if (hit <= whichMove.accuracy) {
-alert('You miss.')
-burn()
-alert('The ' + actualMonsName + ' has ' + hitCounter + ' health left.')
-MonsAtt()
-if (hitPoints <= 0) {
-  alert('You died.')
-} else {
-  alert('You have ' + hitPoints + ' health left.')
-  FightMenu()
-}
-} else {
-combo = Math.floor(Math.random() * 5)
-switch (combo) {
-  case 0:
-  case 1:
-  case 2:
-    alert('You weren\'t able to get a combo.')
-    if (whatMove === normal) {
-      alert('The normal attack did ' + attackPower + '.')
-      hitCounter -= attackPower
-    } 
-    else if (monsType1 != whatMove.sEType && monsTYPE1 != whatMove.nVEType) {
-      alert('The ' + whatName + ' did ' + whatMove.damageString + ' damage.')
-      if (monsType1 != whatMove.sEType && monsType1 != whatMove.nVEType) {
-        hitCounter -= whatMove.defaultDamage
-      }
-    } 
-    else if (monsType1 === whatMove.sEType) {
-      alert('It\'s 30% more effective!!!')
-      alert('The ' + whatName + ' did ' + (whatMove.defaultDame + (whatMove.defaultDamage * 0.3)) + ' damage.')
-      hitCounter -= whatMove.defaultDamage + (whatMove.defaultDamage * 0.3)
-    } 
-    else if (monsType1 === whatMove.nVEType) {
-      alert('It\'s 30% less effective...')
-      alert('The ' + whatName + ' did ' + (whatMove.defaultDamage - (whatMove.defaultDamage * 0.3)) + ' damage.')
-      hitCounter -= whatMove.defaultDamage - (whatMove.defaultDamage * 0.3)
+function HitOrMiss() {
+    if (hit === 0) {
+        alert('You miss.')
+        burn()
+        alert('The ' + actualMonsName + ' has ' + hitCounter + ' health left.')
+        MonsAtt()
+        if (hitPoints <= 0) {
+            alert('You died.')
+        } else {
+            alert('You have ' + hitPoints + ' health left.')
+            FightMenu()
+        }
+    } else {
+        combo = Math.floor(Math.random() * 5)
+        switch (combo) {
+            case 0:
+            case 1:
+            case 2:
+                alert('You weren\'t able to get a combo.')
+                hitCounter -= attackPower
+                burn()
+                break;
+            case 3:
+            case 4:
+                comboNums = Math.floor(Math.random() * 15) + 2
+                multiplier()
+                alert('You got a ' + comboNums + ' combo.')
+                hitCounter -= attackPower * comboNums
+                burn()
+                break;
+        }
     }
-    burn()
-    break;
-  case 3:
-  case 4:
-    comboNums = Math.floor(Math.random() * 15) + 2
-    multiplier()
-    alert('You got a ' + combeNums + 'combo!')
-    if (whatMove === normal) {
-      alert('The normal attack did ' + (attackPower * comboNums) + '.')
-      hitCounter -= attackPower * comboNums
-    } 
-    else if (monsType1 != whatMove.sEType && monsTYPE1 != whatMove.nVEType) {
-      alert('The ' + whatMove.name + ' did ' + (whatMove.defaultDamage * comboNums) + ' damage.')
-      if (monsType1 != whatMove.sEType && monsType1 != whatMove.nVEType) {
-        hitCounter -= whatMove.defaultDamage
-      } 
-      else if (monsType1 === whatMove.sEType) {
-        alert('It\'s 30% more effective!!!')
-        alert('The ' + whatMove.name + ' did ' + ((whatMove.defaultDamage + (whatMove.defaultDamage * 0.3)) * comboNums) + ' damage.')
-        hitCounter -= (whatMove.defaultDamage + (whatMove.defaultDamage * 0.3)) * comboNums
-      } 
-      else if (monsType1 === whatMove.nVEType) {
-        alert('It\'s 30% less effective...')
-        alert('The ' + whatMove.name + ' did ' + ((whatMove.defaultDamage - (whatMove.defaultDamage * 0.3)) * comboNums) + ' damage.')
-        hitCounter -= whatMove.defaultDamage - (whatMove.defaultDamage * 0.3) * comboNums
-      }
-      burn()
-      break;
-    }
-}
-if (hitCounter <= 0) {
-  WonTheFight()
-} else {
-alert('The ' + actualMonsName + ' has ' + hitCounter + ' health left.')
-MonsAtt()
-}
-}
-}
 function GameOver() {
 alert('You died with ' + totalGold + ' gold, were level ' + level + ', had ' + attackPower + ' power, and had a total of ' + totalHealth + ' health.')
 Credits()
@@ -2397,5 +2350,16 @@ else {
 alert('Galkemen says \'GO GET A ' + (questItem.toUpperCase) + '!!!\'')
 InTown()
 }
+}
+}
+move.prototype.use() {
+randomNumber(1, 100)
+x /= 100
+if (x <= this.accuracy) {
+alert('You miss.')
+}
+else {
+alert('The ' + this.name + ' did ' + this.defaultDamage + '.')
+hitCounter -= this.defaultDamage
 }
 }
