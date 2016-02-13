@@ -1435,7 +1435,7 @@ newMove = new Move('Whacking', attackPower, attackPower, 'none', 'Punch', 0.25, 
 newMove(newMove)
 }
 if (questAmt === 10) {
-newMove = new Move('Slicing', attackPower + (attackPower * 0.40), attackPower + (attackPower * 0.40), 'none', 'Greatsword', 0.40, 60%, 'Bipedal', 'Quadruped')
+newMove = new Move('Slicing', attackPower + (attackPower * 0.40), attackPower + (attackPower * 0.40), 'none', 'Greatsword', 0.40, '60%', 'Bipedal', 'Quadruped')
 newMove(newMove)
 }
 }
@@ -2352,7 +2352,7 @@ InTown()
 }
 }
 }
-move.prototype.use() {
+move.prototype.use() = {
 randomNumber(1, 100)
 x /= 100
 if (x <= this.accuracy) {
@@ -2361,21 +2361,36 @@ alert('You miss.')
 else {
 if (this.sEType != monsType2 && this.nVEType != monsType2 && this.sEType != null) {
 damage = this.defaultDamage
-this.doDamage
-hitCounter -= damage
+getCombo()
+this.doDamage()
 }
 else if (this.sEType === monsType2 || this.sEType === null) {
 damage = this.defaultDamage + (this.defaultDamage * 0.3)
-this.doDamage
+getCombo()
+this.doDamage()
 }
 else if (this.nVEType === monsType2) {
 damage = this.defaultDamage - (this.defaultDamage * 0.3) 
+getCombo()
+this.doDamage()
 }
 }
 FightMenu()
 }
-
-move.prototype.doDamage {
+function getCombo() {
+randomNumber(1, 5)
+  if (x <= 3){
+   alert("You weren't able to get a combo.")
+   comboNums = 1
+  }
+  else {
+    randomNumber(2, 16)
+    comboNums = x
+    alert("You got a " + comboNums + " combo.")
+  }
+}
+move.prototype.doDamage() = {
+damage *= comboNums
 alert('The ' + this.name + ' did ' + damage + ' damage.')
 hitCounter -= damage
 }
