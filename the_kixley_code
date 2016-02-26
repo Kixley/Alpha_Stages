@@ -2354,7 +2354,7 @@ InTown()
 }
 }
 move.prototype.use() = {
-randomNumber(1, 100)
+randomNumber(1,100)
 x /= 100
 if (x <= this.accuracy) {
 alert('You miss.')
