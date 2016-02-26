@@ -2354,8 +2354,7 @@ InTown()
 }
 }
 move.prototype.use() = {
-randomNumber(1,100)
-x /= 100
+x = (Math.floor(Math.random() * 99) + 1) / 100
 if (x <= this.accuracy) {
 alert('You miss.')
 }
